@@ -1,5 +1,5 @@
 [![Build
-Status](https://snap-ci.com/mshappe/ruby-the-gryphon/branch/master/build_image)](https://snap-ci.com/mshappe/ruby-the-gryphon/branch/master)
+Status](https://snap-ci.com/mshappe/ruby-the-gryphon/branch/master/build_image)](https://snap-ci.com/mshappe/ruby-the-gryphon/branch/master) [![Code Climate](https://codeclimate.com/github/mshappe/ruby-the-gryphon/badges/gpa.svg)](https://codeclimate.com/github/mshappe/ruby-the-gryphon) [![Test Coverage](https://codeclimate.com/github/mshappe/ruby-the-gryphon/badges/coverage.svg)](https://codeclimate.com/github/mshappe/ruby-the-gryphon)
 
 # Ruby the Gryphon
 
