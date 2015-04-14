@@ -1,0 +1,12 @@
+.well.well-sm
+  .row
+    .col-md-12
+      h4
+        | Log in
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = f.input :email
+        = f.input :password, as: :password, autocomplete: "off"
+        - if devise_mapping.rememberable?
+          = f.input :remember_me, as: :boolean
+        = f.button :submit, "Log in", class: 'btn-success'
+      = render "devise/shared/links"

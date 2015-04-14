@@ -1,0 +1,26 @@
+doctype html
+html lang='en'
+head
+  title RubyTheGryphon
+  meta name="viewport" content="width=device-width, initial-scale=1"
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tags
+body
+  .jumbotron
+    .container-fluid
+      .row
+        .center-block style='width:440px'
+          img= link_to image_tag('Poster.gif'), root_url
+
+  .container-fluid
+    .notice.text-success= notice
+    .alert.text-danger= alert
+
+    .row
+      .col-lg-3.col-md-3.col-sm-5.col-xs-12
+        = render 'devise/sessions/new' unless user_signed_in?
+        = render 'devise/sessions/logged_in' if user_signed_in?
+        = yield :sidebar
+      .col-lg-9.col-md-9.col-sm-7.col-xs-12
+        = content_for?(:main) ? yield(:main) : yield
