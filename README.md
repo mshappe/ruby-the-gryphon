@@ -1,3 +1,6 @@
+[![Build
+Status](https://snap-ci.com/mshappe/ruby-the-gryphon/branch/master/build_image)](https://snap-ci.com/mshappe/ruby-the-gryphon/branch/master)
+
 # Ruby the Gryphon
 
 "...all gryphons are girls..."
