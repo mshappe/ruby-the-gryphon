@@ -1,0 +1,8 @@
+h2
+  = action
+= simple_form_for(resource, as: resource_name, url: path, wrapper: :horizontal_form, html: { method: :post, class: 'form-horizontal' }) do |f|
+  = devise_error_messages!
+  = f.input :email, autofocus: true
+  .form-group
+    .col-md-offset-3.col-sm-offset-3.col-md-9
+      = f.button :submit, action, class: 'btn-primary'
