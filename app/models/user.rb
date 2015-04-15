@@ -44,4 +44,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :person
+  has_many :personas
+
+  accepts_nested_attributes_for :person, :personas
 end

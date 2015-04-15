@@ -39,4 +39,7 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   it { is_expected.to have_one :person }
+  it { is_expected.to have_many :personas }
+  it { is_expected.to accept_nested_attributes_for :person }
+  it { is_expected.to accept_nested_attributes_for :personas }
 end

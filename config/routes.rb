@@ -42,7 +42,7 @@
 #
 
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   devise_for :adminusers, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root to: 'welcome#index'
