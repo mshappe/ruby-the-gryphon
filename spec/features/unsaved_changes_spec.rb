@@ -11,7 +11,7 @@ RSpec.describe 'Unsaved Changes', type: :feature, js: true do
       click_link 'Forgot your password?'
     end
 
-    expect(page).to have_button 'Send me reset password instructions'
+    expect(page).to have_button 'Forgot my password'
   end
 
   it 'should not navigate away on reject' do
@@ -19,6 +19,6 @@ RSpec.describe 'Unsaved Changes', type: :feature, js: true do
       click_link 'Forgot your password?'
     end
 
-    expect(page).not_to have_button 'Send me reset password instructions'
+    expect(page).not_to have_button 'Forgot my password'
   end
 end
