@@ -27,16 +27,22 @@
 #  heraldic_image_updated_at   :datetime
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  address_id                  :integer
 #
 # Indexes
 #
-#  index_people_on_user_id  (user_id)
+#  index_people_on_address_id  (address_id)
+#  index_people_on_user_id     (user_id)
 #
 
 require 'rails_helper'
 
 RSpec.describe Person, :type => :model do
-  it { is_expected.to validate_presence_of :name }
-  it { is_expected.to belong_to :user }
   it { is_expected.to have_attached_file :heraldic_image }
+
+  it { is_expected.to belong_to :user }
+  it { is_expected.to belong_to :address }
+  it { is_expected.to accept_nested_attributes_for :address }
+
+  it { is_expected.to validate_presence_of :name }
 end

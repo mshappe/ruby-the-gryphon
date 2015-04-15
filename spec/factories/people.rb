@@ -27,10 +27,12 @@
 #  heraldic_image_updated_at   :datetime
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  address_id                  :integer
 #
 # Indexes
 #
-#  index_people_on_user_id  (user_id)
+#  index_people_on_address_id  (address_id)
+#  index_people_on_user_id     (user_id)
 #
 
 FactoryGirl.define do

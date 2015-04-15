@@ -27,10 +27,12 @@
 #  heraldic_image_updated_at   :datetime
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  address_id                  :integer
 #
 # Indexes
 #
-#  index_people_on_user_id  (user_id)
+#  index_people_on_address_id  (address_id)
+#  index_people_on_user_id     (user_id)
 #
 
 class Person < ActiveRecord::Base
@@ -38,6 +40,9 @@ class Person < ActiveRecord::Base
   has_attached_file :heraldic_image, storage: :database
 
   belongs_to :user
+  belongs_to :address
+
+  accepts_nested_attributes_for :address
 
   phony_normalize :phone, default_country_code: 'US'
 

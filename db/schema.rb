@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414030429) do
+ActiveRecord::Schema.define(version: 20150415200834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20150414030429) do
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "country"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "adminusers", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -87,8 +97,10 @@ ActiveRecord::Schema.define(version: 20150414030429) do
     t.datetime "heraldic_image_updated_at"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "address_id"
   end
 
+  add_index "people", ["address_id"], name: "index_people_on_address_id", using: :btree
   add_index "people", ["user_id"], name: "index_people_on_user_id", using: :btree
 
   create_table "persona_images", force: :cascade do |t|
@@ -165,6 +177,7 @@ ActiveRecord::Schema.define(version: 20150414030429) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "people", "addresses"
   add_foreign_key "people", "users"
   add_foreign_key "personas", "persona_types"
   add_foreign_key "personas", "users"

@@ -21,3 +21,4 @@
 
 en:
   hello: "Hello world"
+  state_id_warning: "State IDs must be between 1 and 64 inclusive"

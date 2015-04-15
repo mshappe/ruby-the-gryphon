@@ -1,11 +1,12 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
   before_filter :configure_account_update_params, only: [:update]
+  before_filter :create_nested_models, only: [:new, :edit]
 
 # GET /resource/sign_up
-#  def new
+# def new
 #   super
-#  end
+# end
 
 # POST /resource
 # def create
@@ -13,10 +14,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # end
 
 # GET /resource/edit
-  def edit
-    resource.build_person if resource.person.blank?
-    super
-  end
+# def edit
+#  super
+# end
 
 # PUT /resource
 # def update
@@ -37,7 +37,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 #   super
 # end
 
-# protected
+  protected
 
 # You can put the params you want to permit in the empty array.
 # def configure_sign_up_params
@@ -46,9 +46,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 # You can put the params you want to permit in the empty array.
   def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password,
-                                                                   person_attributes: [:name]) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation,
+                                                                   :current_password,
+                                                                   person_attributes: [:name,
+                                                                                       address_attributes: [:address, :city, :state, :postal_code, :country]]) }
 
+  end
+
+  def create_nested_models
+    resource.build_person if resource.person.blank?
+    resource.person.build_address if resource.person.address.blank?
   end
 
 # The path used after sign up.

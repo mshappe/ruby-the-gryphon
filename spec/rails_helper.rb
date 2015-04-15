@@ -26,9 +26,11 @@ require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::TestHelpers, type: [:controller, :features]
   config.include FactoryGirl::Syntax::Methods
   config.include Paperclip::Shoulda::Matchers
+
+  Capybara.javascript_driver = :webkit
 
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
