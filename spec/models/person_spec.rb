@@ -10,7 +10,7 @@
 #  gender                      :string
 #  url                         :string
 #  date_of_birth               :datetime
-#  sca_number                  :integer
+#  sca_number                  :string
 #  sca_expiration_date         :datetime
 #  private_name                :boolean
 #  private_address             :boolean
@@ -28,10 +28,12 @@
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #  address_id                  :integer
+#  branch_id                   :integer
 #
 # Indexes
 #
 #  index_people_on_address_id  (address_id)
+#  index_people_on_branch_id   (branch_id)
 #  index_people_on_user_id     (user_id)
 #
 
@@ -42,6 +44,7 @@ RSpec.describe Person, :type => :model do
 
   it { is_expected.to belong_to :user }
   it { is_expected.to belong_to :address }
+  it { is_expected.to belong_to :branch }
   it { is_expected.to accept_nested_attributes_for :address }
 
   it { is_expected.to validate_presence_of :name }

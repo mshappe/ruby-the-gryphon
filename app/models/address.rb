@@ -13,5 +13,7 @@
 #
 
 class Address < ActiveRecord::Base
+  has_paper_trail
+
   has_one :person
 end

@@ -1,21 +1,27 @@
 # == Route Map
 #
 #                        Prefix Verb       URI Pattern                              Controller#Action
-#              new_user_session GET        /users/sign_in(.:format)                 devise/sessions#new
-#                  user_session POST       /users/sign_in(.:format)                 devise/sessions#create
-#          destroy_user_session DELETE     /users/sign_out(.:format)                devise/sessions#destroy
-#                 user_password POST       /users/password(.:format)                devise/passwords#create
-#             new_user_password GET        /users/password/new(.:format)            devise/passwords#new
-#            edit_user_password GET        /users/password/edit(.:format)           devise/passwords#edit
-#                               PATCH      /users/password(.:format)                devise/passwords#update
-#                               PUT        /users/password(.:format)                devise/passwords#update
-#      cancel_user_registration GET        /users/cancel(.:format)                  devise/registrations#cancel
-#             user_registration POST       /users(.:format)                         devise/registrations#create
-#         new_user_registration GET        /users/sign_up(.:format)                 devise/registrations#new
-#        edit_user_registration GET        /users/edit(.:format)                    devise/registrations#edit
-#                               PATCH      /users(.:format)                         devise/registrations#update
-#                               PUT        /users(.:format)                         devise/registrations#update
-#                               DELETE     /users(.:format)                         devise/registrations#destroy
+#              new_user_session GET        /users/sign_in(.:format)                 users/sessions#new
+#                  user_session POST       /users/sign_in(.:format)                 users/sessions#create
+#          destroy_user_session DELETE     /users/sign_out(.:format)                users/sessions#destroy
+#                 user_password POST       /users/password(.:format)                users/passwords#create
+#             new_user_password GET        /users/password/new(.:format)            users/passwords#new
+#            edit_user_password GET        /users/password/edit(.:format)           users/passwords#edit
+#                               PATCH      /users/password(.:format)                users/passwords#update
+#                               PUT        /users/password(.:format)                users/passwords#update
+#      cancel_user_registration GET        /users/cancel(.:format)                  users/registrations#cancel
+#             user_registration POST       /users(.:format)                         users/registrations#create
+#         new_user_registration GET        /users/sign_up(.:format)                 users/registrations#new
+#        edit_user_registration GET        /users/edit(.:format)                    users/registrations#edit
+#                               PATCH      /users(.:format)                         users/registrations#update
+#                               PUT        /users(.:format)                         users/registrations#update
+#                               DELETE     /users(.:format)                         users/registrations#destroy
+#             user_confirmation POST       /users/confirmation(.:format)            users/confirmations#create
+#         new_user_confirmation GET        /users/confirmation/new(.:format)        users/confirmations#new
+#                               GET        /users/confirmation(.:format)            users/confirmations#show
+#                   user_unlock POST       /users/unlock(.:format)                  users/unlocks#create
+#               new_user_unlock GET        /users/unlock/new(.:format)              users/unlocks#new
+#                               GET        /users/unlock(.:format)                  users/unlocks#show
 #         new_adminuser_session GET        /admin/login(.:format)                   active_admin/devise/sessions#new
 #             adminuser_session POST       /admin/login(.:format)                   active_admin/devise/sessions#create
 #     destroy_adminuser_session DELETE|GET /admin/logout(.:format)                  active_admin/devise/sessions#destroy
@@ -24,6 +30,9 @@
 #       edit_adminuser_password GET        /admin/password/edit(.:format)           active_admin/devise/passwords#edit
 #                               PATCH      /admin/password(.:format)                active_admin/devise/passwords#update
 #                               PUT        /admin/password(.:format)                active_admin/devise/passwords#update
+#              adminuser_unlock POST       /admin/unlock(.:format)                  active_admin/devise/unlocks#create
+#          new_adminuser_unlock GET        /admin/unlock/new(.:format)              active_admin/devise/unlocks#new
+#                               GET        /admin/unlock(.:format)                  active_admin/devise/unlocks#show
 #                    admin_root GET        /admin(.:format)                         admin/dashboard#index
 # batch_action_admin_adminusers POST       /admin/adminusers/batch_action(.:format) admin/adminusers#batch_action
 #              admin_adminusers GET        /admin/adminusers(.:format)              admin/adminusers#index
@@ -35,10 +44,27 @@
 #                               PUT        /admin/adminusers/:id(.:format)          admin/adminusers#update
 #                               DELETE     /admin/adminusers/:id(.:format)          admin/adminusers#destroy
 #               admin_dashboard GET        /admin/dashboard(.:format)               admin/dashboard#index
+#      batch_action_admin_users POST       /admin/users/batch_action(.:format)      admin/users#batch_action
+#                   admin_users GET        /admin/users(.:format)                   admin/users#index
+#                               POST       /admin/users(.:format)                   admin/users#create
+#                new_admin_user GET        /admin/users/new(.:format)               admin/users#new
+#               edit_admin_user GET        /admin/users/:id/edit(.:format)          admin/users#edit
+#                    admin_user GET        /admin/users/:id(.:format)               admin/users#show
+#                               PATCH      /admin/users/:id(.:format)               admin/users#update
+#                               PUT        /admin/users/:id(.:format)               admin/users#update
+#                               DELETE     /admin/users/:id(.:format)               admin/users#destroy
 #                admin_comments GET        /admin/comments(.:format)                admin/comments#index
 #                               POST       /admin/comments(.:format)                admin/comments#create
 #                 admin_comment GET        /admin/comments/:id(.:format)            admin/comments#show
 #                          root GET        /                                        welcome#index
+#               search_personas GET        /personas/search(.:format)               personas#search
+#                      personas POST       /personas(.:format)                      personas#create
+#                   new_persona GET        /personas/new(.:format)                  personas#new
+#                  edit_persona GET        /personas/:id/edit(.:format)             personas#edit
+#                       persona GET        /personas/:id(.:format)                  personas#show
+#                               PATCH      /personas/:id(.:format)                  personas#update
+#                               PUT        /personas/:id(.:format)                  personas#update
+#                               DELETE     /personas/:id(.:format)                  personas#destroy
 #
 
 Rails.application.routes.draw do
@@ -48,6 +74,12 @@ Rails.application.routes.draw do
   devise_for :adminusers, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root to: 'welcome#index'
+
+  resources :personas, except: [:index] do
+    collection do
+      get :search
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

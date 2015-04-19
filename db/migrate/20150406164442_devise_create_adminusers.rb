@@ -42,7 +42,7 @@ class DeviseCreateAdminusers < ActiveRecord::Migration
 
     add_index :adminusers, :email,                unique: true
     add_index :adminusers, :reset_password_token, unique: true
-    # add_index :adminusers, :confirmation_token,   unique: true
-    # add_index :adminusers, :unlock_token,         unique: true
+    add_index :adminusers, :confirmation_token,   unique: true
+    add_index :adminusers, :unlock_token,         unique: true
   end
 end

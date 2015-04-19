@@ -25,8 +25,10 @@
 #
 # Indexes
 #
+#  index_adminusers_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_adminusers_on_email                 (email) UNIQUE
 #  index_adminusers_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_adminusers_on_unlock_token          (unlock_token) UNIQUE
 #
 
 require 'rails_helper'

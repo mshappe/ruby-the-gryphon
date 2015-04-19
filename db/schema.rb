@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415200834) do
+ActiveRecord::Schema.define(version: 20150419022234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,8 +63,38 @@ ActiveRecord::Schema.define(version: 20150415200834) do
     t.datetime "updated_at"
   end
 
+  add_index "adminusers", ["confirmation_token"], name: "index_adminusers_on_confirmation_token", unique: true, using: :btree
   add_index "adminusers", ["email"], name: "index_adminusers_on_email", unique: true, using: :btree
   add_index "adminusers", ["reset_password_token"], name: "index_adminusers_on_reset_password_token", unique: true, using: :btree
+  add_index "adminusers", ["unlock_token"], name: "index_adminusers_on_unlock_token", unique: true, using: :btree
+
+  create_table "branch_types", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "full_status"
+    t.boolean  "has_award"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "branches", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "branch_type_id"
+    t.integer  "region_id"
+    t.string   "branch_heraldry"
+    t.string   "map_image"
+    t.string   "map_coordinates"
+    t.integer  "parent_branch_id"
+    t.string   "city"
+    t.string   "state"
+    t.string   "url"
+    t.boolean  "active"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "branches", ["branch_type_id"], name: "index_branches_on_branch_type_id", using: :btree
+  add_index "branches", ["name"], name: "index_branches_on_name", unique: true, using: :btree
+  add_index "branches", ["region_id"], name: "index_branches_on_region_id", using: :btree
 
   create_table "heradry_images", force: :cascade do |t|
     t.integer "person_id"
@@ -80,7 +110,7 @@ ActiveRecord::Schema.define(version: 20150415200834) do
     t.string   "gender"
     t.string   "url"
     t.datetime "date_of_birth"
-    t.integer  "sca_number"
+    t.string   "sca_number"
     t.datetime "sca_expiration_date"
     t.boolean  "private_name"
     t.boolean  "private_address"
@@ -98,9 +128,11 @@ ActiveRecord::Schema.define(version: 20150415200834) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "address_id"
+    t.integer  "branch_id"
   end
 
   add_index "people", ["address_id"], name: "index_people_on_address_id", using: :btree
+  add_index "people", ["branch_id"], name: "index_people_on_branch_id", using: :btree
   add_index "people", ["user_id"], name: "index_people_on_user_id", using: :btree
 
   create_table "persona_images", force: :cascade do |t|
@@ -135,6 +167,24 @@ ActiveRecord::Schema.define(version: 20150415200834) do
   add_index "personas", ["persona_type_id"], name: "index_personas_on_persona_type_id", using: :btree
   add_index "personas", ["user_id"], name: "index_personas_on_user_id", using: :btree
 
+  create_table "regions", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
@@ -157,14 +207,22 @@ ActiveRecord::Schema.define(version: 20150415200834) do
     t.datetime "locked_at"
     t.uuid     "uuid"
     t.string   "username"
+    t.text     "comment"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
   add_index "users", ["uuid"], name: "index_users_on_uuid", unique: true, using: :btree
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",  null: false
@@ -177,8 +235,12 @@ ActiveRecord::Schema.define(version: 20150415200834) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "branches", "branch_types"
+  add_foreign_key "branches", "branches", column: "parent_branch_id", on_delete: :nullify
+  add_foreign_key "branches", "regions"
   add_foreign_key "people", "addresses"
-  add_foreign_key "people", "users"
+  add_foreign_key "people", "branches"
+  add_foreign_key "people", "users", on_delete: :nullify
   add_foreign_key "personas", "persona_types"
-  add_foreign_key "personas", "users"
+  add_foreign_key "personas", "users", on_delete: :nullify
 end

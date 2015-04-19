@@ -2,11 +2,11 @@ h2.header
   | Edit&nbsp;
   = resource_name.to_s.humanize
 .row
-  .col-md-9.col-sm-12.col-xs-12
+  .col-md-8.col-sm-12.col-xs-12
     = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
       .panel.panel-default
         .panel-heading
-          | Security Information
+          .panel-title Security Information
         .panel-body
           = devise_error_messages!
           = f.input :email, autofocus: true
@@ -18,7 +18,7 @@ h2.header
           = f.input :password_confirmation, autocomplete: "off"
       .panel.panel-default
         .panel-heading
-          | Personal Information
+          .panel-title Personal Information
         .panel-body
           = f.simple_fields_for :person, wrapper: :horizontal_form do |p|
             = p.input :name, autocomplete: 'off'
@@ -32,21 +32,27 @@ h2.header
               .form-group
                 .col-md-offset-3.col-md-9
                   = a.country_select :country, { priority: %w(US CA), prompt: 'Country' }, class: 'form-control'
-
+            = p.association :branch
       .form-group
         .col-md-9
           = f.input :current_password, autocomplete: "off", hint: "(we need your current password to confirm your changes)"
         .col-md-3.col-sm-12.col-xs-12
           = f.button :submit, "Update", class: 'btn-primary'
 
-  .col-md-3.col-sm-12.col-xs-12
+  .col-md-4.col-sm-12.col-xs-12
     .panel.panel-info.panel
       .panel-heading
-        | Personas
+        .panel-title Personas
       .panel-body
-        = link_to 'Add a persona'
-        - resource.personas.each do |p|
-          = link_to p.name
+        .list-group
+          = link_to 'Add a persona', new_persona_path, class: 'list-group-item'
+          - resource.personas.each do |p|
+            = link_to(edit_persona_path(p), { class: 'list-group-item' }) do
+              .row
+                .col-md-8
+                  = p.name
+                .col-md-2
+                  = persona_badge(p)
 h3.header
   | Cancel my account
 = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'

@@ -24,8 +24,8 @@
 
 FactoryGirl.define do
   factory :persona do
-    user nil
-    name "MyString"
+    user
+    sequence(:name) { Faker::Name.name }
     honorific "MyString"
     persona_type
     description "MyText"

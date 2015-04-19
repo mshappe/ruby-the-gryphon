@@ -25,7 +25,11 @@
 class Persona < ActiveRecord::Base
   has_paper_trail
   has_attached_file :persona_image, storage: :database
+  resourcify
 
   belongs_to :user
   belongs_to :persona_type
+
+  validates :name, presence: true, uniqueness: true
+  validates :persona_type, presence: true
 end

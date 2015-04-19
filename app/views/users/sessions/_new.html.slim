@@ -1,12 +1,13 @@
-.well.well-sm
-  .row
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      | Log in
+  .panel-body.row
     .col-md-12
-      h4
-        | Log in
       = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        = f.input :email
-        = f.input :password, as: :password, autocomplete: "off"
+        = f.input :email, input_html: { class: 'input-sm' }
+        = f.input :password, as: :password, autocomplete: "off", input_html: { class: 'input-sm' }
         - if devise_mapping.rememberable?
           = f.input :remember_me, as: :boolean
-        = f.button :submit, "Log in", class: 'btn-success'
+        = f.button :submit, "Log in", class: 'btn-success btn-sm'
       = render "users/shared/links"

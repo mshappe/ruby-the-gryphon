@@ -24,6 +24,7 @@
 #  locked_at              :datetime
 #  uuid                   :uuid
 #  username               :string
+#  comment                :text
 #
 # Indexes
 #
@@ -31,7 +32,7 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
-#  index_users_on_username              (username)
+#  index_users_on_username              (username) UNIQUE
 #  index_users_on_uuid                  (uuid) UNIQUE
 #
 

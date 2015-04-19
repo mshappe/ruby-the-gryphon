@@ -1,0 +1,12 @@
+= simple_form_for @persona, class: 'form-horizontal', wrapper: :horizontal_form do |f|
+  = f.input :name, disabled: (action_name == 'edit')
+  = f.input :honorific
+  = f.association :persona_type
+  = f.input :description
+  = f.input :name_registered, as: :datetime_picker
+  = f.input :persona_image
+  .form-group
+    .col-md-offset-3.col-sm-offset-3.col-md-9
+      = f.button :submit, 'Save', class: 'btn-primary'
+      = button_to 'Delete', { action: :destroy, id: @persona.id },
+                  { method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this persona?' }  }
