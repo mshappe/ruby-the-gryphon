@@ -30,7 +30,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'capistrano-rails', group: :development
+
+group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rvm'
+end
 
 group :development, :test do
   gem 'annotate'
