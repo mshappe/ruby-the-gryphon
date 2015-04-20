@@ -9,6 +9,10 @@ development:
   <<: *default
   database: ruby-the-gryphon_development
 
+staging:
+  <<: *default
+  database: ruby-the-gryphon_staging
+
 test:
   <<: *default
   database: ruby-the-gryphon_test

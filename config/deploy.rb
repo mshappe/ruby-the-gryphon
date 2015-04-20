@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'RubyGryphon'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :repo_url, 'git@github.com:mshappe/ruby-the-gryphon.git'
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :deploy_to, '/home/rubygryphon/app'
 set :scm, :git
