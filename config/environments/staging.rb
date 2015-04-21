@@ -78,5 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'rubygrphon.itasca.net' }
- # config.assets.manifest = "public/assets/manifest-#{SecureRandom.hex(16)}.json"
+  config.action_mailer.delivery_method = :sendmail
+
+  # config.assets.manifest = "public/assets/manifest-#{SecureRandom.hex(16)}.json"
 end
