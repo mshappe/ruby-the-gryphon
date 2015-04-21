@@ -9,5 +9,5 @@
         = f.input :password, as: :password, autocomplete: "off", input_html: { class: 'input-sm' }
         - if devise_mapping.rememberable?
           = f.input :remember_me, as: :boolean
-        = f.button :submit, "Log in", class: 'btn-success btn-sm'
+        = f.button :submit, "Log in", class: 'btn-primary btn-sm'
       = render "users/shared/links"

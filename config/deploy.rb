@@ -10,7 +10,7 @@ set :format, :pretty
 set :log_level, :debug
 set :pty, true
 set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/assets', 'public/system')
 set :keep_releases, 3
 
 # Default value for default_env is {}
@@ -18,6 +18,19 @@ set :keep_releases, 3
 
 
 namespace :deploy do
+
+  task :ensure_db do
+    on roles(:db) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'db:create'
+        end
+      end
+    end
+  end
+
+  before :compile_assets, :ensure_db
+
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
