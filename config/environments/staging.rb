@@ -80,7 +80,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'rubygrphon.itasca.net' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'no-reply@bee.itasca.com'}
+  config.action_mailer.default_options = {from: 'no-reply@bee.itasca.net'}
   config.action_mailer.delivery_method = :sendmail
 
   # config.assets.manifest = "public/assets/manifest-#{SecureRandom.hex(16)}.json"
