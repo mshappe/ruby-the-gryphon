@@ -6,6 +6,8 @@ capybara-*.html
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /db/data.yml
+# We're only using seeds.rb for data transfer. Real seeding uses seed_fu
+/db/seeds.rb
 /public/system
 /coverage/
 /spec/tmp

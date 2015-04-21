@@ -23,6 +23,7 @@ gem 'responders', '~> 2.1.0'
 gem 'rolify', '~> 4.0.0'
 gem 'sass-rails', '~> 5.0'
 gem 'seed-fu', '~> 2.3.5'
+gem 'seed_dump'
 gem 'simple_form', '~> 3.1.0'
 gem 'slim-rails', '~> 3.0.1'
 gem 'therubyracer'
@@ -49,7 +50,6 @@ group :development, :test do
   gem 'shoulda'
   gem 'spring'
   gem 'web-console', '~> 2.0'
-  gem 'yaml_db'
 end
 
 group :test do
