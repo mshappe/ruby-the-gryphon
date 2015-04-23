@@ -16,11 +16,11 @@ h2.header
               = resource.unconfirmed_email
           = f.input :password, autocomplete: "off", hint: "(leave blank if you don't want to change it)"
           = f.input :password_confirmation, autocomplete: "off"
-      .panel.panel-default
-        .panel-heading
-          .panel-title Personal Information
-        .panel-body
-          = f.simple_fields_for :person, wrapper: :horizontal_form do |p|
+      = f.simple_fields_for :person, wrapper: :horizontal_form do |p|
+        .panel.panel-default
+          .panel-heading
+            .panel-title Personal Information
+          .panel-body
             = p.input :name, autocomplete: 'off'
             = p.simple_fields_for :address, wrapper: :horizontal_form do |a|
               = a.input :address
@@ -33,6 +33,19 @@ h2.header
                 .col-md-offset-3.col-md-9
                   = a.country_select :country, { priority: %w(US CA), prompt: 'Country' }, class: 'form-control'
             = p.association :branch
+        .panel.panel-default
+          .panel-heading
+            .panel-title Privacy Settings
+          .panel-body
+            .row
+              .col-lg-3.col-md-6.col-sm-6
+                = p.input :private_email, label: 'Hide Email', wrapper: :none, inline_label: true
+              .col-lg-3.col-md-6.col-sm-6
+                = p.input :private_address, label: 'Hide Address', wrapper: :none, inline_label: true
+              .col-lg-3.col-md-6.col-sm-6
+                = p.input :private_phone, label: 'Hide Phone', wrapper: :none, inline_label: true
+              .col-lg-3.col-md-6.col-sm-6
+                = p.input :private_persona, label: 'Hide Persona', wrapper: :none, inline_label: true
       .form-group
         .col-md-9
           = f.input :current_password, autocomplete: "off", hint: "(we need your current password to confirm your changes)"

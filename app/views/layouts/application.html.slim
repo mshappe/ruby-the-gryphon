@@ -1,38 +1,38 @@
 doctype html
 html lang='en'
-head
-  title RubyTheGryphon
-  meta name="viewport" content="width=device-width, initial-scale=1"
-  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-  = javascript_include_tag 'application', 'data-turbolinks-track' => true
-  = favicon_link_tag 'favicon.ico'
-  = csrf_meta_tags
-body
-  .container-fluid
-    .row
-      #header.jumbotron
-        .center-block style='width:440px'
-          img= link_to image_tag('Poster.gif'), root_url
+  head
+    title RubyTheGryphon
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = favicon_link_tag 'favicon.ico'
+    = csrf_meta_tags
+  body
+    .container-fluid
+      .row
+        #header.jumbotron
+          .center-block style='width:440px'
+            img= link_to image_tag('Poster.gif'), root_url
 
-    .row
-      .col-md-12
-        .notice.text-success= notice
-        .alert.text-danger= alert
-
-    .row
-      #navigation.col-lg-3.col-md-3.col-sm-5.col-xs-12
-        = render 'users/sessions/new' unless user_signed_in?
-        = render 'users/sessions/logged_in' if user_signed_in?
-        = yield :sidebar
-      #main.col-lg-9.col-md-9.col-sm-7.col-xs-12
-        = content_for?(:main) ? yield(:main) : yield
-
-    .row
-      #footer
+      .row
         .col-md-12
-          .center-block style='width: 440px; text-align: center'
-            .text-muted #{link_to 'Code', 'http://github.com/mshappe/ruby-the-gryphon'} Copyright © 2015 Society for Creative Anachronism, Inc.
-            .text-muted Licensed under the #{link_to 'MIT License', 'http://github.com/mshappe/ruby-the-gryphon/LICENSE'}.
-            .text-muted This site is NOT currently an official offering of the Society for Creative Anachronism, Inc. This is an experimental site.
-            .text-muted Version #{version_number}: #{version_name}
+          .notice.text-success= notice
+          .alert.text-danger= alert
+
+      .row
+        #navigation.col-lg-3.col-md-3.col-sm-5.col-xs-12
+          = render 'users/sessions/new' unless user_signed_in?
+          = render 'users/sessions/logged_in' if user_signed_in?
+          = yield :sidebar
+        #main.col-lg-9.col-md-9.col-sm-7.col-xs-12
+          = content_for?(:main) ? yield(:main) : yield
+
+      .row
+        #footer
+          .col-md-12
+            .center-block style='width: 440px; text-align: center'
+              .text-muted #{link_to 'Code', 'http://github.com/mshappe/ruby-the-gryphon'} Copyright © 2015 Society for Creative Anachronism, Inc.
+              .text-muted Licensed under the #{link_to 'MIT License', 'http://github.com/mshappe/ruby-the-gryphon/LICENSE'}.
+              .text-muted This site is NOT currently an official offering of the Society for Creative Anachronism, Inc. This is an experimental site.
+              .text-muted Version #{version_number}: #{version_name}
 

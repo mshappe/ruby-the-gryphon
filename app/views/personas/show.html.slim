@@ -1,0 +1,7 @@
+h2.heading #{@persona.name} #{persona_badge(@persona)}
+
+- if user_signed_in?
+  = render partial: 'people/person', locals: { person: @persona.person }
+
+h3.heading Description
+p= @persona.description

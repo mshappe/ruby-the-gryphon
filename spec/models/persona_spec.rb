@@ -27,6 +27,7 @@ require 'rails_helper'
 RSpec.describe Persona, :type => :model do
   it { is_expected.to belong_to :user }
   it { is_expected.to belong_to :persona_type }
+  it { is_expected.to have_one(:person).through :user }
   it { is_expected.to have_attached_file :persona_image }
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_uniqueness_of :name }
