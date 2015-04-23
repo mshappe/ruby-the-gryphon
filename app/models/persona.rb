@@ -29,6 +29,7 @@ class Persona < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :persona_type
+  has_one :person, through: :user
 
   validates :name, presence: true, uniqueness: true
   validates :persona_type, presence: true

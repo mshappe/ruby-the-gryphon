@@ -15,10 +15,10 @@
 FactoryGirl.define do
   factory :address do
     address "MyString"
-city "MyString"
-state "MyString"
-postal_code "MyString"
-country "MyString"
+    city "MyString"
+    state 'MN'
+    postal_code "55423"
+    country "US"
   end
 
 end

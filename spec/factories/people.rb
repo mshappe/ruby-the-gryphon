@@ -40,6 +40,7 @@
 FactoryGirl.define do
   factory :person do
     user
+    address
     name "MyString"
     phone "MyString"
     phone_message "MyString"
