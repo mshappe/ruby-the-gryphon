@@ -1,6 +1,23 @@
 # == Route Map
 #
 #                        Prefix Verb       URI Pattern                              Controller#Action
+#                          root GET        /                                        welcome#index
+#                        events GET        /events(.:format)                        events#index
+#                               POST       /events(.:format)                        events#create
+#                     new_event GET        /events/new(.:format)                    events#new
+#                    edit_event GET        /events/:id/edit(.:format)               events#edit
+#                         event GET        /events/:id(.:format)                    events#show
+#                               PATCH      /events/:id(.:format)                    events#update
+#                               PUT        /events/:id(.:format)                    events#update
+#                               DELETE     /events/:id(.:format)                    events#destroy
+#               search_personas GET        /personas/search(.:format)               personas#search
+#                      personas POST       /personas(.:format)                      personas#create
+#                   new_persona GET        /personas/new(.:format)                  personas#new
+#                  edit_persona GET        /personas/:id/edit(.:format)             personas#edit
+#                       persona GET        /personas/:id(.:format)                  personas#show
+#                               PATCH      /personas/:id(.:format)                  personas#update
+#                               PUT        /personas/:id(.:format)                  personas#update
+#                               DELETE     /personas/:id(.:format)                  personas#destroy
 #              new_user_session GET        /users/sign_in(.:format)                 users/sessions#new
 #                  user_session POST       /users/sign_in(.:format)                 users/sessions#create
 #          destroy_user_session DELETE     /users/sign_out(.:format)                users/sessions#destroy
@@ -56,30 +73,25 @@
 #                admin_comments GET        /admin/comments(.:format)                admin/comments#index
 #                               POST       /admin/comments(.:format)                admin/comments#create
 #                 admin_comment GET        /admin/comments/:id(.:format)            admin/comments#show
-#                          root GET        /                                        welcome#index
-#               search_personas GET        /personas/search(.:format)               personas#search
-#                      personas POST       /personas(.:format)                      personas#create
-#                   new_persona GET        /personas/new(.:format)                  personas#new
-#                  edit_persona GET        /personas/:id/edit(.:format)             personas#edit
-#                       persona GET        /personas/:id(.:format)                  personas#show
-#                               PATCH      /personas/:id(.:format)                  personas#update
-#                               PUT        /personas/:id(.:format)                  personas#update
-#                               DELETE     /personas/:id(.:format)                  personas#destroy
 #
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { confirmations: 'users/confirmations', passwords: 'users/passwords',
-                                    registrations: 'users/registrations', sessions: 'users/sessions',
-                                    unlocks: 'users/unlocks' }
-  devise_for :adminusers, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   root to: 'welcome#index'
+
+  resources :events
 
   resources :personas, except: [:index] do
     collection do
       get :search
     end
   end
+
+  devise_for :users, controllers: { confirmations: 'users/confirmations', passwords: 'users/passwords',
+                                    registrations: 'users/registrations', sessions: 'users/sessions',
+                                    unlocks: 'users/unlocks' }
+  devise_for :adminusers, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

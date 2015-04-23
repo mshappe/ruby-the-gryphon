@@ -27,7 +27,7 @@ h2.header
               = a.input :city
               .form-group
                 .col-md-offset-3.col-md-9
-                  = a.subregion_select :state, a.object.country || 'US', { priority: %w(US CA) }, class: 'form-control'
+                  = a.subregion_select :state, (a.object.country.present? ? a.object.country : 'US'), { priority: %w(US CA) }, class: 'form-control'
               = a.input :postal_code
               .form-group
                 .col-md-offset-3.col-md-9

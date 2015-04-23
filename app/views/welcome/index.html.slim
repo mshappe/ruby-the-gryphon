@@ -7,3 +7,11 @@ ul
   li Edit your profile once logged in, including personas.
 
 p Not very exciting yet, but everything's gotta start somewhere!
+
+.panel.panel-default
+  .panel-heading
+    .panel-title Upcoming events (#{link_to 'All upcoming events', events_url(range: :upcoming)})
+  .panel-body
+    .row
+      .col-md-12
+        = render partial: 'events/summary', collection: @events, as: :event

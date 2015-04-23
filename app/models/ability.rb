@@ -5,17 +5,22 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    alias_action :create, :read, :update, :destroy, :to => :crud
+    alias_action :create, :read, :update, :destroy, to: :crud
+    alias_action :create, :read, :update, to: :cru
 
     # We have no roles yet!
     can :manage, :all if user.has_role? :admin
 
     # What can be publicly read?
-    can :read, [Person, Persona]
+    can :read, [Person, Persona, Event]
 
     # What belongs to a specific user and can be edited by that user
     can :update, Person,  user_id: user.id
     can :crud, Persona, user_id: user.id
+
+    can :cru, Event do |event| # Event is inexplicably tied to personas. We chose not to change this right now.
+      user.personas.pluck(&:id).include?(event.submitter_persona_id)
+    end
 
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities

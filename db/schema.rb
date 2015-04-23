@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420160903) do
+ActiveRecord::Schema.define(version: 20150421220519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,41 @@ ActiveRecord::Schema.define(version: 20150420160903) do
   add_index "branches", ["branch_type_id"], name: "index_branches_on_branch_type_id", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", unique: true, using: :btree
   add_index "branches", ["region_id"], name: "index_branches_on_region_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string   "url"
+    t.boolean  "approved"
+    t.integer  "branch_id"
+    t.integer  "sponsor_branch_id"
+    t.string   "unlisted_host"
+    t.string   "unlisted_sponsor"
+    t.string   "site_name"
+    t.integer  "address_id"
+    t.text     "web_ad"
+    t.text     "comments"
+    t.text     "admin_comments"
+    t.integer  "submitter_persona_id"
+    t.string   "submitter_sca_name"
+    t.string   "submitter_legal_name"
+    t.string   "submitter_phone"
+    t.string   "submitter_email"
+    t.integer  "steward_persona_id"
+    t.string   "steward_sca_name"
+    t.string   "steward_legal_name"
+    t.string   "steward_phone"
+    t.string   "steward_email"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "events", ["address_id"], name: "index_events_on_address_id", using: :btree
+  add_index "events", ["branch_id"], name: "index_events_on_branch_id", using: :btree
+  add_index "events", ["sponsor_branch_id"], name: "index_events_on_sponsor_branch_id", using: :btree
+  add_index "events", ["steward_persona_id"], name: "index_events_on_steward_persona_id", using: :btree
+  add_index "events", ["submitter_persona_id"], name: "index_events_on_submitter_persona_id", using: :btree
 
   create_table "heradry_images", force: :cascade do |t|
     t.integer "person_id"
@@ -248,6 +283,11 @@ ActiveRecord::Schema.define(version: 20150420160903) do
   add_foreign_key "branches", "branch_types"
   add_foreign_key "branches", "branches", column: "parent_branch_id", on_delete: :nullify
   add_foreign_key "branches", "regions"
+  add_foreign_key "events", "addresses"
+  add_foreign_key "events", "branches"
+  add_foreign_key "events", "branches", column: "sponsor_branch_id"
+  add_foreign_key "events", "personas", column: "steward_persona_id", on_delete: :nullify
+  add_foreign_key "events", "personas", column: "submitter_persona_id", on_delete: :nullify
   add_foreign_key "people", "addresses"
   add_foreign_key "people", "branches"
   add_foreign_key "people", "users", on_delete: :nullify

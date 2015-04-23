@@ -1,0 +1,13 @@
+.panel.panel-primary
+  .panel-heading
+    .panel-title= @event.name
+  .panel-body
+    div= event_date(@event).html_safe
+    div= @event.site_name
+    div= @event.address.address
+    div
+      = link_to @event.branch.name
+      |  (#{@event.address.city}, #{@event.address.state})
+    .well.well-sm= @event.web_ad.html_safe
+  .panel-footer
+    div= link_to 'More details', @event.url if @event.url
