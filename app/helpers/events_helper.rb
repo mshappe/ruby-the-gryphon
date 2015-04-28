@@ -5,7 +5,7 @@ module EventsHelper
     datetime = datetime.to_time # Just in case
     format = "%e %B #{sca_year(datetime)}"
     format += ' (%Y CE)' unless options[:format] =~ %r[no_ce]
-    format += ' %l:%M %P %Z' unless options[:format] =~ %r[date_only]
+    format += ' %l:%M %P' unless options[:format] =~ %r[date_only]
 
     datetime.strftime format
   end

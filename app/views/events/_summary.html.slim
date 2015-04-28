@@ -3,5 +3,5 @@
     strong= link_to event.name, event
   div= event_date(event, format: :date_only).html_safe
   div
-    = link_to event.branch.name
+    = link_to event.branch.name, event.branch
     |  (#{event.address.city}, #{event.address.state})

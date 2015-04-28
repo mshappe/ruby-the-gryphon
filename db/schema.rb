@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421220519) do
+ActiveRecord::Schema.define(version: 20150428212719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,11 @@ ActiveRecord::Schema.define(version: 20150421220519) do
     t.string   "country"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.float    "latitude"
+    t.float    "longitude"
   end
+
+  add_index "addresses", ["latitude", "longitude"], name: "index_addresses_on_latitude_and_longitude", using: :btree
 
   create_table "adminusers", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -68,6 +72,12 @@ ActiveRecord::Schema.define(version: 20150421220519) do
   add_index "adminusers", ["reset_password_token"], name: "index_adminusers_on_reset_password_token", unique: true, using: :btree
   add_index "adminusers", ["unlock_token"], name: "index_adminusers_on_unlock_token", unique: true, using: :btree
 
+  create_table "branch_heraldries", force: :cascade do |t|
+    t.integer "branch_id"
+    t.string  "style"
+    t.binary  "file_contents"
+  end
+
   create_table "branch_types", force: :cascade do |t|
     t.string   "name"
     t.boolean  "full_status"
@@ -80,16 +90,22 @@ ActiveRecord::Schema.define(version: 20150421220519) do
     t.string   "name"
     t.integer  "branch_type_id"
     t.integer  "region_id"
-    t.string   "branch_heraldry"
-    t.string   "map_image"
     t.string   "map_coordinates"
     t.integer  "parent_branch_id"
     t.string   "city"
     t.string   "state"
     t.string   "url"
     t.boolean  "active"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "branch_heraldry_file_name"
+    t.string   "branch_heraldry_content_type"
+    t.integer  "branch_heraldry_file_size"
+    t.datetime "branch_heraldry_updated_at"
+    t.string   "map_image_file_name"
+    t.string   "map_image_content_type"
+    t.integer  "map_image_file_size"
+    t.datetime "map_image_updated_at"
   end
 
   add_index "branches", ["branch_type_id"], name: "index_branches_on_branch_type_id", using: :btree
@@ -133,6 +149,12 @@ ActiveRecord::Schema.define(version: 20150421220519) do
 
   create_table "heradry_images", force: :cascade do |t|
     t.integer "person_id"
+    t.string  "style"
+    t.binary  "file_contents"
+  end
+
+  create_table "map_images", force: :cascade do |t|
+    t.integer "branch_id"
     t.string  "style"
     t.binary  "file_contents"
   end

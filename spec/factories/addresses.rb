@@ -10,6 +10,12 @@
 #  country     :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  latitude    :float
+#  longitude   :float
+#
+# Indexes
+#
+#  index_addresses_on_latitude_and_longitude  (latitude,longitude)
 #
 
 FactoryGirl.define do

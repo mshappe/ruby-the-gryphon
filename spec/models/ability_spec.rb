@@ -9,9 +9,9 @@ RSpec.describe Ability, type: :model do
       user.add_role :admin
     end
 
-    it { is_expected.to have_abilities :manage, User.new }
-    it { is_expected.to have_abilities :manage, Person.new }
-    it { is_expected.to have_abilities :manage, Persona.new }
+    [Branch, Event, Person, Persona, User].each do |klass|
+      it { is_expected.to have_abilities :manage, klass.new }
+    end
   end
 
   describe 'Ordinary user to their own stuff' do
@@ -33,7 +33,7 @@ RSpec.describe Ability, type: :model do
   describe 'Visitor' do
     subject { Ability.new(nil) }
 
-    [Event, Person, Persona].each do |k|
+    [Branch, Event, Person, Persona].each do |k|
       it { is_expected.to have_abilities :read, k.new }
     end
   end

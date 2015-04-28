@@ -14,10 +14,15 @@ html lang='en'
           .center-block style='width:440px'
             img= link_to image_tag('Poster.gif'), root_url
 
+      nav
+        ul.nav.nav-tabs.nav-justified
+          =active_link_to 'Home', root_path, wrap_tag: :li, active: :exclusive
+          =active_link_to 'Events', events_path, wrap_tag: :li
+          =active_link_to 'Edit Profile', edit_user_registration_path, wrap_tag: :li
       .row
         .col-md-12
-          .notice.text-success= notice
-          .alert.text-danger= alert
+          = render partial: 'alert', locals: { type: 'success', text: notice} if notice
+          = render partial: 'alert', locals: { type: 'danger', test: alert } if alert
 
       .row
         #navigation.col-lg-3.col-md-3.col-sm-5.col-xs-12

@@ -2,6 +2,14 @@
 #
 #                        Prefix Verb       URI Pattern                              Controller#Action
 #                          root GET        /                                        welcome#index
+#                      branches GET        /branches(.:format)                      branches#index
+#                               POST       /branches(.:format)                      branches#create
+#                    new_branch GET        /branches/new(.:format)                  branches#new
+#                   edit_branch GET        /branches/:id/edit(.:format)             branches#edit
+#                        branch GET        /branches/:id(.:format)                  branches#show
+#                               PATCH      /branches/:id(.:format)                  branches#update
+#                               PUT        /branches/:id(.:format)                  branches#update
+#                               DELETE     /branches/:id(.:format)                  branches#destroy
 #                        events GET        /events(.:format)                        events#index
 #                               POST       /events(.:format)                        events#create
 #                     new_event GET        /events/new(.:format)                    events#new
@@ -78,6 +86,7 @@
 Rails.application.routes.draw do
   root to: 'welcome#index'
 
+  resources :branches
   resources :events
 
   resources :personas, except: [:index] do

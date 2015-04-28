@@ -16,8 +16,8 @@ RSpec.describe 'Profile' do
 
   describe 'Edit profile' do
     before :each do
-      find_link('Edit Profile').click
-      expect(page).to have_text "Edit User"
+      find_link('Edit Profile', match: :first).click
+      expect(page).to have_text 'Edit User'
     end
 
     it 'can change password' do

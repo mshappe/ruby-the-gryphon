@@ -5,3 +5,24 @@
 .event-summary {
   margin-bottom: 12px;
 }
+
+.event-detail {
+  @extend .panel;
+  @extend .panel-primary;
+
+  .heading {
+    @extend .panel-heading;
+
+    .title {
+      @extend .panel-title;
+    }
+  }
+
+  .body {
+    @extend .panel-body;
+  }
+
+  .footer {
+    @extend .panel-footer;
+  }
+}

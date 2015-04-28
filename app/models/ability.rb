@@ -12,7 +12,7 @@ class Ability
     can :manage, :all if user.has_role? :admin
 
     # What can be publicly read?
-    can :read, [Person, Persona, Event]
+    can :read, [Branch, Event, Person, Persona]
 
     # What belongs to a specific user and can be edited by that user
     can :update, Person,  user_id: user.id

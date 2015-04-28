@@ -1,5 +1,8 @@
 h1.page-header And so, it begins
 
+.text-warning NOTA BENE
+| The navigation above is not intended to represent any expected real-world menu structure yet. It's just for experimentation.
+
 h2.header What you can do
 h3.header 0.1.1 Ambidextrous Aardvark (23 April 49)
 ul
@@ -16,7 +19,19 @@ p Not very exciting yet, but everything's gotta start somewhere!
 
 .panel.panel-default
   .panel-heading
-    .panel-title Upcoming events (#{link_to 'All upcoming events', events_url(range: :upcoming)})
+    .panel-title
+      .row
+        .col-md-4.col-sm-12
+          | Upcoming events
+        .col-md-5.col-sm-6
+          = link_to events_url(range: :upcoming) do
+            .glyphicon.glyphicon-list
+            | All upcoming events
+        .col-md-3.col-sm-6
+          .text-right
+            = link_to new_event_path do
+              .glyphicon.glyphicon-plus
+              | Submit an event
   .panel-body
     .row
       .col-md-12
