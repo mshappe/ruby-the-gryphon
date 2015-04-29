@@ -33,8 +33,8 @@
 class Branch < ActiveRecord::Base
   has_paper_trail
   resourcify
-  has_attached_file :branch_heraldry, storage: :database
-  has_attached_file :map_image, storage: :database
+  has_attached_file :branch_heraldry, storage: :database, cascade_deletion: true
+  has_attached_file :map_image, storage: :database, cascade_deletion: true
 
   belongs_to :branch_type
   belongs_to :region
@@ -44,4 +44,7 @@ class Branch < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :branch_type, presence: true
   validates :region, presence: true
+  validates_attachment_content_type :branch_heraldry, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :map_image, :content_type => /\Aimage\/.*\Z/
+
 end

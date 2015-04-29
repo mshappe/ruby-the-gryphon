@@ -1,0 +1,15 @@
+.panel.panel-primary
+  .panel-heading
+    .row
+      .col-md-6.col-sm-6
+        .panel-title
+          = params[:include] == 'past' ? "All" : "Upcoming"
+          |  Events
+      .col-md-6.col-sm-6
+        .text-right
+          .panel-title
+            = link_to 'See past events', events_path(include: 'past') unless params[:include] == 'past'
+            = link_to 'Only future events', events_path if params[:include] == 'past'
+
+  .panel-body
+    = render partial: 'events/summary', collection: @events, as: :event

@@ -51,4 +51,38 @@ RSpec.describe Event, :type => :model do
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_presence_of :start_at }
   it { is_expected.to validate_presence_of :end_at }
+
+  describe 'scopes' do
+    before :each do
+      Event.destroy_all # I have no idea where the stray event is coming from and I don't care.
+      @unapproved_event = create :event, start_at: Date.tomorrow, approved: false
+      @good_event = create :event, start_at: Date.tomorrow
+      @old_event = create :event, start_at: 2.days.ago
+      @future_event = create :event, start_at: 4.months.from_now
+    end
+
+    describe '#next_three_months' do
+      it 'should only have @good_event' do
+        expect(Event.next_three_months).to match_array [@unapproved_event, @good_event]
+      end
+    end
+
+    describe '#all_future' do
+      it 'should include @future_event' do
+        expect(Event.all_future).to match_array [@unapproved_event, @good_event, @future_event]
+      end
+    end
+
+    describe '#approved' do
+      it 'should only have @good_event, @old_event, @future_event' do
+        expect(Event.approved).to match_array [@good_event, @old_event, @future_event]
+      end
+    end
+
+    describe '#unapproved' do
+      it 'should only have @unapproved_event' do
+        expect(Event.unapproved).to match_array [@unapproved_event]
+      end
+    end
+  end
 end

@@ -87,6 +87,8 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   resources :branches
+  get '/branches/branch_heraldries/:id', controller: 'branches', action: 'branch_heraldries'
+  get '/branches/map_images/:id', controller: 'branches', action: 'map_images'
   resources :events
 
   resources :personas, except: [:index] do
@@ -94,6 +96,7 @@ Rails.application.routes.draw do
       get :search
     end
   end
+  get '/personas/persona_images/:id', controller: 'personas', action: 'persona_images'
 
   devise_for :users, controllers: { confirmations: 'users/confirmations', passwords: 'users/passwords',
                                     registrations: 'users/registrations', sessions: 'users/sessions',

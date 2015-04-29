@@ -45,7 +45,7 @@ FactoryGirl.define do
     start_at "2015-04-21 17:05:19"
     end_at "2015-04-21 17:05:19"
     url "MyString"
-    approved false
+    approved true
     branch nil
     sponsor_branch nil
     unlisted_host "MyString"

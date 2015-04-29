@@ -52,4 +52,9 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validates :start_at, presence: true
   validates :end_at, presence: true
+
+  scope :approved, -> { where approved: true }
+  scope :unapproved, -> { where approved: false }
+  scope :next_three_months, -> { where start_at: (Date.today..3.months.from_now) }
+  scope :all_future, -> { where 'start_at >= ?', Date.today }
 end

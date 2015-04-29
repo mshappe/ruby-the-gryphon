@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428212719) do
+ActiveRecord::Schema.define(version: 20150428231910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,12 @@ ActiveRecord::Schema.define(version: 20150428212719) do
   add_index "events", ["submitter_persona_id"], name: "index_events_on_submitter_persona_id", using: :btree
 
   create_table "heradry_images", force: :cascade do |t|
+    t.integer "person_id"
+    t.string  "style"
+    t.binary  "file_contents"
+  end
+
+  create_table "heraldic_images", force: :cascade do |t|
     t.integer "person_id"
     t.string  "style"
     t.binary  "file_contents"

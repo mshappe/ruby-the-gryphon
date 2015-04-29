@@ -1,7 +1,17 @@
-h2.heading #{@persona.name} #{persona_badge(@persona)}
+.row
+  .col-md-12.col-sm-12
+    h2.heading #{@persona.name} #{persona_badge(@persona)}
 
-- if user_signed_in?
-  = render partial: 'people/person', locals: { person: @persona.person }
+.row
+  .col-md-9.col-sm-9
+    - if user_signed_in?
+      = render partial: 'people/person', locals: { person: @persona.person }
+    - else
+      div You must sign in to see personal information.
+  .col-md-3
+    = image_tag @persona.persona_image.url, class: 'img-responsive' if @persona.persona_image.present?
 
-h3.heading Description
-p= @persona.description
+.row
+  .col-md-12
+    h3.heading Description
+    p= @persona.description
