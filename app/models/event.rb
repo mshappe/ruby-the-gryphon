@@ -29,6 +29,9 @@
 #  steward_email        :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  submission_state     :string
+#  supersedes_id        :integer
+#  superseded_by_id     :integer
 #
 # Indexes
 #
@@ -36,10 +39,13 @@
 #  index_events_on_branch_id             (branch_id)
 #  index_events_on_sponsor_branch_id     (sponsor_branch_id)
 #  index_events_on_steward_persona_id    (steward_persona_id)
+#  index_events_on_submission_state      (submission_state)
 #  index_events_on_submitter_persona_id  (submitter_persona_id)
 #
 
 class Event < ActiveRecord::Base
+  include Submittable
+
   has_paper_trail
   resourcify
 
@@ -53,8 +59,6 @@ class Event < ActiveRecord::Base
   validates :start_at, presence: true
   validates :end_at, presence: true
 
-  scope :approved, -> { where approved: true }
-  scope :unapproved, -> { where approved: false }
   scope :next_three_months, -> { where start_at: (Date.today..3.months.from_now) }
   scope :all_future, -> { where 'start_at >= ?', Date.today }
 end

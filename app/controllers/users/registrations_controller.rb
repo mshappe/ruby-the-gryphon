@@ -3,6 +3,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_account_update_params, only: [:update]
   before_filter :create_nested_models, only: [:edit]
 
+  skip_authorization_check
+
 # GET /resource/sign_up
   def new
     super

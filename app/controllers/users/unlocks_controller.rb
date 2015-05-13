@@ -1,4 +1,6 @@
 class Users::UnlocksController < Devise::UnlocksController
+  skip_authorization_check
+
   # GET /resource/unlock/new
   # def new
   #   super

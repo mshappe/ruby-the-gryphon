@@ -29,6 +29,9 @@
 #  steward_email        :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  submission_state     :string
+#  supersedes_id        :integer
+#  superseded_by_id     :integer
 #
 # Indexes
 #
@@ -36,6 +39,7 @@
 #  index_events_on_branch_id             (branch_id)
 #  index_events_on_sponsor_branch_id     (sponsor_branch_id)
 #  index_events_on_steward_persona_id    (steward_persona_id)
+#  index_events_on_submission_state      (submission_state)
 #  index_events_on_submitter_persona_id  (submitter_persona_id)
 #
 
@@ -45,7 +49,6 @@ FactoryGirl.define do
     start_at "2015-04-21 17:05:19"
     end_at "2015-04-21 17:05:19"
     url "MyString"
-    approved true
     branch nil
     sponsor_branch nil
     unlisted_host "MyString"
@@ -65,6 +68,7 @@ FactoryGirl.define do
     steward_legal_name "MyString"
     steward_phone "MyString"
     steward_email "MyString"
+    submission_state 'queued'
   end
 
 end

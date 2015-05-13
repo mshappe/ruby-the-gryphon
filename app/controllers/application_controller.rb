@@ -2,6 +2,7 @@ require "application_responder"
 
 class ApplicationController < ActionController::Base
   include Paperclip::Storage::Database::ControllerClassMethods
+  check_authorization
 
   self.responder = ApplicationResponder
   respond_to :html

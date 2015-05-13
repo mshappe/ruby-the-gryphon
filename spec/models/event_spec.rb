@@ -29,6 +29,9 @@
 #  steward_email        :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  submission_state     :string
+#  supersedes_id        :integer
+#  superseded_by_id     :integer
 #
 # Indexes
 #
@@ -36,12 +39,17 @@
 #  index_events_on_branch_id             (branch_id)
 #  index_events_on_sponsor_branch_id     (sponsor_branch_id)
 #  index_events_on_steward_persona_id    (steward_persona_id)
+#  index_events_on_submission_state      (submission_state)
 #  index_events_on_submitter_persona_id  (submitter_persona_id)
 #
 
 require 'rails_helper'
 
 RSpec.describe Event, :type => :model do
+  before :each do
+    Event.destroy_all # I have no idea where the stray event is coming from and I don't care.
+  end
+
   it { is_expected.to belong_to :branch }
   it { is_expected.to belong_to :sponsor_branch }
   it { is_expected.to belong_to :address }
@@ -52,10 +60,10 @@ RSpec.describe Event, :type => :model do
   it { is_expected.to validate_presence_of :start_at }
   it { is_expected.to validate_presence_of :end_at }
 
+  it_behaves_like 'submittable', :event
+
   describe 'scopes' do
     before :each do
-      Event.destroy_all # I have no idea where the stray event is coming from and I don't care.
-      @unapproved_event = create :event, start_at: Date.tomorrow, approved: false
       @good_event = create :event, start_at: Date.tomorrow
       @old_event = create :event, start_at: 2.days.ago
       @future_event = create :event, start_at: 4.months.from_now
@@ -63,25 +71,13 @@ RSpec.describe Event, :type => :model do
 
     describe '#next_three_months' do
       it 'should only have @good_event' do
-        expect(Event.next_three_months).to match_array [@unapproved_event, @good_event]
+        expect(Event.next_three_months).to match_array [@good_event]
       end
     end
 
     describe '#all_future' do
       it 'should include @future_event' do
-        expect(Event.all_future).to match_array [@unapproved_event, @good_event, @future_event]
-      end
-    end
-
-    describe '#approved' do
-      it 'should only have @good_event, @old_event, @future_event' do
-        expect(Event.approved).to match_array [@good_event, @old_event, @future_event]
-      end
-    end
-
-    describe '#unapproved' do
-      it 'should only have @unapproved_event' do
-        expect(Event.unapproved).to match_array [@unapproved_event]
+        expect(Event.all_future).to match_array [@good_event, @future_event]
       end
     end
   end

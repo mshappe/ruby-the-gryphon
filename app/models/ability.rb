@@ -10,9 +10,11 @@ class Ability
 
     # We have no roles yet!
     can :manage, :all if user.has_role? :admin
+    can :manage, Event if user.has_role? :event_officer
 
     # What can be publicly read?
-    can :read, [Branch, Event, Person, Persona]
+    can :read, [Branch, Person, Persona]
+    can :read, Event, submission_state: 'approved'
 
     # What belongs to a specific user and can be edited by that user
     can :update, Person,  user_id: user.id

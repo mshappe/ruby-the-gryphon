@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428231910) do
+ActiveRecord::Schema.define(version: 20150512234730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(version: 20150428231910) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.string   "url"
-    t.boolean  "approved"
     t.integer  "branch_id"
     t.integer  "sponsor_branch_id"
     t.string   "unlisted_host"
@@ -139,12 +138,16 @@ ActiveRecord::Schema.define(version: 20150428231910) do
     t.string   "steward_email"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "submission_state"
+    t.integer  "supersedes_id"
+    t.integer  "superseded_by_id"
   end
 
   add_index "events", ["address_id"], name: "index_events_on_address_id", using: :btree
   add_index "events", ["branch_id"], name: "index_events_on_branch_id", using: :btree
   add_index "events", ["sponsor_branch_id"], name: "index_events_on_sponsor_branch_id", using: :btree
   add_index "events", ["steward_persona_id"], name: "index_events_on_steward_persona_id", using: :btree
+  add_index "events", ["submission_state"], name: "index_events_on_submission_state", using: :btree
   add_index "events", ["submitter_persona_id"], name: "index_events_on_submitter_persona_id", using: :btree
 
   create_table "heradry_images", force: :cascade do |t|
@@ -314,6 +317,8 @@ ActiveRecord::Schema.define(version: 20150428231910) do
   add_foreign_key "events", "addresses"
   add_foreign_key "events", "branches"
   add_foreign_key "events", "branches", column: "sponsor_branch_id"
+  add_foreign_key "events", "events", column: "superseded_by_id", on_delete: :nullify
+  add_foreign_key "events", "events", column: "supersedes_id", on_delete: :nullify
   add_foreign_key "events", "personas", column: "steward_persona_id", on_delete: :nullify
   add_foreign_key "events", "personas", column: "submitter_persona_id", on_delete: :nullify
   add_foreign_key "people", "addresses"

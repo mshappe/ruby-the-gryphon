@@ -14,6 +14,14 @@ RSpec.describe Ability, type: :model do
     end
   end
 
+  describe 'Event officer' do
+    before :each do
+      user.add_role :event_officer # TODO this role will eventually be on Office (or WarrantType) rather than User
+    end
+
+    it { is_expected.to have_abilities :manage, Event.new }
+  end
+
   describe 'Ordinary user to their own stuff' do
     it { is_expected.to have_abilities [:read, :update], Person.new(user_id: user.id) }
     it { is_expected.to have_abilities [:create, :read, :update, :destroy], Persona.new(user_id: user.id) }
@@ -33,9 +41,13 @@ RSpec.describe Ability, type: :model do
   describe 'Visitor' do
     subject { Ability.new(nil) }
 
-    [Branch, Event, Person, Persona].each do |k|
+    [Branch, Person, Persona].each do |k|
       it { is_expected.to have_abilities :read, k.new }
     end
+
+    it { is_expected.to have_abilities :read, Event.new(submission_state: 'approved') }
+    it { is_expected.to not_have_abilities :read, Event.new(submission_state: 'queued') }
+
   end
 
 end

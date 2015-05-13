@@ -4,6 +4,7 @@ class PersonasController < ApplicationController
 
   before_action :authenticate_user!, except: [:persona_images]
   load_and_authorize_resource except: [:persona_images]
+  skip_authorization_check only: [:persona_images]
 
   def create
     @persona = Persona.create(persona_params)
