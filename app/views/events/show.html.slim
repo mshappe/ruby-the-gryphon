@@ -18,10 +18,9 @@
     div
       .glyphicon.glyphicon-info-sign
       = link_to 'More details', @event.url if @event.url
-    - if @event.address.geocoded?
-      div
-        .glyphicon.glyphicon-map-marker
-        = link_to 'Google Maps', "http://maps.google.com/maps?q=#{@event.address.full_address}(#{@event.site_name})", target: '_blank'
+    div
+      .glyphicon.glyphicon-map-marker
+      = link_to 'Google Maps', "http://maps.google.com/maps?q=#{@event.address.full_address}(#{@event.site_name})", target: '_blank'
 
 coffee:
   $(document).ready(
