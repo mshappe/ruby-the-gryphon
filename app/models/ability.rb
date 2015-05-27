@@ -20,8 +20,9 @@ class Ability
     can :update, Person,  user_id: user.id
     can :crud, Persona, user_id: user.id
 
-    can :cru, Event do |event| # Event is inexplicably tied to personas. We chose not to change this right now.
-      user.personas.pluck(&:id).include?(event.submitter_persona_id)
+    can :create, Event if user.persisted? # No visitors
+    can [:create, :edit], Event do |event| # Event is inexplicably tied to personas. We chose not to change this right now.
+      user.personas.pluck(:id).include?(event.submitter_persona_id)
     end
 
     # See the wiki for details:

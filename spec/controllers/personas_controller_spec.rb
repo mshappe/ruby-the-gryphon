@@ -73,11 +73,10 @@ RSpec.describe PersonasController, :type => :controller do
       end
 
       it 'should fail' do
-        expect {
-          post :create, persona: { user_id: 42,
-                                   name: 'Wombat von Wombatlips´',
-                                   persona_type_id: @type.id }
-        }.to raise_error CanCan::AccessDenied
+        post :create, persona: { user_id: 42,
+                                 name: 'Wombat von Wombatlips´',
+                                 persona_type_id: @type.id }
+        expect(response).to redirect_to root_url
       end
     end
 
@@ -94,7 +93,7 @@ RSpec.describe PersonasController, :type => :controller do
         it 'should succeed' do
           expect(response).to have_http_status :redirect
           expect(response).to redirect_to @persona
-          expect(@persona.description).to eq  'Beware the viscous giraffe'
+          expect(@persona.description).to eq 'Beware the viscous giraffe'
           is_expected.to set_flash.to %r[updated]
         end
       end

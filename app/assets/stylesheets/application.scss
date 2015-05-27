@@ -40,6 +40,12 @@ body {
   -webkit-font-feature-settings: 'onum', 'liga', 'dlig', 'calt';
 }
 
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+  margin-top: ($line-height-computed / 2)
+}
+
 .jumbotron {
   margin-bottom: 6px;
 }
