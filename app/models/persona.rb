@@ -36,4 +36,6 @@ class Persona < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :persona_type, presence: true
   validates_attachment_content_type :persona_image, :content_type => /\Aimage\/.*\Z/
+
+  scope :primary, -> { joins(:persona_type).where(persona_types: { name: 'Primary Name' }) }
 end

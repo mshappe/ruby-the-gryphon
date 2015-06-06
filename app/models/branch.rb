@@ -47,4 +47,5 @@ class Branch < ActiveRecord::Base
   validates_attachment_content_type :branch_heraldry, :content_type => /\Aimage\/.*\Z/
   validates_attachment_content_type :map_image, :content_type => /\Aimage\/.*\Z/
 
+  default_scope -> { order(:name) }
 end

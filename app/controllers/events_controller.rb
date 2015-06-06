@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
   load_and_authorize_resource
+
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :create_nested_models, only: [:new, :edit]
+
 
   def index
     @events = Event.approved
@@ -43,6 +46,10 @@ class EventsController < ApplicationController
   end
 
   protected
+
+  def create_nested_models
+    @event.build_address if @event.address.blank?
+  end
 
   def enforce_submission_state
     unless can? :manage, Event

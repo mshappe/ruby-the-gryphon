@@ -1,0 +1,38 @@
+h3  #{@event.persisted? ? 'Edit' : 'Submit' } an Event
+
+= simple_form_for @event, class: 'form-horizontal', wrapper: :horizontal_form do |f|
+  .panel.panel-primary
+    .panel-heading
+      .panel-title Basic Information
+    .panel-body
+      = f.input :name
+      .form-group
+        = f.input :start_at, as: :datetime_picker, wrapper: :ranged_datetime_horiz
+        = f.input :end_at, as: :datetime_picker, wrapper: :ranged_datetime_horiz
+      = f.input :url
+      = f.association :branch
+      = f.association :sponsor_branch
+      = f.input :submitter_persona_id, as: :hidden, input_html: { value: current_user.personas.primary.first.id }
+      = f.association :steward_persona, prompt: 'I am the steward'
+
+  .panel.panel-default
+    .panel-heading
+      .panel-title Location
+    .panel-body
+      = f.input :site_name
+      = f.simple_fields_for :address, wrapper: :horizontal_form do |a|
+        = a.input :address
+        = a.input :city
+        .form-group
+          .col-md-offset-3.col-md-9
+            = a.subregion_select :state, (@event.address.country.present? ? @event.address.country : 'US'), { priority: %w(MB MI MN ND SD WI) }, class: 'form-control'
+        = a.input :postal_code
+        .form-group
+          .col-md-offset-3.col-md-9
+            = a.country_select :country, { priority: %w(US CA), prompt: 'Country' }, class: 'form-control'
+
+
+  coffee:
+    $(document).ready(()->
+      $('select').select2()
+    )
