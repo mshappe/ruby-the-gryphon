@@ -52,7 +52,7 @@ RSpec.describe EventsController, :type => :controller do
     describe 'for visitors' do
       it 'should fail' do
         get :new
-        expect(response).to redirect_to new_user_session_url
+        expect(response).to redirect_to root_url
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe EventsController, :type => :controller do
     describe 'for visitors' do
       specify 'should fail' do
         post :create, event: attributes_for(:event)
-        expect(response).to redirect_to new_user_session_url
+        expect(response).to redirect_to root_url
       end
     end
 
@@ -99,7 +99,7 @@ RSpec.describe EventsController, :type => :controller do
       let(:event) { create :event }
       specify 'should fail' do
         get :edit, id: event.id
-        expect(response).to redirect_to new_user_session_url
+        expect(response).to redirect_to root_url
       end
     end
 
@@ -143,7 +143,7 @@ RSpec.describe EventsController, :type => :controller do
 
       it 'should fail' do
         patch :update, id: event.id, event: { name: 'Foo' }
-        expect(response).to redirect_to new_user_session_url
+        expect(response).to redirect_to root_url
       end
     end
 
