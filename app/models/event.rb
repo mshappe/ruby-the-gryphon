@@ -7,7 +7,6 @@
 #  start_at             :datetime
 #  end_at               :datetime
 #  url                  :string
-#  approved             :boolean
 #  branch_id            :integer
 #  sponsor_branch_id    :integer
 #  unlisted_host        :string
@@ -54,6 +53,8 @@ class Event < ActiveRecord::Base
   belongs_to :address
   belongs_to :submitter_persona, class_name: 'Persona'
   belongs_to :steward_persona, class_name: 'Persona'
+
+  has_and_belongs_to_many :event_activities, class_name: 'EventActivity', join_table: :event_event_activity
 
   validates :name, presence: true
   validates :start_at, presence: true

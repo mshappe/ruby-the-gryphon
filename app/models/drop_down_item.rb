@@ -22,6 +22,7 @@ class AwardType < DropDownItem
 end
 
 class EventActivity < DropDownItem
+  has_and_belongs_to_many :events, join_table: 'event_event_activity'
 end
 
 class ImageType <DropDownItem

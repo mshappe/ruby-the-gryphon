@@ -7,7 +7,6 @@
 #  start_at             :datetime
 #  end_at               :datetime
 #  url                  :string
-#  approved             :boolean
 #  branch_id            :integer
 #  sponsor_branch_id    :integer
 #  unlisted_host        :string
@@ -55,6 +54,8 @@ RSpec.describe Event, :type => :model do
   it { is_expected.to belong_to :address }
   it { is_expected.to belong_to :submitter_persona }
   it { is_expected.to belong_to :steward_persona }
+
+  it { is_expected.to have_and_belong_to_many(:event_activities) }
 
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_presence_of :start_at }

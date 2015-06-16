@@ -7,7 +7,6 @@
 #  start_at             :datetime
 #  end_at               :datetime
 #  url                  :string
-#  approved             :boolean
 #  branch_id            :integer
 #  sponsor_branch_id    :integer
 #  unlisted_host        :string
