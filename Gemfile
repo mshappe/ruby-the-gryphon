@@ -36,6 +36,7 @@ gem 'unicorn'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development do
+  gem 'awesome_print'
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
   gem 'capistrano-rvm'
