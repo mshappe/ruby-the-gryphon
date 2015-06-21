@@ -1,6 +1,14 @@
 h3  #{@event.persisted? ? 'Edit' : 'Submit' } an Event
 
 = simple_form_for @event, class: 'form-horizontal', wrapper: :horizontal_form do |f|
+  - if @event.persisted? && can?(:manage, @event)
+
+    .panel.panel-warning
+      .panel-heading
+        .panel-title Event Management
+    .panel-body
+      = f.input :submission_state, collection: Submittable::STATES
+
   .panel.panel-primary
     .panel-heading
       .panel-title Basic Information

@@ -30,7 +30,7 @@ html lang='en'
         #navigation.col-lg-3.col-md-3.col-sm-5.col-xs-12
           = render 'users/sessions/new' unless user_signed_in?
           = render 'users/sessions/logged_in' if user_signed_in?
-          = render 'application/event_officer_menu' if current_user.has_role?(:admin) || current_user.has_role?(:event_officer)
+          = render 'application/event_officer_menu' if can? :manage, Event
           = yield :sidebar
         #main.col-lg-9.col-md-9.col-sm-7.col-xs-12
           = content_for?(:main) ? yield(:main) : yield

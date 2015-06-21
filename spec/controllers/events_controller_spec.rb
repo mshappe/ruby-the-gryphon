@@ -44,10 +44,7 @@ RSpec.describe EventsController, :type => :controller do
         get :queued
         expect(response).to be_success
       end
-
-
     end
-
   end
 
   describe 'GET #show for all users' do

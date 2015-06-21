@@ -1,6 +1,10 @@
 .event-detail
   .heading
-    .title= @event.name
+    .row
+      .col-md-9
+        .title= @event.name
+      .col-md-3
+        = link_to 'Edit', edit_event_path(@event), class: 'btn btn-primary pull-right' if can? :edit, @event
   .body
     h4 Hosted by #{@event.branch.present? ? link_to(@event.branch.name, @event.branch) : @event.unlisted_host}
     - if @event.sponsor_branch.present? || @event.unlisted_sponsor.present?
