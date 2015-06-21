@@ -29,6 +29,27 @@ RSpec.describe EventsController, :type => :controller do
     end
   end
 
+  describe 'GET #queued' do
+    describe 'for visitors' do
+      it 'should fail' do
+        get :queued
+        expect(response).to redirect_to root_url
+      end
+    end
+
+    describe 'for event officer' do
+      login_user :event_officer
+
+      it 'should succeed' do
+        get :queued
+        expect(response).to be_success
+      end
+
+
+    end
+
+  end
+
   describe 'GET #show for all users' do
     describe 'for an approved event' do
       before :each do

@@ -10,6 +10,10 @@ class EventsController < ApplicationController
     @events = @events.all_future unless params[:include] == 'past'
   end
 
+  def queued
+    @events = Event.queued
+  end
+
   def create
     enforce_submission_state
 

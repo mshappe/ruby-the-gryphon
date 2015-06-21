@@ -13,6 +13,7 @@
 #                               DELETE     /branches/:id(.:format)                   branches#destroy
 #                               GET        /branches/branch_heraldries/:id(.:format) branches#branch_heraldries
 #                               GET        /branches/map_images/:id(.:format)        branches#map_images
+#                 queued_events GET        /events/queued(.:format)                  events#queued
 #                        events GET        /events(.:format)                         events#index
 #                               POST       /events(.:format)                         events#create
 #                     new_event GET        /events/new(.:format)                     events#new
@@ -63,6 +64,7 @@
 #          new_adminuser_unlock GET        /admin/unlock/new(.:format)               active_admin/devise/unlocks#new
 #                               GET        /admin/unlock(.:format)                   active_admin/devise/unlocks#show
 #                    admin_root GET        /admin(.:format)                          admin/dashboard#index
+#               admin_dashboard GET        /admin/dashboard(.:format)                admin/dashboard#index
 # batch_action_admin_adminusers POST       /admin/adminusers/batch_action(.:format)  admin/adminusers#batch_action
 #              admin_adminusers GET        /admin/adminusers(.:format)               admin/adminusers#index
 #                               POST       /admin/adminusers(.:format)               admin/adminusers#create
@@ -72,7 +74,6 @@
 #                               PATCH      /admin/adminusers/:id(.:format)           admin/adminusers#update
 #                               PUT        /admin/adminusers/:id(.:format)           admin/adminusers#update
 #                               DELETE     /admin/adminusers/:id(.:format)           admin/adminusers#destroy
-#               admin_dashboard GET        /admin/dashboard(.:format)                admin/dashboard#index
 #      batch_action_admin_users POST       /admin/users/batch_action(.:format)       admin/users#batch_action
 #                   admin_users GET        /admin/users(.:format)                    admin/users#index
 #                               POST       /admin/users(.:format)                    admin/users#create
@@ -94,7 +95,12 @@ Rails.application.routes.draw do
   resources :branches
   get '/branches/branch_heraldries/:id', controller: 'branches', action: 'branch_heraldries'
   get '/branches/map_images/:id', controller: 'branches', action: 'map_images'
-  resources :events
+
+  resources :events do
+    collection do
+      get :queued
+    end
+  end
 
   resources :personas, except: [:index] do
     collection do
