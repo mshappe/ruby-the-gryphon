@@ -2,7 +2,7 @@
   .heading
     .title= @event.name
   .body
-    h5 Hosted by #{@event.branch.present? ? link_to(@event.branch.name, @event.branch) : @event.unlisted_host}
+    h4 Hosted by #{@event.branch.present? ? link_to(@event.branch.name, @event.branch) : @event.unlisted_host}
     - if @event.sponsor_branch.present? || @event.unlisted_sponsor.present?
       h6 Sponsored by #{@event.sponsor_branch.present? ? link_to(@event.sponsor_branch.name, @event.sponsor_branch) : @event.unlisted_sponsor}
     .date= event_date(@event).html_safe
@@ -12,7 +12,11 @@
       div= @event.address.address
       div #{@event.address.city}, #{@event.address.state} #{@event.address.postal_code}
       div= @event.address.country
-    h5 Description
+    h4 Planned Activities
+    .well.well-sm
+      .row
+        = render @event.event_activities
+    h4 Description
     .well.well-sm= @event.web_ad.html_safe
   .footer
     div

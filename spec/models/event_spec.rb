@@ -61,6 +61,8 @@ RSpec.describe Event, :type => :model do
   it { is_expected.to validate_presence_of :start_at }
   it { is_expected.to validate_presence_of :end_at }
 
+  it { is_expected.to accept_nested_attributes_for :address }
+
   it_behaves_like 'submittable', :event
 
   describe 'scopes' do

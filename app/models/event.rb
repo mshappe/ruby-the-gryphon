@@ -56,6 +56,8 @@ class Event < ActiveRecord::Base
 
   has_and_belongs_to_many :event_activities, class_name: 'EventActivity', join_table: :event_event_activity
 
+  accepts_nested_attributes_for :address
+
   validates :name, presence: true
   validates :start_at, presence: true
   validates :end_at, presence: true

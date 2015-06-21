@@ -26,3 +26,7 @@
     @extend .panel-footer;
   }
 }
+
+.checkbox, .checkbox + .checkbox {
+  margin-top: 0;
+}
