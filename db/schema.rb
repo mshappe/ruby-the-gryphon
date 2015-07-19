@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616222644) do
+ActiveRecord::Schema.define(version: 20150719200822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,30 @@ ActiveRecord::Schema.define(version: 20150616222644) do
   add_index "adminusers", ["email"], name: "index_adminusers_on_email", unique: true, using: :btree
   add_index "adminusers", ["reset_password_token"], name: "index_adminusers_on_reset_password_token", unique: true, using: :btree
   add_index "adminusers", ["unlock_token"], name: "index_adminusers_on_unlock_token", unique: true, using: :btree
+
+  create_table "award_badges", force: :cascade do |t|
+    t.integer "award_id"
+    t.string  "style"
+    t.binary  "file_contents"
+  end
+
+  create_table "awards", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "precedence"
+    t.string   "award_badge_file_name"
+    t.string   "award_badge_content_type"
+    t.integer  "award_badge_file_size"
+    t.datetime "award_badge_updated_at"
+    t.integer  "award_type_id"
+    t.integer  "branch_id"
+    t.boolean  "active"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "awards", ["award_type_id"], name: "index_awards_on_award_type_id", using: :btree
+  add_index "awards", ["branch_id"], name: "index_awards_on_branch_id", using: :btree
 
   create_table "branch_heraldries", force: :cascade do |t|
     t.integer "branch_id"

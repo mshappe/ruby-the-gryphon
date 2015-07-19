@@ -45,6 +45,15 @@ RSpec.configure do |config|
     end
   end
 
+  config.before :each, :js, type: :feature do |example|
+   # Everything is terrible. js: true in config.before will run if the js tag
+   # is present in the spec declaration, regardless of the value.
+   if example.metadata[:js]
+     page.driver.block_unknown_urls
+     page.driver.allow_url('fonts.googleapis.com')
+   end
+ end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
