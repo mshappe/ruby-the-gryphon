@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719214648) do
+ActiveRecord::Schema.define(version: 20150719225154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,23 @@ ActiveRecord::Schema.define(version: 20150719214648) do
   add_index "branches", ["branch_type_id"], name: "index_branches_on_branch_type_id", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", unique: true, using: :btree
   add_index "branches", ["region_id"], name: "index_branches_on_region_id", using: :btree
+
+  create_table "courts", force: :cascade do |t|
+    t.integer  "court_order"
+    t.datetime "court_date"
+    t.integer  "event_id"
+    t.integer  "reign_id"
+    t.integer  "regent_persona_id"
+    t.integer  "reporter_persona_id"
+    t.integer  "herald_persona_id"
+    t.text     "note"
+    t.text     "planning_notes"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "courts", ["event_id"], name: "index_courts_on_event_id", using: :btree
+  add_index "courts", ["reign_id"], name: "index_courts_on_reign_id", using: :btree
 
   create_table "drop_down_items", force: :cascade do |t|
     t.string   "name"
@@ -414,6 +431,8 @@ ActiveRecord::Schema.define(version: 20150719214648) do
   add_foreign_key "branches", "branch_types"
   add_foreign_key "branches", "branches", column: "parent_branch_id", on_delete: :nullify
   add_foreign_key "branches", "regions"
+  add_foreign_key "courts", "events"
+  add_foreign_key "courts", "reigns"
   add_foreign_key "events", "addresses"
   add_foreign_key "events", "branches"
   add_foreign_key "events", "branches", column: "sponsor_branch_id"
