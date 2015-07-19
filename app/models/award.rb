@@ -23,6 +23,9 @@
 #
 
 class Award < ActiveRecord::Base
+  has_paper_trail
+  resourcify
+
   belongs_to :award_type
   belongs_to :branch
   has_attached_file :award_badge, storage: :database

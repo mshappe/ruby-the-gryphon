@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719200822) do
+ActiveRecord::Schema.define(version: 20150719211415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -351,6 +351,31 @@ ActiveRecord::Schema.define(version: 20150719200822) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+
+  create_table "warrant_badges", force: :cascade do |t|
+    t.integer "warrant_type_id"
+    t.string  "style"
+    t.binary  "file_contents"
+  end
+
+  create_table "warrant_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "warrant_badge_file_name"
+    t.string   "warrant_badge_content_type"
+    t.integer  "warrant_badge_file_size"
+    t.datetime "warrant_badge_updated_at"
+    t.boolean  "missive"
+    t.integer  "stallari_order"
+    t.text     "job_description"
+    t.integer  "superior_warrant_id"
+    t.boolean  "background_check_required"
+    t.boolean  "northwatch_display"
+    t.string   "icon_file_name"
+    t.boolean  "active"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   add_foreign_key "branches", "branch_types"
   add_foreign_key "branches", "branches", column: "parent_branch_id", on_delete: :nullify
