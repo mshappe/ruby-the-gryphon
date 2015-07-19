@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719211415) do
+ActiveRecord::Schema.define(version: 20150719214648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -279,6 +279,40 @@ ActiveRecord::Schema.define(version: 20150719211415) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "reign_images", force: :cascade do |t|
+    t.integer "reign_id"
+    t.string  "style"
+    t.binary  "file_contents"
+  end
+
+  create_table "reign_maps", force: :cascade do |t|
+    t.integer "reign_id"
+    t.string  "style"
+    t.binary  "file_contents"
+  end
+
+  create_table "reigns", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "combatant_persona_id"
+    t.integer  "consort_persona_id"
+    t.string   "reign_image_file_name"
+    t.string   "reign_image_content_type"
+    t.integer  "reign_image_file_size"
+    t.datetime "reign_image_updated_at"
+    t.integer  "crown_event_id"
+    t.integer  "coronation_event_id"
+    t.string   "url"
+    t.integer  "runner_up_persona_id"
+    t.integer  "runenr_up_consort_persona_id"
+    t.string   "reign_map_file_name"
+    t.string   "reign_map_content_type"
+    t.integer  "reign_map_file_size"
+    t.datetime "reign_map_updated_at"
+    t.integer  "reign_map_description"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "roles", force: :cascade do |t|
