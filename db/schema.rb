@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719225154) do
+ActiveRecord::Schema.define(version: 20150802183706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,28 @@ ActiveRecord::Schema.define(version: 20150719225154) do
     t.binary  "file_contents"
   end
 
+  create_table "award_recommendations", force: :cascade do |t|
+    t.integer  "award_id"
+    t.integer  "persona_id"
+    t.string   "persona_name"
+    t.string   "legal_name"
+    t.integer  "branch_id"
+    t.string   "gender"
+    t.text     "persona_description"
+    t.boolean  "is_youth"
+    t.integer  "sca_term"
+    t.text     "reason"
+    t.string   "status"
+    t.integer  "planned_court_id"
+    t.integer  "submitted_by_user_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "award_recommendations", ["award_id"], name: "index_award_recommendations_on_award_id", using: :btree
+  add_index "award_recommendations", ["branch_id"], name: "index_award_recommendations_on_branch_id", using: :btree
+  add_index "award_recommendations", ["persona_id"], name: "index_award_recommendations_on_persona_id", using: :btree
+
   create_table "awards", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -137,7 +159,7 @@ ActiveRecord::Schema.define(version: 20150719225154) do
   add_index "branches", ["region_id"], name: "index_branches_on_region_id", using: :btree
 
   create_table "courts", force: :cascade do |t|
-    t.integer  "court_order"
+    t.integer  "court_order",         default: 1
     t.datetime "court_date"
     t.integer  "event_id"
     t.integer  "reign_id"
@@ -146,8 +168,8 @@ ActiveRecord::Schema.define(version: 20150719225154) do
     t.integer  "herald_persona_id"
     t.text     "note"
     t.text     "planning_notes"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "courts", ["event_id"], name: "index_courts_on_event_id", using: :btree
@@ -428,6 +450,9 @@ ActiveRecord::Schema.define(version: 20150719225154) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_foreign_key "award_recommendations", "awards"
+  add_foreign_key "award_recommendations", "branches"
+  add_foreign_key "award_recommendations", "personas"
   add_foreign_key "branches", "branch_types"
   add_foreign_key "branches", "branches", column: "parent_branch_id", on_delete: :nullify
   add_foreign_key "branches", "regions"

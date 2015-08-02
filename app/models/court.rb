@@ -3,7 +3,7 @@
 # Table name: courts
 #
 #  id                  :integer          not null, primary key
-#  court_order         :integer
+#  court_order         :integer          default(1)
 #  court_date          :datetime
 #  event_id            :integer
 #  reign_id            :integer
