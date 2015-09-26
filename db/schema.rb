@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802183706) do
+ActiveRecord::Schema.define(version: 20150802224520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,45 @@ ActiveRecord::Schema.define(version: 20150802183706) do
     t.string  "style"
     t.binary  "file_contents"
   end
+
+  create_table "award_recipient_images", force: :cascade do |t|
+    t.integer "award_recipient_id"
+    t.string  "style"
+    t.binary  "file_contents"
+  end
+
+  create_table "award_recipient_thumbnails", force: :cascade do |t|
+    t.integer "award_recipient_id"
+    t.string  "style"
+    t.binary  "file_contents"
+  end
+
+  create_table "award_recipients", force: :cascade do |t|
+    t.integer  "award_id"
+    t.integer  "persona_id"
+    t.integer  "court_id"
+    t.integer  "status_id"
+    t.datetime "received"
+    t.datetime "revoked"
+    t.string   "award_recipient_thumbnail_file_name"
+    t.string   "award_recipient_thumbnail_content_type"
+    t.integer  "award_recipient_thumbnail_file_size"
+    t.datetime "award_recipient_thumbnail_updated_at"
+    t.string   "award_recipient_image_file_name"
+    t.string   "award_recipient_image_content_type"
+    t.integer  "award_recipient_image_file_size"
+    t.datetime "award_recipient_image_updated_at"
+    t.text     "award_content"
+    t.text     "creation_notes"
+    t.text     "reason"
+    t.text     "note"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "award_recipients", ["award_id"], name: "index_award_recipients_on_award_id", using: :btree
+  add_index "award_recipients", ["court_id"], name: "index_award_recipients_on_court_id", using: :btree
+  add_index "award_recipients", ["persona_id"], name: "index_award_recipients_on_persona_id", using: :btree
 
   create_table "award_recommendations", force: :cascade do |t|
     t.integer  "award_id"
@@ -450,6 +489,9 @@ ActiveRecord::Schema.define(version: 20150802183706) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_foreign_key "award_recipients", "awards"
+  add_foreign_key "award_recipients", "courts"
+  add_foreign_key "award_recipients", "personas"
   add_foreign_key "award_recommendations", "awards"
   add_foreign_key "award_recommendations", "branches"
   add_foreign_key "award_recommendations", "personas"
