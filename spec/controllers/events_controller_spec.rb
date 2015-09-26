@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe EventsController, :type => :controller do
   before :each do
-    Event.destroy_all # I have no idea where the stray event is coming from and I don't care.
     @unapproved_event = create :event, start_at: Date.tomorrow, submission_state: 'queued'
     @good_event = create :event, start_at: Date.tomorrow, submission_state: 'approved'
     @old_event = create :event, start_at: 2.days.ago, submission_state: 'approved'

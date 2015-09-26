@@ -36,7 +36,6 @@ gem 'unicorn'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development do
-  gem 'awesome_print'
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
   gem 'capistrano-rvm'
@@ -45,6 +44,7 @@ end
 
 group :development, :test do
   gem 'annotate'
+  gem 'awesome_print'
   gem 'byebug'
   gem 'capybara-webkit'
   gem 'database_cleaner'

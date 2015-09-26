@@ -1,0 +1,10 @@
+.award-summary
+  .row
+    .col-lg-9.col-md-9.col-sm-7
+      div
+        strong= link_to award.name, award
+      div
+        div= link_to award.branch.name, award.branch
+        div= award.description
+    .col-lg-3.col-md-3.col-sm-5
+      = image_tag award.award_badge.url, class: 'img-responsive' if award.award_badge.present?

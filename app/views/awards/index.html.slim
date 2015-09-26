@@ -1,0 +1,12 @@
+.panel.panel-primary
+  .panel-heading
+    .row
+      .col-md-6.col-sm-6
+        .panel-title
+          | Awards
+      .col-md-6.col-sm-6
+        .text-right
+          .panel-title
+            | See all kingdom awards
+  .panel-body
+    = render partial: 'awards/summary', collection: @awards, as: :award

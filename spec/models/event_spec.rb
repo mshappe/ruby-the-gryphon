@@ -45,10 +45,6 @@
 require 'rails_helper'
 
 RSpec.describe Event, :type => :model do
-  before :each do
-    Event.destroy_all # I have no idea where the stray event is coming from and I don't care.
-  end
-
   it { is_expected.to belong_to :branch }
   it { is_expected.to belong_to :sponsor_branch }
   it { is_expected.to belong_to :address }

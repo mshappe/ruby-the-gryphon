@@ -92,6 +92,9 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
   get '/release_notes', controller: 'welcome', action: 'release_notes'
 
+  resources :awards
+  get '/awards/award_badges/:id', controller: 'awards', action: 'award_badges'
+
   resources :branches
   get '/branches/branch_heraldries/:id', controller: 'branches', action: 'branch_heraldries'
   get '/branches/map_images/:id', controller: 'branches', action: 'map_images'

@@ -36,7 +36,7 @@ FactoryGirl.define do
     branch_type
     region
     map_coordinates "MyString"
-    parent_branch_id 1
+    parent_branch_id nil
     city "MyString"
     state "MyString"
     url "MyString"

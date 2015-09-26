@@ -25,6 +25,11 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+Capybara::Webkit.configure do |webkit_config|
+  webkit_config.block_unknown_urls
+  webkit_config.allow_url('fonts.googleapis.com')
+end
+
 RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
@@ -36,7 +41,6 @@ RSpec.configure do |config|
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
-    FactoryGirl.lint
   end
 
   config.around :each do |example|
@@ -45,15 +49,6 @@ RSpec.configure do |config|
     end
   end
 
-  config.before :each, :js, type: :feature do |example|
-   # Everything is terrible. js: true in config.before will run if the js tag
-   # is present in the spec declaration, regardless of the value.
-   if example.metadata[:js]
-     page.driver.block_unknown_urls
-     page.driver.allow_url('fonts.googleapis.com')
-   end
- end
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -61,6 +56,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  config.use_instantiated_fixtures  = false
 
 
 
