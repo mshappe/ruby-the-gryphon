@@ -39,6 +39,7 @@ class Branch < ActiveRecord::Base
   belongs_to :branch_type
   belongs_to :region
   belongs_to :parent_branch, class_name: 'Branch', foreign_key: 'parent_branch_id'
+  has_many :awards
   has_many :child_branches, class_name: 'Branch', inverse_of: :parent_branch
 
   validates :name, presence: true, uniqueness: true
@@ -48,4 +49,23 @@ class Branch < ActiveRecord::Base
   validates_attachment_content_type :map_image, :content_type => /\Aimage\/.*\Z/
 
   default_scope -> { order(:name) }
+
+  def self.default_branch
+    if default_branch_name.blank?
+      Rails.logger.error 'No default branch name defined'
+    else
+      branch = Rails.cache.fetch 'default-branch' do
+        Branch.find_by name: default_branch_name
+      end
+
+      Rails.logger.error("Could not find branch named #{default_branch_name} in database") unless branch.present?
+      branch
+    end
+  end
+
+  private
+
+  def self.default_branch_name
+    @@default_branch_name ||= Rails.application.config.x.branch_name
+  end
 end

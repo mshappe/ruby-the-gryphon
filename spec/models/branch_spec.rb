@@ -37,9 +37,49 @@ RSpec.describe Branch, :type => :model do
   it { is_expected.to belong_to :region }
   it { is_expected.to belong_to :parent_branch }
   it { is_expected.to have_many :child_branches }
+  it { is_expected.to have_many :awards }
 
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_uniqueness_of :name }
   it { is_expected.to validate_presence_of :branch_type }
   it { is_expected.to validate_presence_of :region }
+
+  context '::default_branch' do
+    before :each do
+      Rails.cache.clear
+    end
+
+    context 'is defined in application config' do
+      before :each do
+        Rails.application.config.x.branch_name = 'Erewhon'
+      end
+
+      context 'but is not defined in database' do
+        it 'should return nil and log an error' do
+          expect(Rails.logger).to receive(:error).with(%r[could not find branch named.*in database]i)
+          expect(Branch.default_branch).to be_nil
+        end
+      end
+      context 'and is defined in database' do
+        before :each do
+          create :branch, name: 'Erewhon'
+        end
+        it 'should return the default branch' do
+          expect(Branch.default_branch).to_not be_nil
+          expect(Branch.default_branch.name).to eq 'Erewhon'
+        end
+      end
+    end
+
+    context 'is not defined in application config' do
+      before :each do
+        Rails.application.config.x.branch_name = nil
+      end
+
+      it 'should return nil and log an error' do
+        expect(Rails.logger).to receive(:error).with(%r[no default branch name defined]i)
+        expect(Branch.default_branch).to be_nil
+      end
+    end
+  end
 end

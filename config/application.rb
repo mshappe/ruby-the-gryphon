@@ -36,5 +36,8 @@ module RubyTheGryphon
     config.active_record.raise_in_transactional_callbacks = true
 
     config.assets.initialize_on_precompile = true
+
+    defaults = YAML.load(File.read 'config/defaults.yml').symbolize_keys
+    config.x.branch_name = defaults[:branch_name]
   end
 end

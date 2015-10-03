@@ -7,6 +7,13 @@
       .col-md-6.col-sm-6
         .text-right
           .panel-title
-            | See all kingdom awards
+            = form_tag awards_path, method: :get do
+              = select('branch', 'id', Branch.all.reject { |b| b.awards.count == 0 }.collect { |b| [b.name, b.id]}, \
+                { selected: params[:branch].present? ? params[:branch][:id] : Branch.default_branch.id })
+              = submit_tag 'Change branch', class: 'btn btn-sm'
   .panel-body
     = render partial: 'awards/summary', collection: @awards, as: :award
+
+
+coffee:
+  $('#branch_id').select2()
