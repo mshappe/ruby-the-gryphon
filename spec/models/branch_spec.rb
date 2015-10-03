@@ -45,11 +45,12 @@ RSpec.describe Branch, :type => :model do
   it { is_expected.to validate_presence_of :region }
 
   context '::default_branch' do
-    before :each do
+    after :each do
+      Rails.application.config.x.branch_name = nil
       Rails.cache.clear
     end
 
-    context 'is defined in application config' do
+    context 'a default is defined in application config' do
       before :each do
         Rails.application.config.x.branch_name = 'Erewhon'
       end
@@ -60,6 +61,7 @@ RSpec.describe Branch, :type => :model do
           expect(Branch.default_branch).to be_nil
         end
       end
+
       context 'and is defined in database' do
         before :each do
           create :branch, name: 'Erewhon'
@@ -72,10 +74,6 @@ RSpec.describe Branch, :type => :model do
     end
 
     context 'is not defined in application config' do
-      before :each do
-        Rails.application.config.x.branch_name = nil
-      end
-
       it 'should return nil and log an error' do
         expect(Rails.logger).to receive(:error).with(%r[no default branch name defined]i)
         expect(Branch.default_branch).to be_nil

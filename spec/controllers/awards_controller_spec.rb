@@ -12,6 +12,10 @@ RSpec.describe AwardsController, type: :controller do
     @other_award = create :award, branch: @other_branch
 
     Rails.application.config.x.branch_name = @branch.name
+  end
+
+  after :each do
+    Rails.application.config.x.branch_name = nil
     Rails.cache.clear
   end
 

@@ -66,6 +66,6 @@ class Branch < ActiveRecord::Base
   private
 
   def self.default_branch_name
-    @@default_branch_name ||= Rails.application.config.x.branch_name
+    Rails.application.config.x.branch_name
   end
 end
