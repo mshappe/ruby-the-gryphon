@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802224520) do
+ActiveRecord::Schema.define(version: 20151025184542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -383,7 +383,7 @@ ActiveRecord::Schema.define(version: 20150802224520) do
     t.integer  "coronation_event_id"
     t.string   "url"
     t.integer  "runner_up_persona_id"
-    t.integer  "runenr_up_consort_persona_id"
+    t.integer  "runner_up_consort_persona_id"
     t.string   "reign_map_file_name"
     t.string   "reign_map_content_type"
     t.integer  "reign_map_file_size"

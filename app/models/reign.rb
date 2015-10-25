@@ -14,7 +14,7 @@
 #  coronation_event_id          :integer
 #  url                          :string
 #  runner_up_persona_id         :integer
-#  runenr_up_consort_persona_id :integer
+#  runner_up_consort_persona_id :integer
 #  reign_map_file_name          :string
 #  reign_map_content_type       :string
 #  reign_map_file_size          :integer
@@ -30,7 +30,7 @@ class Reign < ActiveRecord::Base
   belongs_to :combatant_persona, class_name: 'Persona', foreign_key: 'combatant_persona_id'
   belongs_to :consort_persona, class_name: 'Persona', foreign_key: 'consort_persona_id'
   belongs_to :runner_up_persona, class_name: 'Persona', foreign_key: 'runner_up_persona_id'
-  belongs_to :runner_up_consort_persona, class_name: 'Persona', foreign_key: 'runenr_up_consort_persona_id'
+  belongs_to :runner_up_consort_persona, class_name: 'Persona', foreign_key: 'runner_up_consort_persona_id'
   belongs_to :crown_event, class_name: 'Event', foreign_key: 'crown_event_id'
   belongs_to :coronation_event, class_name: 'Event', foreign_key: 'coronation_event_id'
 

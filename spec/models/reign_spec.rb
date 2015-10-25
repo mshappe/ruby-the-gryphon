@@ -14,7 +14,7 @@
 #  coronation_event_id          :integer
 #  url                          :string
 #  runner_up_persona_id         :integer
-#  runenr_up_consort_persona_id :integer
+#  runner_up_consort_persona_id :integer
 #  reign_map_file_name          :string
 #  reign_map_content_type       :string
 #  reign_map_file_size          :integer

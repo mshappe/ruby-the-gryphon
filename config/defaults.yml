@@ -1,1 +1,17 @@
 branch_name: Northshield
+award_type_names: # Name in DropDownList as AwardType
+  aoa: "Award of Arms Bearing"
+  goa: "Grant of Arms Bearing"
+  poa: "Patent of Arms Bearing"
+  non_armigerous: "Non-Armigerous Awards"
+  royalty: "Royalty"
+  unspec: "Award type not specified"
+  vigilant: "Vigilant"
+  youth: "Youth Awards"
+
+
+
+
+
+
+

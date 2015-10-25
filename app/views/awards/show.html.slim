@@ -1,0 +1,28 @@
+.award-detail
+  .heading
+    .row
+      .col-md-9
+        .title= @award.name
+      .col-md-3
+        = link_to 'Edit', edit_award_path(@award), class: 'btn btn-primary pull-right' if can? :edit, @award
+
+  .body
+    .row
+      .col-md-9
+        h4= link_to @award.branch.name
+        h4 Description
+        .well.well-sm= @award.description
+      .col-md-3
+        = image_tag @award.award_badge.url, class: 'img-responsive' if @award.award_badge.present?
+    .row
+      .col-md-12
+        h4 Award recipients (#{@award_recipients.count} total)
+
+        .table-responsive
+          table.table.table-striped.table-hover
+            thead
+              th Recipient
+              th Event
+            tbody
+              = render @award_recipients
+

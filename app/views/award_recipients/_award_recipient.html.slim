@@ -1,0 +1,3 @@
+tr
+  td= link_to award_recipient.persona.name, award_recipient.persona
+  td= link_to "#{award_recipient.court.event.name} (#{sca_date award_recipient.received, format: :date_only})", award_recipient.court.event

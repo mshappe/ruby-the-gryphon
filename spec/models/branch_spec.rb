@@ -74,6 +74,10 @@ RSpec.describe Branch, :type => :model do
     end
 
     context 'is not defined in application config' do
+      before :each do
+        Rails.application.config.x.branch_name = nil # in case we have one defined in defaults.yml
+      end
+
       it 'should return nil and log an error' do
         expect(Rails.logger).to receive(:error).with(%r[no default branch name defined]i)
         expect(Branch.default_branch).to be_nil

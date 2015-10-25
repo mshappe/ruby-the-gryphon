@@ -18,7 +18,16 @@
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 
+
+module Helpiness
+  def rand_id
+    rand 2**16 # No idea what the DB max is, but this should be a plenty big space
+  end
+end
+
 RSpec.configure do |config|
+  config.include Helpiness
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

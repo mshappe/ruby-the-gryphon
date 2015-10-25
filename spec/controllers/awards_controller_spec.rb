@@ -19,7 +19,7 @@ RSpec.describe AwardsController, type: :controller do
     Rails.cache.clear
   end
 
-  describe 'GET #index' do
+  context 'GET #index' do
     context "without params, for all users" do
       before :each do
         get :index
@@ -42,17 +42,33 @@ RSpec.describe AwardsController, type: :controller do
         expect(assigns[:awards]).to eq @sorted_awards.prepend @other_award
       end
     end
+
+    context "with branch selected by id" do
+      before :each do
+        get :index, branch: { id: @other_branch.id }
+      end
+
+      it 'should return the award for that branch' do
+        expect(response).to be_success
+        expect(assigns[:awards].count).to eq 1
+        expect(assigns[:awards]).to eq [@other_award]
+      end
+    end
   end
 
-  context "with branch selected by id" do
+  context "GET #show" do
     before :each do
-      get :index, branch: { id: @other_branch.id }
+      @court = create :court
+      @persona = create :persona
+      @award_recipient = create :award_recipient, award: @awards.first, persona: @persona, court: @court
     end
 
-    it 'should return the award for that branch' do
+    it 'displays award information including recipients in order most to least recent' do
+      get :show, id: @awards.first
+
       expect(response).to be_success
-      expect(assigns[:awards].count).to eq 1
-      expect(assigns[:awards]).to eq [@other_award]
+      expect(assigns[:award]).to eq @awards.first
+      expect(assigns[:award_recipients]).to match_array [@award_recipient]
     end
   end
 end

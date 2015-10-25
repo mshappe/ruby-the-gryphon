@@ -12,6 +12,10 @@ class AwardsController < ApplicationController
     @awards = restrict_by_branch params[:branch]
   end
 
+  def show
+    @award_recipients = AwardRecipient.by_award(@award)
+  end
+
   protected
 
   def restrict_by_branch(branch)

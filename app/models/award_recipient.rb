@@ -40,4 +40,6 @@ class AwardRecipient < ActiveRecord::Base
   has_attached_file :award_recipient_image, storage: :database
   validates_attachment_content_type :award_recipient_thumbnail, content_type: /\Aimage\/.*\Z/
   validates_attachment_content_type :award_recipient_image, content_type: /\Aimage\/.*\Z/
+
+  scope :by_award, ->(award) { where(award_id: award.id) }
 end

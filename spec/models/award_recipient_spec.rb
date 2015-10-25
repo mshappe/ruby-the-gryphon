@@ -37,4 +37,27 @@ RSpec.describe AwardRecipient, :type => :model do
   it { is_expected.to belong_to :award }
   it { is_expected.to belong_to :persona }
   it { is_expected.to belong_to :court }
+
+  context '#by_award' do
+    before :each do
+      @award = create :award
+      @we_want = create :award_recipient, award: @award, received: DateTime.now
+      @we_dont_want = create :award_recipient
+    end
+
+    it 'should return recipients by award' do
+      expect(AwardRecipient.by_award(@award)).to match_array [@we_want]
+    end
+
+    context 'multiple recipients' do
+      before :each do
+        @we_also_want = create :award_recipient, award: @award, received: 7.days.ago
+      end
+
+      it 'should return in order of receipt' do
+        # Order matters, so eq not match_array
+        expect(AwardRecipient.by_award(@award)).to eq [@we_also_want, @we_want]
+      end
+    end
+  end
 end
