@@ -92,7 +92,7 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
   get '/release_notes', controller: 'welcome', action: 'release_notes'
 
-  resources :awards
+  resources :awards, except: [:destroy]
   get '/awards/award_badges/:id', controller: 'awards', action: 'award_badges'
 
   resources :branches

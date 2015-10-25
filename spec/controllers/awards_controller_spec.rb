@@ -20,7 +20,7 @@ RSpec.describe AwardsController, type: :controller do
   end
 
   context 'GET #index' do
-    context "without params, for all users" do
+    context 'without params, for all users' do
       before :each do
         get :index
       end
@@ -31,7 +31,7 @@ RSpec.describe AwardsController, type: :controller do
       end
     end
 
-    context "with branch=all" do
+    context 'with branch=all' do
       before :each do
         get :index, branch: 'all'
       end
@@ -43,7 +43,7 @@ RSpec.describe AwardsController, type: :controller do
       end
     end
 
-    context "with branch selected by id" do
+    context 'with branch selected by id' do
       before :each do
         get :index, branch: { id: @other_branch.id }
       end
@@ -56,7 +56,7 @@ RSpec.describe AwardsController, type: :controller do
     end
   end
 
-  context "GET #show" do
+  context 'GET #show' do
     before :each do
       @court = create :court
       @persona = create :persona
@@ -69,6 +69,130 @@ RSpec.describe AwardsController, type: :controller do
       expect(response).to be_success
       expect(assigns[:award]).to eq @awards.first
       expect(assigns[:award_recipients]).to match_array [@award_recipient]
+    end
+  end
+
+  context 'GET #new' do
+    context 'for people who are not cool enough' do
+      it 'should not return a new page' do
+        get :new
+        expect(response).to be_redirect
+      end
+    end
+
+    context 'for people are cool enough' do
+      login_user :admin
+
+      it 'should return a new page' do
+        get :new
+        expect(response).to be_success
+      end
+    end
+  end
+
+  context 'GET #edit' do
+    context 'for people who are not cool enough' do
+      it 'should not return an edit page' do
+        get :edit, id: @awards.first.id
+        expect(response).to be_redirect
+      end
+    end
+
+    context 'for people who are cool enough' do
+      login_user :admin
+
+      it 'should return an edit page for people who are cool enough' do
+        get :edit, id: @awards.first.id
+        expect(response).to be_success
+      end
+    end
+  end
+
+  context 'POST #create' do
+    context 'for people who are not logged in at all' do
+      it 'does not post' do
+        post :create, award: attributes_for(:award)
+        expect(response).to be_redirect
+        expect(response).to redirect_to new_user_session_url
+      end
+    end
+
+    context 'for people who are not cool enough' do
+      login_user
+
+      it 'does not post' do
+        post :create, award: attributes_for(:award)
+        expect(response).to be_redirect
+        expect(response).to redirect_to root_url
+      end
+    end
+
+    context 'for the cool kids' do
+      login_user :admin
+
+      it 'posts correct' do
+        expect { post :create, award: attributes_for(:award) }.to change { Award.count }.by 1
+        is_expected.to set_flash[:notice]
+        expect(response).to be_redirect
+        expect(response).to redirect_to Award.last
+      end
+
+      it 'returns to new with bad params' do
+        attrs = attributes_for(:award)
+        attrs[:name] = nil
+        expect { post :create, award: attrs }.to_not change { Award.count }
+        is_expected.to set_flash[:error]
+        expect(response).to be_success
+        expect(response).to render_template :new
+      end
+    end
+  end
+
+  context 'PATCH #update' do
+    context 'for people who are not logged in at all' do
+      it 'does not put' do
+        patch :update, id: @awards.first.id, award: { name: 'Llamaface' }
+        expect(response).to be_redirect
+        expect(response).to redirect_to new_user_session_url
+      end
+    end
+
+    context 'for people who are not cool enough' do
+      login_user
+
+      it 'does not PATCH' do
+        patch :update, id: @awards.first.id, award: { name: 'Llamaface' }
+        expect(response).to be_redirect
+        expect(response).to redirect_to root_url
+      end
+    end
+
+    context 'for people who are cool enough' do
+      login_user :admin
+
+      it 'updates correctly' do
+        expect { put :update, id: @awards.first.id, award: { name: 'Llamaface' } }.to change { @awards.first.reload.name }.to eq 'Llamaface'
+        is_expected.to set_flash[:notice]
+        expect(response).to be_redirect
+        expect(response).to redirect_to @awards.first
+      end
+
+      it 'returns to edit with bad params' do
+        expect { put :update, id: @awards.first.id, award: { name: nil } }.to_not change { @awards.first.reload.name }
+        is_expected.to set_flash[:error]
+        expect(response).to be_success
+        expect(response).to render_template :edit
+      end
+    end
+  end
+
+  context 'DELETE #destroy' do
+    login_user :admin
+
+    context 'even for cool kids' do
+      it 'raises an exception because we do not allow deletion!' do
+        expect { delete :destroy, id: @awards.first.id }.to raise_error
+      end
     end
   end
 end

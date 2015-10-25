@@ -16,12 +16,26 @@ class AwardsController < ApplicationController
     @award_recipients = AwardRecipient.by_award(@award)
   end
 
+  def create
+    flash[:error] = 'Your submission had errors.' unless @award.save
+    respond_with @award
+  end
+
+  def update
+    flash[:error] = 'Your submission had errors.' unless @award.update_attributes award_params
+    respond_with @award
+  end
+
   protected
 
   def restrict_by_branch(branch)
     return @awards.where(branch: Branch.default_branch) if branch.nil?
     return @awards.where(branches: { id: branch[:id] }) if branch.is_a?(Hash) && branch.has_key?(:id)
     @awards
+  end
+
+  def award_params
+    params.require(:award).permit!
   end
 
 end
