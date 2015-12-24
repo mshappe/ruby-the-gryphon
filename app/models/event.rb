@@ -55,6 +55,8 @@ class Event < ActiveRecord::Base
   belongs_to :steward_persona, class_name: 'Persona'
 
   has_and_belongs_to_many :event_activities, class_name: 'EventActivity', join_table: :event_event_activity
+  has_many :event_attendees
+  has_many :attendees, class_name: 'Persona', through: :event_attendees, foreign_key: 'persona_id'
 
   accepts_nested_attributes_for :address
 

@@ -52,6 +52,8 @@ RSpec.describe Event, :type => :model do
   it { is_expected.to belong_to :steward_persona }
 
   it { is_expected.to have_and_belong_to_many(:event_activities) }
+  it { is_expected.to have_many(:event_attendees) }
+  it { is_expected.to have_many(:attendees).through(:event_attendees) }
 
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_presence_of :start_at }

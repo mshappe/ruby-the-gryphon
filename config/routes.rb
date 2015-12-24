@@ -89,6 +89,7 @@
 #
 
 Rails.application.routes.draw do
+
   root to: 'welcome#index'
   get '/release_notes', controller: 'welcome', action: 'release_notes'
 
@@ -98,6 +99,8 @@ Rails.application.routes.draw do
   resources :branches
   get '/branches/branch_heraldries/:id', controller: 'branches', action: 'branch_heraldries'
   get '/branches/map_images/:id', controller: 'branches', action: 'map_images'
+
+  get 'dashboard/show'
 
   resources :events do
     collection do

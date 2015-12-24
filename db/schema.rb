@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151025184542) do
+ActiveRecord::Schema.define(version: 20151107191317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,6 +222,20 @@ ActiveRecord::Schema.define(version: 20151025184542) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "event_attendees", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "persona_id"
+    t.integer  "warrant_type_id"
+    t.integer  "award_recommendation_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "event_attendees", ["award_recommendation_id"], name: "index_event_attendees_on_award_recommendation_id", using: :btree
+  add_index "event_attendees", ["event_id"], name: "index_event_attendees_on_event_id", using: :btree
+  add_index "event_attendees", ["persona_id"], name: "index_event_attendees_on_persona_id", using: :btree
+  add_index "event_attendees", ["warrant_type_id"], name: "index_event_attendees_on_warrant_type_id", using: :btree
 
   create_table "event_event_activity", id: false, force: :cascade do |t|
     t.integer "event_id",          null: false
@@ -500,6 +514,10 @@ ActiveRecord::Schema.define(version: 20151025184542) do
   add_foreign_key "branches", "regions"
   add_foreign_key "courts", "events"
   add_foreign_key "courts", "reigns"
+  add_foreign_key "event_attendees", "award_recommendations"
+  add_foreign_key "event_attendees", "events"
+  add_foreign_key "event_attendees", "personas"
+  add_foreign_key "event_attendees", "warrant_types"
   add_foreign_key "events", "addresses"
   add_foreign_key "events", "branches"
   add_foreign_key "events", "branches", column: "sponsor_branch_id"

@@ -32,6 +32,8 @@ class Persona < ActiveRecord::Base
   has_one :person, through: :user
   has_many :submitted_events, class_name: 'Event', foreign_key: :submitter_persona_id
   has_many :stewarded_events, class_name: 'Event', foreign_key: :steward_persona_id
+  has_many :event_attendees
+  has_many :events, through: :event_attendees
 
   validates :name, presence: true, uniqueness: true
   validates :persona_type, presence: true
