@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   def index
     @events = Event.approved
     @events = @events.all_future unless params[:include] == 'past'
+    @events = @events.includes(:branch, :address).order(:start_at)
   end
 
   def queued

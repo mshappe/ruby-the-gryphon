@@ -6,7 +6,7 @@ RSpec.describe DashboardController, :type => :controller do
     login_user
 
     before :each do
-      get :show
+      get :show, user_id: @user.id
     end
 
     it 'returns http success' do
