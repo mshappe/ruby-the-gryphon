@@ -100,7 +100,7 @@ Rails.application.routes.draw do
   get '/branches/branch_heraldries/:id', controller: 'branches', action: 'branch_heraldries'
   get '/branches/map_images/:id', controller: 'branches', action: 'map_images'
 
-  get 'dashboard/show'
+  get '/dashboard/:user_id', controller: 'dashboard', action: 'show', as: :dashboard
 
   resources :events do
     collection do

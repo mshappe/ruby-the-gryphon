@@ -31,7 +31,8 @@ RSpec.describe Persona, :type => :model do
   it { is_expected.to have_many :submitted_events }
   it { is_expected.to have_many :stewarded_events }
   it { is_expected.to have_many :event_attendees }
-  it { is_expected.to have_many(:events).through :event_attendees}
+  it { is_expected.to have_many(:events).through :event_attendees }
+  it { is_expected.to have_many(:received_awards) }
   it { is_expected.to have_attached_file :persona_image }
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_uniqueness_of :name }

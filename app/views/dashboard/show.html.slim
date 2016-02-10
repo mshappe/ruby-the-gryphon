@@ -1,0 +1,43 @@
+.row
+  .col-md-11.col-sm-11.col-xs-11
+    h2= @user.personas.primary.name
+  -if can? :edit, @user
+    .col-md-1.col-sm-1.col-xs-1
+      = link_to edit_user_registration_path, class: "btn btn-default text-right", 'aria-label' => "Edit", 'data-toggle' => "tooltip", 'data-placement' => "top", title: "Edit Profile"
+        span.glyphicon.glyphicon-edit aria-hidden="true"
+
+- unless @events.blank?
+  .row
+    .col-md-12.col-sm-12
+      .panel.panel-default
+        .panel-heading
+          'Planned Events
+        .panel-body
+          - @events.each do |e|
+            div= e.name
+.row
+  .col-md-12.col-sm-12
+    .panel.panel-default
+      .panel-heading
+        'Received Awards
+      .panel-body
+        .table-responsive
+          table.table.table-striped.table-hover
+            - @awards.each do |a|
+              tr
+                td= link_to a.award.name, a.award
+                td= sca_date a.received, format: :date_only
+                td= link_to a.court.event.try(:name), a.court.try(:event) unless a.court.blank?
+.row
+  .col-md-4.col-sm-6
+    .panel.panel-default
+      .panel-heading
+        'Personas
+      .panel-body
+        - @user.personas.each do |p|
+          div= link_to(p.name, p) + ' ' + persona_badge(p)
+
+javascript:
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })

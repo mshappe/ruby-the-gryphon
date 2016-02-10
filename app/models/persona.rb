@@ -34,10 +34,11 @@ class Persona < ActiveRecord::Base
   has_many :stewarded_events, class_name: 'Event', foreign_key: :steward_persona_id
   has_many :event_attendees
   has_many :events, through: :event_attendees
+  has_many :received_awards, class_name: 'AwardRecipient'
 
   validates :name, presence: true, uniqueness: true
   validates :persona_type, presence: true
   validates_attachment_content_type :persona_image, :content_type => /\Aimage\/.*\Z/
 
-  scope :primary, -> { joins(:persona_type).where(persona_types: { name: 'Primary Name' }) }
+  scope :primary, -> { joins(:persona_type).where(persona_types: { name: 'Primary Name' }).first }
 end

@@ -1,9 +1,9 @@
 module VersionHelper
   def version_number
-    '0.1.1'
+    '0.2.0'
   end
 
   def version_name
-    'Ambidextrous Aardvark'
+    'Bees?'
   end
 end

@@ -15,6 +15,7 @@ class Ability
     # What can be publicly read?
     can :read, [Award, Branch, Person, Persona]
     can :read, Event, submission_state: 'approved'
+    can :read, User, id: user.id
 
     # What belongs to a specific user and can be edited by that user
     can :update, Person,  user_id: user.id
