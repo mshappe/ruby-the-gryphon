@@ -13,6 +13,8 @@ RSpec.describe DashboardController, :type => :controller do
       expect(response).to have_http_status(:success)
       expect(assigns[:events]).to_not be_nil
       expect(assigns[:awards]).to_not be_nil
+      expect(assigns[:auths]).to_not be_nil
+      expect(assigns[:warrants]).to_not be_nil
     end
   end
 

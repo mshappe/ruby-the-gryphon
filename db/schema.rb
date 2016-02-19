@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107191317) do
+ActiveRecord::Schema.define(version: 20160219212350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,34 @@ ActiveRecord::Schema.define(version: 20151107191317) do
   add_index "adminusers", ["reset_password_token"], name: "index_adminusers_on_reset_password_token", unique: true, using: :btree
   add_index "adminusers", ["unlock_token"], name: "index_adminusers_on_unlock_token", unique: true, using: :btree
 
+  create_table "authorization_cards", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "expiration_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "authorization_cards", ["user_id"], name: "index_authorization_cards_on_user_id", using: :btree
+
+  create_table "authorization_types", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "group"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "authorizations", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "authorization_type_id"
+    t.datetime "date_of"
+    t.text     "notes"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "authorizations", ["authorization_type_id"], name: "index_authorizations_on_authorization_type_id", using: :btree
+  add_index "authorizations", ["person_id"], name: "index_authorizations_on_person_id", using: :btree
+
   create_table "award_badges", force: :cascade do |t|
     t.integer "award_id"
     t.string  "style"
@@ -83,6 +111,16 @@ ActiveRecord::Schema.define(version: 20151107191317) do
     t.string  "style"
     t.binary  "file_contents"
   end
+
+  create_table "award_recipient_recommendations", force: :cascade do |t|
+    t.integer  "award_recipient_id"
+    t.integer  "award_recommendation_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "award_recipient_recommendations", ["award_recipient_id"], name: "index_award_recipient_recommendations_on_award_recipient_id", using: :btree
+  add_index "award_recipient_recommendations", ["award_recommendation_id"], name: "award_rec_on_award_rec_id", using: :btree
 
   create_table "award_recipient_thumbnails", force: :cascade do |t|
     t.integer "award_recipient_id"
@@ -138,6 +176,18 @@ ActiveRecord::Schema.define(version: 20151107191317) do
   add_index "award_recommendations", ["award_id"], name: "index_award_recommendations_on_award_id", using: :btree
   add_index "award_recommendations", ["branch_id"], name: "index_award_recommendations_on_branch_id", using: :btree
   add_index "award_recommendations", ["persona_id"], name: "index_award_recommendations_on_persona_id", using: :btree
+
+  create_table "award_scribes", force: :cascade do |t|
+    t.integer  "award_recipient_id"
+    t.integer  "person_id"
+    t.integer  "award_scribe_type_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "award_scribes", ["award_recipient_id"], name: "index_award_scribes_on_award_recipient_id", using: :btree
+  add_index "award_scribes", ["award_scribe_type_id"], name: "index_award_scribes_on_award_scribe_type_id", using: :btree
+  add_index "award_scribes", ["person_id"], name: "index_award_scribes_on_person_id", using: :btree
 
   create_table "awards", force: :cascade do |t|
     t.string   "name"
@@ -503,12 +553,36 @@ ActiveRecord::Schema.define(version: 20151107191317) do
     t.datetime "updated_at",                 null: false
   end
 
+  create_table "warrants", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "warrant_type_id"
+    t.datetime "tenure_start"
+    t.datetime "tenure_end"
+    t.integer  "branch_id"
+    t.datetime "approved"
+    t.text     "introduction"
+    t.text     "comments"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "warrants", ["branch_id"], name: "index_warrants_on_branch_id", using: :btree
+  add_index "warrants", ["person_id"], name: "index_warrants_on_person_id", using: :btree
+  add_index "warrants", ["warrant_type_id"], name: "index_warrants_on_warrant_type_id", using: :btree
+
+  add_foreign_key "authorization_cards", "users"
+  add_foreign_key "authorizations", "authorization_types"
+  add_foreign_key "authorizations", "people"
+  add_foreign_key "award_recipient_recommendations", "award_recipients"
+  add_foreign_key "award_recipient_recommendations", "award_recommendations"
   add_foreign_key "award_recipients", "awards"
   add_foreign_key "award_recipients", "courts"
   add_foreign_key "award_recipients", "personas"
   add_foreign_key "award_recommendations", "awards"
   add_foreign_key "award_recommendations", "branches"
   add_foreign_key "award_recommendations", "personas"
+  add_foreign_key "award_scribes", "award_recipients"
+  add_foreign_key "award_scribes", "people"
   add_foreign_key "branches", "branch_types"
   add_foreign_key "branches", "branches", column: "parent_branch_id", on_delete: :nullify
   add_foreign_key "branches", "regions"
@@ -530,4 +604,7 @@ ActiveRecord::Schema.define(version: 20151107191317) do
   add_foreign_key "people", "users", on_delete: :nullify
   add_foreign_key "personas", "persona_types"
   add_foreign_key "personas", "users", on_delete: :nullify
+  add_foreign_key "warrants", "branches"
+  add_foreign_key "warrants", "people"
+  add_foreign_key "warrants", "warrant_types"
 end

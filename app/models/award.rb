@@ -26,7 +26,7 @@ class Award < ActiveRecord::Base
   has_paper_trail
   resourcify
 
-  belongs_to :award_type, class: 'AwardType'
+  belongs_to :award_type, class_name: 'AwardType'
   belongs_to :branch
   has_many :award_recipients
   has_many :personas, through: :award_recipients

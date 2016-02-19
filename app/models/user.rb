@@ -47,6 +47,8 @@ class User < ActiveRecord::Base
 
   has_one :person
   has_many :personas
+  has_many :authorizations, through: :person
+  has_many :warrants, through: :person
 
   accepts_nested_attributes_for :person, :personas
 end

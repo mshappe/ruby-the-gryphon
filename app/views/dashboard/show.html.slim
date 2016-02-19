@@ -29,6 +29,45 @@
                 td= sca_date a.received, format: :date_only
                 td= link_to a.court.event.try(:name), a.court.try(:event) unless a.court.blank?
 .row
+  - unless @warrants.blank?
+    .col-md-12.col-sm-12
+      .panel.panel-default
+        .panel-heading
+          'Office Warrants past and present
+        .panel-body
+          .table-responsive
+            table.table.table-striped.table-hover
+              thead
+                tr
+                  th Office
+                  th Branch
+                  th Start
+                  th End
+              tbody
+                - @warrants.each do |w|
+                  tr
+                    td= w.warrant_type.name
+                    td= w.branch.name
+                    td= sca_date w.tenure_start, format: :date_only
+                    td= sca_date w.tenure_end, format: :date_only
+.row
+  - unless @auths.blank?
+    .col-md-8.col-sm-6
+      .panel.panel-default
+        .panel-heading
+          'Martial Authorizations
+        .panel-body
+          .table-responsive
+            table.table.table-striped.table-hover
+              thead
+                th Authorization
+                th Since
+              tbody
+                - @auths.each do |a|
+                  tr
+                    td= a.authorization_type.name
+                    td= a.date_of
+
   .col-md-4.col-sm-6
     .panel.panel-default
       .panel-heading

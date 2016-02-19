@@ -45,6 +45,8 @@ class Person < ActiveRecord::Base
   belongs_to :user
   belongs_to :address
   belongs_to :branch
+  has_many :authorizations
+  has_many :warrants
 
   accepts_nested_attributes_for :address
 
