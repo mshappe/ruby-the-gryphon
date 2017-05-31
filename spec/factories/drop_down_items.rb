@@ -13,10 +13,11 @@
 
 FactoryGirl.define do
   factory :drop_down_item do
-    name "MyString"
-description "MyText"
-type ""
-active false
+    sequence :name { Faker::Name.name }
+    description "MyText"
+    type ""
+    active false
   end
 
+  factory :region, parent: :drop_down_item, class: Region
 end

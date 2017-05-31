@@ -27,7 +27,6 @@
 #
 #  index_branches_on_branch_type_id  (branch_type_id)
 #  index_branches_on_name            (name) UNIQUE
-#  index_branches_on_region_id       (region_id)
 #
 
 require 'rails_helper'

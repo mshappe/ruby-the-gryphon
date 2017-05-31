@@ -15,10 +15,6 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
-
-
 module Helpiness
   def rand_id
     rand 2**16 # No idea what the DB max is, but this should be a plenty big space

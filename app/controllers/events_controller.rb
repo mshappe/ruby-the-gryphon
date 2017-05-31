@@ -22,7 +22,7 @@ class EventsController < ApplicationController
       EventNotification.notify_submitter(current_user, @event).deliver_later
       flash[:notice] = 'Event submitted. It will be reviewed by the Event Information Officer.'
     else
-      pp @event.errors
+      ap @event.errors
       flash[:error] = 'Your submission had errors.'
     end
     respond_with @event
@@ -46,7 +46,7 @@ class EventsController < ApplicationController
       EventNotification.notify_submitter_update(@event).deliver_later
       flash[:notice] = 'Event updated. Submitter will be notified.'
     else
-      pp @event.errors
+      ap @event.errors
       flash[:error] = 'Your update had errors'
     end
     respond_with @event
@@ -59,7 +59,7 @@ class EventsController < ApplicationController
   end
 
   def enforce_submission_state
-    if @event.submission_state.blank? || cannot?(:manage, Event) 
+    if @event.submission_state.blank? || cannot?(:manage, Event)
       @event.submission_state = 'queued'
     end
   end

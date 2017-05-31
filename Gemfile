@@ -1,8 +1,8 @@
-#ruby=2.2.1
+#ruby=2.4
 #ruby-gemset=ruby-gryphon
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '~> 4.2.1'
 gem 'pg'
 
 gem 'active_link_to'
@@ -21,6 +21,7 @@ gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
 gem 'paper_trail', '~> 3.0.7'
 gem 'paperclip_database', '~> 2.0'
 gem 'phony_rails', '~> 0.12.4'
+gem 'rails_12factor', group: :production
 gem 'responders', '~> 2.1.0'
 gem 'rolify', '~> 4.0.0'
 gem 'sass-rails', '~> 5.0'
@@ -40,6 +41,7 @@ group :development do
   gem 'capistrano-passenger'
   gem 'capistrano-rvm'
   gem 'quality'
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
@@ -53,9 +55,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
   gem 'shoulda'
   gem 'spring'
-  gem 'web-console', '~> 2.0'
 end
 
 group :test do
-  gem 'codeclimate-test-reporter', require: nil
 end

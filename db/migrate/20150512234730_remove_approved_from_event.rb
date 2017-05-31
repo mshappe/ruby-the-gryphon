@@ -5,7 +5,7 @@ class RemoveApprovedFromEvent < ActiveRecord::Migration
   def up
     if (Event.column_names.include? 'approved')
       Event.all.find_each do |e|
-        pp '-'
+        ap '-'
         e.update_attribute :submission_state, (e[:approved] == true ? 'approved' : 'queued')
       end
     end

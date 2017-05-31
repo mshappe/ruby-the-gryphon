@@ -3,7 +3,7 @@ class CreateBranches < ActiveRecord::Migration
     create_table :branches do |t|
       t.string :name
       t.references :branch_type, index: true, foreign_key: true
-      t.references :region, index: true, foreign_key: true
+      t.integer :region_id
       t.string :branch_heraldry
       t.string :map_image
       t.string :map_coordinates

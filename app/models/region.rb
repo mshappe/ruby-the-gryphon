@@ -1,17 +1,15 @@
 # == Schema Information
 #
-# Table name: regions
+# Table name: drop_down_items
 #
 #  id          :integer          not null, primary key
 #  name        :string
 #  description :text
+#  type        :string
+#  active      :boolean
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 
-class Region < ActiveRecord::Base
-  has_paper_trail
-  resourcify
-
-  validates :name, presence: true, uniqueness: true
+class Region < DropDownItem
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219212350) do
+ActiveRecord::Schema.define(version: 20170531222857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -245,7 +245,6 @@ ActiveRecord::Schema.define(version: 20160219212350) do
 
   add_index "branches", ["branch_type_id"], name: "index_branches_on_branch_type_id", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", unique: true, using: :btree
-  add_index "branches", ["region_id"], name: "index_branches_on_region_id", using: :btree
 
   create_table "courts", force: :cascade do |t|
     t.integer  "court_order",         default: 1
@@ -351,6 +350,30 @@ ActiveRecord::Schema.define(version: 20160219212350) do
     t.binary  "file_contents"
   end
 
+  create_table "peer_candidate_comments", force: :cascade do |t|
+    t.integer  "peer_candidate_id"
+    t.integer  "person_id"
+    t.datetime "timestamp",         null: false
+    t.text     "comments"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "peer_candidate_comments", ["peer_candidate_id"], name: "index_peer_candidate_comments_on_peer_candidate_id", using: :btree
+  add_index "peer_candidate_comments", ["person_id"], name: "index_peer_candidate_comments_on_person_id", using: :btree
+
+  create_table "peer_candidates", force: :cascade do |t|
+    t.integer  "award_id"
+    t.integer  "persona_id"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "peer_candidates", ["active"], name: "index_peer_candidates_on_active", using: :btree
+  add_index "peer_candidates", ["award_id"], name: "index_peer_candidates_on_award_id", using: :btree
+  add_index "peer_candidates", ["persona_id"], name: "index_peer_candidates_on_persona_id", using: :btree
+
   create_table "people", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -415,13 +438,6 @@ ActiveRecord::Schema.define(version: 20160219212350) do
 
   add_index "personas", ["persona_type_id"], name: "index_personas_on_persona_type_id", using: :btree
   add_index "personas", ["user_id"], name: "index_personas_on_user_id", using: :btree
-
-  create_table "regions", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
 
   create_table "reign_images", force: :cascade do |t|
     t.integer "reign_id"
@@ -585,7 +601,6 @@ ActiveRecord::Schema.define(version: 20160219212350) do
   add_foreign_key "award_scribes", "people"
   add_foreign_key "branches", "branch_types"
   add_foreign_key "branches", "branches", column: "parent_branch_id", on_delete: :nullify
-  add_foreign_key "branches", "regions"
   add_foreign_key "courts", "events"
   add_foreign_key "courts", "reigns"
   add_foreign_key "event_attendees", "award_recommendations"
@@ -599,6 +614,10 @@ ActiveRecord::Schema.define(version: 20160219212350) do
   add_foreign_key "events", "events", column: "supersedes_id", on_delete: :nullify
   add_foreign_key "events", "personas", column: "steward_persona_id", on_delete: :nullify
   add_foreign_key "events", "personas", column: "submitter_persona_id", on_delete: :nullify
+  add_foreign_key "peer_candidate_comments", "peer_candidates"
+  add_foreign_key "peer_candidate_comments", "people"
+  add_foreign_key "peer_candidates", "awards"
+  add_foreign_key "peer_candidates", "personas"
   add_foreign_key "people", "addresses"
   add_foreign_key "people", "branches"
   add_foreign_key "people", "users", on_delete: :nullify
