@@ -41,13 +41,13 @@ h2.header
           .panel-body
             .row
               .col-lg-3.col-md-6.col-sm-6
-                = p.input :private_email, label: 'Hide Email', wrapper: :none, inline_label: true
+                = p.input :private_email, label: 'Hide Email', wrapper: false, inline_label: true
               .col-lg-3.col-md-6.col-sm-6
-                = p.input :private_address, label: 'Hide Address', wrapper: :none, inline_label: true
+                = p.input :private_address, label: 'Hide Address', wrapper: false, inline_label: true
               .col-lg-3.col-md-6.col-sm-6
-                = p.input :private_phone, label: 'Hide Phone', wrapper: :none, inline_label: true
+                = p.input :private_phone, label: 'Hide Phone', wrapper: false, inline_label: true
               .col-lg-3.col-md-6.col-sm-6
-                = p.input :private_persona, label: 'Hide Persona', wrapper: :none, inline_label: true
+                = p.input :private_persona, label: 'Hide Persona', wrapper: false, inline_label: true
       .form-group
         .col-md-9
           = f.input :current_password, autocomplete: "off", hint: "(we need your current password to confirm your changes)"

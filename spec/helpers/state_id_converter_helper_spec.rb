@@ -14,7 +14,7 @@ RSpec.describe StateIdConverterHelper, :type => :helper do
   it 'converts a numeric id to a state or province' do
     expect(helper.id_to_code 1).to eq 'AZ'
     expect(helper.id_to_code 64).to eq 'YT'
-    expect { helper.id_to_code 65 }.to raise_error
-    expect { helper.id_to_code -1 }.to raise_error
+    expect { helper.id_to_code 65 }.to raise_error RangeError
+    expect { helper.id_to_code -1 }.to raise_error RangeError
   end
 end

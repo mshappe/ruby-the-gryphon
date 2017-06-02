@@ -215,7 +215,7 @@ RSpec.describe AwardsController, type: :controller do
 
     context 'even for cool kids' do
       it 'raises an exception because we do not allow deletion!' do
-        expect { delete :destroy, id: @awards.first.id }.to raise_error
+        expect { delete :destroy, id: @awards.first.id }.to raise_error ActionController::UrlGenerationError
       end
     end
   end
