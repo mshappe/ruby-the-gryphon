@@ -52,7 +52,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'rspec-rails', '~> 3.1.0'
+  gem 'rspec-rails', '~> 3'
   gem 'shoulda'
   gem 'spring'
 end

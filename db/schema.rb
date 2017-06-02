@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531222857) do
+ActiveRecord::Schema.define(version: 20170602202440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,17 @@ ActiveRecord::Schema.define(version: 20170531222857) do
   add_index "branches", ["branch_type_id"], name: "index_branches_on_branch_type_id", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", unique: true, using: :btree
 
+  create_table "champions", force: :cascade do |t|
+    t.integer  "persona_id"
+    t.integer  "reign_id"
+    t.string   "name",       limit: 100
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "champions", ["persona_id"], name: "index_champions_on_persona_id", using: :btree
+  add_index "champions", ["reign_id"], name: "index_champions_on_reign_id", using: :btree
+
   create_table "courts", force: :cascade do |t|
     t.integer  "court_order",         default: 1
     t.datetime "court_date"
@@ -439,6 +450,41 @@ ActiveRecord::Schema.define(version: 20170531222857) do
   add_index "personas", ["persona_type_id"], name: "index_personas_on_persona_type_id", using: :btree
   add_index "personas", ["user_id"], name: "index_personas_on_user_id", using: :btree
 
+  create_table "poll_answers", force: :cascade do |t|
+    t.integer  "poll_id"
+    t.boolean  "active"
+    t.text     "answer"
+    t.integer  "votes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "poll_answers", ["poll_id"], name: "index_poll_answers_on_poll_id", using: :btree
+
+  create_table "polls", force: :cascade do |t|
+    t.text     "question"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer  "post_type_id"
+    t.integer  "persona_id"
+    t.integer  "warrant_type_id"
+    t.string   "title",           limit: 200
+    t.text     "body"
+    t.string   "url",             limit: 200
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "approved"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "posts", ["persona_id"], name: "index_posts_on_persona_id", using: :btree
+  add_index "posts", ["warrant_type_id"], name: "index_posts_on_warrant_type_id", using: :btree
+
   create_table "reign_images", force: :cascade do |t|
     t.integer "reign_id"
     t.string  "style"
@@ -483,6 +529,48 @@ ActiveRecord::Schema.define(version: 20170531222857) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "sca_memberships", id: false, force: :cascade do |t|
+    t.string   "sca_number"
+    t.datetime "sca_exp_date"
+  end
+
+  add_index "sca_memberships", ["sca_number"], name: "index_sca_memberships_on_sca_number", using: :btree
+
+  create_table "stallari_questions", force: :cascade do |t|
+    t.text     "question"
+    t.text     "answer"
+    t.string   "reply_email"
+    t.datetime "answered_date"
+    t.integer  "answered_persona_id"
+    t.boolean  "active"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "stallari_questions", ["answered_persona_id"], name: "index_stallari_questions_on_answered_persona_id", using: :btree
+
+  create_table "treaties", force: :cascade do |t|
+    t.integer  "persona_id"
+    t.integer  "treaty_type_id"
+    t.string   "treaty_type_type"
+    t.integer  "reign_id"
+    t.integer  "foreign_branch_id"
+    t.text     "user_comment"
+    t.text     "royal_comment"
+    t.text     "foreign_comment"
+    t.datetime "royal_approved"
+    t.datetime "foreign_approved"
+    t.string   "royal_status",      limit: 1
+    t.string   "foreign_status",    limit: 1
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "treaties", ["foreign_branch_id"], name: "index_treaties_on_foreign_branch_id", using: :btree
+  add_index "treaties", ["persona_id"], name: "index_treaties_on_persona_id", using: :btree
+  add_index "treaties", ["reign_id"], name: "index_treaties_on_reign_id", using: :btree
+  add_index "treaties", ["treaty_type_type", "treaty_type_id"], name: "index_treaties_on_treaty_type_type_and_treaty_type_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -601,6 +689,8 @@ ActiveRecord::Schema.define(version: 20170531222857) do
   add_foreign_key "award_scribes", "people"
   add_foreign_key "branches", "branch_types"
   add_foreign_key "branches", "branches", column: "parent_branch_id", on_delete: :nullify
+  add_foreign_key "champions", "personas"
+  add_foreign_key "champions", "reigns"
   add_foreign_key "courts", "events"
   add_foreign_key "courts", "reigns"
   add_foreign_key "event_attendees", "award_recommendations"
@@ -623,6 +713,7 @@ ActiveRecord::Schema.define(version: 20170531222857) do
   add_foreign_key "people", "users", on_delete: :nullify
   add_foreign_key "personas", "persona_types"
   add_foreign_key "personas", "users", on_delete: :nullify
+  add_foreign_key "poll_answers", "polls"
   add_foreign_key "warrants", "branches"
   add_foreign_key "warrants", "people"
   add_foreign_key "warrants", "warrant_types"
