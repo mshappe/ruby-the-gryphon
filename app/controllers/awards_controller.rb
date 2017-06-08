@@ -7,13 +7,17 @@ class AwardsController < ApplicationController
   downloads_files_for :award, :award_badge
 
   def index
-    @awards = @awards.includes(:branch)
-    @awards = @awards.order('branches.name').order(:precedence) # Default to precedence order if no parameters given to the contrary
-    @awards = restrict_by_branch params[:branch]
+    @q = @awards.ransack(params[:q])
+    @awards = @q.result.includes(:branch)
+      .order('branches.name')
+      .order(:precedence)
+      .page(params[:page])
+    @awards = restrict_by_branch(params[:branch])
   end
 
   def show
-    @award_recipients = AwardRecipient.by_award(@award)
+    @q = AwardRecipient.by_award(@award).ransack(params[:q])
+    @award_recipients = @q.result.page(params[:page])
   end
 
   def create

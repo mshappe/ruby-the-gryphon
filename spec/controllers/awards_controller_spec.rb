@@ -78,21 +78,75 @@ RSpec.describe AwardsController, type: :controller do
         expect(assigns[:awards]).to eq [@other_award]
       end
     end
+
+    context 'can search' do
+      before :each do
+        get :index, q: { name_cont: @awards.first.name[0..2] }
+      end
+
+      it 'should return the search-for award(s)' do
+        expect(response).to be_success
+        expect(assigns[:awards].count).to eq 1
+        expect(assigns[:awards].first).to eq @awards.first
+      end
+    end
   end
 
   context 'GET #show' do
-    before :each do
-      @court = create :court
-      @persona = create :persona
-      @award_recipient = create :award_recipient, award: @awards.first, persona: @persona, court: @court
+    context 'just an ordinary get' do
+      before :each do
+        @court = create :court
+        @persona = create :persona
+        @award_recipient = create :award_recipient, award: @awards.first, persona: @persona, court: @court
+      end
+
+      it 'displays award information including recipients in order most to least recent' do
+        get :show, id: @awards.first
+
+        expect(response).to be_success
+        expect(assigns[:award]).to eq @awards.first
+        expect(assigns[:award_recipients]).to match_array [@award_recipient]
+      end
     end
 
-    it 'displays award information including recipients in order most to least recent' do
-      get :show, id: @awards.first
+    context 'searching' do
+      before :each do
+        @court1 = create :court
+        @court2 = create :court
+        @personas1 = create_list :persona, 3
+        @personas2 = create_list :persona, 3
+        @award_recipients1 = @personas1.collect do |p|
+          create :award_recipient, award: @awards.first, persona: p, court: @court1
+        end
+        @award_recipients2 = @personas2.collect do |p|
+          create :award_recipient, award: @awards.first, persona: p, court: @court2
+        end
+      end
 
-      expect(response).to be_success
-      expect(assigns[:award]).to eq @awards.first
-      expect(assigns[:award_recipients]).to match_array [@award_recipient]
+      context 'recipients' do
+        before :each do
+          get :show, id: @awards.first, q: { persona_name_cont: @personas1[1].name }
+        end
+
+        it 'should return just who we want' do
+          expect(response).to be_success
+          expect(assigns[:award_recipients].count).to eq 1
+          expect(assigns[:award_recipients].first).to eq @award_recipients1[1]
+        end
+      end
+
+      context 'courts' do
+        before :each do
+          get :show, id: @awards.first, q: { court_event_name_cont: @court1.event.name }
+        end
+
+        it 'should return just who we want' do
+          expect(response).to be_success
+          expect(assigns[:award_recipients].count).to eq 3
+          expect(assigns[:award_recipients]).to match_array @award_recipients1
+        end
+
+      end
     end
   end
 

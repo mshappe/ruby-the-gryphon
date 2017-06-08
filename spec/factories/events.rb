@@ -44,7 +44,7 @@
 
 FactoryGirl.define do
   factory :event do
-    name "MyString"
+    sequence(:name) { Faker::Name.name }
     start_at "2015-04-21 17:05:19"
     end_at "2015-04-21 17:05:19"
     url "MyString"

@@ -24,14 +24,14 @@
 FactoryGirl.define do
   factory :court do
     court_order 1
-court_date "2015-07-19 17:51:54"
-event nil
-reign nil
-regent_persona_id 1
-reporter_persona_id 1
-herald_persona_id 1
-note "MyText"
-planning_notes "MyText"
+    court_date "2015-07-19 17:51:54"
+    association :event
+    reign nil
+    regent_persona_id 1
+    reporter_persona_id 1
+    herald_persona_id 1
+    note "MyText"
+    planning_notes "MyText"
   end
 
 end

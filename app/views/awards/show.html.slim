@@ -17,7 +17,13 @@
     .row
       .col-md-12
         h4 Award recipients (#{@award_recipients.count} total)
-
+        = paginate @award_recipients
+        = search_form_for @q, url: award_path(@award), class: 'form-horizontal', wrapper: :horizontal_form do |f|
+          = f.label :persona_name_cont
+          = f.search_field :persona_name_cont
+          = f.label :court_event_name_cont
+          = f.search_field :court_event_name_cont
+          = f.submit
         .table-responsive
           table.table.table-striped.table-hover
             thead
@@ -25,4 +31,3 @@
               th Event
             tbody
               = render @award_recipients
-
