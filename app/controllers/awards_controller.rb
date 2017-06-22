@@ -7,7 +7,7 @@ class AwardsController < ApplicationController
   downloads_files_for :award, :award_badge
 
   def index
-    @q = @awards.ransack(params[:q])
+    @q = @awards.ransack(query)
     @awards = @q.result.includes(:branch)
       .order('branches.name')
       .order(:precedence)
@@ -16,8 +16,8 @@ class AwardsController < ApplicationController
   end
 
   def show
-    @q = AwardRecipient.by_award(@award).ransack(params[:q])
-    @award_recipients = @q.result.page(params[:page])
+    @q = AwardRecipient.by_award(@award).ransack(query)
+    @award_recipients = @q.result.page(page)
   end
 
   def create
@@ -39,7 +39,16 @@ class AwardsController < ApplicationController
   end
 
   def award_params
-    params.require(:award).permit!
+    params.require(:award).permit(:name, :description, :precedence, :award_badge,
+                                  :award_type_id, :branch_id, :active)
+  end
+
+  def page
+    params.permit(:page).fetch(:page, nil)
+  end
+
+  def query
+    params.permit(q: [:court_event_name_cont, :persona_name_cont, :name_cont]).fetch(:q, nil)
   end
 
 end

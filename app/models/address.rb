@@ -22,7 +22,8 @@ class Address < ActiveRecord::Base
   has_paper_trail
   geocoded_by :full_address, lookup: :esri
   reverse_geocoded_by :latitude, :longitude, lookup: :esri do |obj, results|
-    if geo = results.first
+    if results.try :first
+      geo = results.first
       obj.address = geo.address
       obj.city = geo.city
       obj.state = geo.state_code

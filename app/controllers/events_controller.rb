@@ -65,6 +65,11 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit! # TODO
+    params.require(:event).permit(:name, :start_at, :end_at, :url, :branch_id, :sponsor_branch_id,
+                                  :unlisted_host, :unlisted_sponsor, :site_name, :address_id, :web_ad,
+                                  :comments, :admin_comments, :submitter_persona_id, :submitter_sca_name,
+                                  :submitter_legal_name, :submitter_phone, :submitter_email,
+                                  :steward_persona_id, :steward_sca_name, :steward_legal_name,
+                                  :steward_phone, :steward_email, :submission_state, :supersedes_id, :superseded_by_id)
   end
 end
