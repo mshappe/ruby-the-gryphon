@@ -6,16 +6,11 @@
       .col-md-3
         = link_to 'Edit', edit_event_path(@event), class: 'btn btn-primary pull-right' if can? :edit, @event
   .body
-    h4 Hosted by #{@event.branch.present? ? link_to(@event.branch.name, @event.branch) : @event.unlisted_host}
-    - if @event.sponsor_branch.present? || @event.unlisted_sponsor.present?
-      h6 Sponsored by #{@event.sponsor_branch.present? ? link_to(@event.sponsor_branch.name, @event.sponsor_branch) : @event.unlisted_sponsor}
+    h4 Hosted by #{@event.branch.present? ? link_to(@event.branch_name, @event.branch) : @event.unlisted_host}
+    = render 'shared/sponsor', sponsor_branch: @event.sponsor_branch, unlisted_sponsor: @event.unlisted_sponsor
     .date= event_date(@event).html_safe
     .site-name= @event.site_name
-    / TODO THIS SHOULD BE A HELPER
-    address data-toggle='tooltip' data-placement='top' title="#{@event.address.latitude.to_s + ', ' + @event.address.longitude.to_s if @event.address.geocoded?}"
-      div= @event.address.address
-      div #{@event.address.city}, #{@event.address.state} #{@event.address.postal_code}
-      div= @event.address.country
+    = render 'shared/address', address: @event.address
     h4 Planned Activities
     .well.well-sm
       .row

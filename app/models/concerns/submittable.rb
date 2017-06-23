@@ -21,4 +21,13 @@ module Submittable
     self.superseded_by = successor
     successor.supersedes = self
   end
+
+  def update_attributes(params)
+    if self.submission_state == 'queued' && params['submission_state'] == 'approved' &&
+        self.supersedes.try(:submission_state) == 'approved'
+      self.supersedes.retire(self)
+    end
+
+    super(params)
+  end
 end

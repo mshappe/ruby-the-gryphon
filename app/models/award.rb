@@ -34,4 +34,6 @@ class Award < ActiveRecord::Base
 
   validates :name, presence: true
   validates_attachment_content_type :award_badge, content_type: /\Aimage\/.*\Z/
+
+  delegate :name, to: :branch, prefix: true
 end

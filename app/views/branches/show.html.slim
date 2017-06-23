@@ -1,12 +1,12 @@
 .panel.panel-primary
   .panel-heading
-    .panel-title The #{@branch.branch_type.name} of #{@branch.name}
+    .panel-title The #{@branch.branch_type_name} of #{@branch.name}
   .panel-body
     .row
       .col-md-4.col-sm-4
         = image_tag @branch.branch_heraldry.url if @branch.branch_heraldry.present?
         - if @branch.region
-          div #{@branch.region.name} Region
+          div #{@branch.region_name} Region
         div #{@branch.city}, #{@branch.state}
       .col-md-8.col-sm-8
         = image_tag @branch.map_image.url, class: 'img-responsive' if @branch.map_image.present?

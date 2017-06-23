@@ -25,8 +25,9 @@
 #
 # Indexes
 #
-#  index_branches_on_branch_type_id  (branch_type_id)
-#  index_branches_on_name            (name) UNIQUE
+#  index_branches_on_branch_type_id    (branch_type_id)
+#  index_branches_on_name              (name) UNIQUE
+#  index_branches_on_parent_branch_id  (parent_branch_id)
 #
 
 class Branch < ActiveRecord::Base
@@ -36,7 +37,7 @@ class Branch < ActiveRecord::Base
   has_attached_file :map_image, storage: :database, cascade_deletion: true
 
   belongs_to :branch_type
-  belongs_to :region
+  belongs_to :region, class_name: 'RegionType'
   belongs_to :parent_branch, class_name: 'Branch', foreign_key: 'parent_branch_id'
   has_many :awards
   has_many :child_branches, class_name: 'Branch', inverse_of: :parent_branch
@@ -47,7 +48,10 @@ class Branch < ActiveRecord::Base
   validates_attachment_content_type :branch_heraldry, :content_type => /\Aimage\/.*\Z/
   validates_attachment_content_type :map_image, :content_type => /\Aimage\/.*\Z/
 
-  default_scope -> { order(:name) }
+  scope :by_name, -> { order :name }
+
+  delegate :name, to: :branch_type, prefix: true
+  delegate :name, to: :region, prefix: true
 
   def self.default_branch
     if default_branch_name.blank?

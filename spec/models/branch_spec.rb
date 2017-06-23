@@ -25,8 +25,9 @@
 #
 # Indexes
 #
-#  index_branches_on_branch_type_id  (branch_type_id)
-#  index_branches_on_name            (name) UNIQUE
+#  index_branches_on_branch_type_id    (branch_type_id)
+#  index_branches_on_name              (name) UNIQUE
+#  index_branches_on_parent_branch_id  (parent_branch_id)
 #
 
 require 'rails_helper'
@@ -63,6 +64,7 @@ RSpec.describe Branch, :type => :model do
 
       context 'and is defined in database' do
         before :each do
+          create :region
           create :branch, name: 'Erewhon'
         end
         it 'should return the default branch' do

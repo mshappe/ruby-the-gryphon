@@ -6,9 +6,8 @@ class EventsController < ApplicationController
 
 
   def index
-    @events = Event.approved
+    @events = Event.approved_eager
     @events = @events.all_future unless params[:include] == 'past'
-    @events = @events.includes(:branch, :address).order(:start_at)
   end
 
   def queued
@@ -36,11 +35,6 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.submission_state == 'queued' && event_params['submission_state'] == 'approved' &&
-        @event.supersedes.try(:submission_state) == 'approved'
-      @event.supersedes.retire(@event)
-    end
-
     if @event.update_attributes(event_params)
       @event.supersedes.try(:save)
       EventNotification.notify_submitter_update(@event).deliver_later
@@ -59,7 +53,7 @@ class EventsController < ApplicationController
   end
 
   def enforce_submission_state
-    if @event.submission_state.blank? || cannot?(:manage, Event)
+    if @event.submission_state? || cannot?(:manage, Event)
       @event.submission_state = 'queued'
     end
   end

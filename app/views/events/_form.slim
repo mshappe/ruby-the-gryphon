@@ -1,7 +1,7 @@
-h3  #{@event.persisted? ? 'Edit' : 'Submit' } an Event
+h3  #{event.persisted? ? 'Edit' : 'Submit' } an Event
 
-= simple_form_for @event, class: 'form-horizontal', wrapper: :horizontal_form do |f|
-  - if @event.persisted? && can?(:manage, @event)
+= simple_form_for event, class: 'form-horizontal', wrapper: :horizontal_form do |f|
+  - if event.persisted? && can?(:manage, event)
 
     .panel.panel-warning
       .panel-heading
@@ -32,8 +32,7 @@ h3  #{@event.persisted? ? 'Edit' : 'Submit' } an Event
         = a.input :address
         = a.input :city
         .form-group
-          .col-md-offset-3.col-md-9.col-sm-offset-3.col-sm-9
-            = a.subregion_select :state, (@event.address.country.present? ? @event.address.country : 'US'), { priority: %w(MB MI MN ND SD WI) }, class: 'form-control'
+          .col-md-offset-3.col-md-9.col-sm-offset-3.col-sm-9=render 'state_selector', address: event.address
         = a.input :postal_code, label: 'Postal&nbsp;code'.html_safe
         .form-group
           .col-md-offset-3.col-md-9.col-sm-offset-3.col-sm-9

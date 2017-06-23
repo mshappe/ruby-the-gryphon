@@ -17,8 +17,11 @@
 #
 # Indexes
 #
-#  index_courts_on_event_id  (event_id)
-#  index_courts_on_reign_id  (reign_id)
+#  index_courts_on_event_id             (event_id)
+#  index_courts_on_herald_persona_id    (herald_persona_id)
+#  index_courts_on_regent_persona_id    (regent_persona_id)
+#  index_courts_on_reign_id             (reign_id)
+#  index_courts_on_reporter_persona_id  (reporter_persona_id)
 #
 
 FactoryGirl.define do

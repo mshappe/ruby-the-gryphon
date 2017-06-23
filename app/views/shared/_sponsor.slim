@@ -1,0 +1,2 @@
+- if sponsor_branch.present? || unlisted_sponsor.present?
+  h6 Sponsored by #{sponsor_branch? ? link_to(sponsor_branch.name, sponsor_branch) : unlisted_sponsor}

@@ -1,0 +1,4 @@
+address data-toggle='tooltip' data-placement='top' title="#{address.latitude.to_s + ', ' + address.longitude.to_s if address.geocoded?}"
+  div= address.address
+  div #{address.city}, #{address.state} #{address.postal_code}
+  div= address.country

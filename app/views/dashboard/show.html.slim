@@ -5,6 +5,10 @@
     .col-md-1.col-sm-1.col-xs-1
       = link_to edit_user_registration_path, class: "btn btn-default text-right", 'aria-label' => "Edit", 'data-toggle' => "tooltip", 'data-placement' => "top", title: "Edit Profile"
         span.glyphicon.glyphicon-edit aria-hidden="true"
+        
+.row
+  .col-md-12
+    = render 'people/person', person: @user.personas.primary.person if @user.personas.primary.person.present?
 
 - unless @events.blank?
   .row

@@ -1,22 +1,21 @@
-h3= person.name
-- unless person.private_address
-  .row
-    .col-md-1
-      .glyphicon.glyphicon-home
-    .col-md-11
-      address
-        = person.address.address
-        | #{person.address.city}, #{person.address.state} #{person.address.postal_code}
-        = person.address.country
-- unless person.private_email
-  .row
-    .col-md-1
-      .glyphicon.glyphicon-envelope
-    .col-md-11
-      div.code &lt;#{person.user.email}&gt;
-- unless person.private_phone
-  .row
-    .col-md-1
-      .glyphicon.glyphicon-phone
-    .col-md-11
-      = person.phone
+- if user_signed_in?
+  h3= person.name
+  - unless person.private_address
+    .row
+      .col-md-1
+        .glyphicon.glyphicon-home
+      .col-md-11= render 'shared/address', address: person.address
+  - unless person.private_email
+    .row
+      .col-md-1
+        .glyphicon.glyphicon-envelope
+      .col-md-11
+        div.code &lt;#{person.email}&gt;
+  - unless person.private_phone
+    .row
+      .col-md-1
+        .glyphicon.glyphicon-phone
+      .col-md-11
+        = person.phone
+- else
+  div You must sign in to see personal information.

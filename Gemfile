@@ -42,7 +42,12 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
   gem 'capistrano-rvm'
-  gem 'quality'
+  gem 'guard'
+  gem 'guard-bundler'
+  gem 'guard-rspec', require: false
+  gem 'guard-annotate'
+  gem 'guard-consistency_fail'
+  gem 'guard-railsbp'
   gem 'web-console', '~> 2.0'
 end
 
