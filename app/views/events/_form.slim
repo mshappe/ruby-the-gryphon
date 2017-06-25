@@ -20,7 +20,7 @@ h3  #{event.persisted? ? 'Edit' : 'Submit' } an Event
       = f.input :url
       = f.association :branch
       = f.association :sponsor_branch
-      = f.input :submitter_persona_id, as: :hidden, input_html: { value: current_user.personas.primary.first.id }
+      = f.input :submitter_persona_id, as: :hidden, input_html: { value: current_user.personas.primary.id }
       = f.association :steward_persona, prompt: 'I am the steward'
 
   .panel.panel-default
@@ -32,7 +32,7 @@ h3  #{event.persisted? ? 'Edit' : 'Submit' } an Event
         = a.input :address
         = a.input :city
         .form-group
-          .col-md-offset-3.col-md-9.col-sm-offset-3.col-sm-9=render 'state_selector', address: event.address
+          .col-md-offset-3.col-md-9.col-sm-offset-3.col-sm-9=render 'shared/state_selector', a: a, address: event.address
         = a.input :postal_code, label: 'Postal&nbsp;code'.html_safe
         .form-group
           .col-md-offset-3.col-md-9.col-sm-offset-3.col-sm-9
@@ -43,7 +43,7 @@ h3  #{event.persisted? ? 'Edit' : 'Submit' } an Event
       .panel-title Event Activities
     .panel-body
       .form-group
-        = f.association :event_activities, as: :check_boxes, wrapper: :none, label_method: :activity_label, \
+        = f.association :event_activities, as: :check_boxes, wrapper: false, label: false, label_method: :activity_label, \
           item_wrapper_tag: 'div', item_wrapper_class: 'col-md-3 col-sm-6'
 
   .panel.panel-default

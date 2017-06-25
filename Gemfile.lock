@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: 8541a5deeedf48d470ab8c5e93eafdb95d8def1b
+  revision: acdbb4a958f67bbdc00f1c9179eb1b1dbd2add66
   specs:
     activeadmin (1.0.0)
       arbre (>= 1.1.1)
@@ -270,7 +270,7 @@ GEM
     paperclip_database (2.3.1)
       paperclip (>= 2.3.0)
     pg (0.21.0)
-    phony (2.15.44)
+    phony (2.15.46)
     phony_rails (0.12.13)
       activesupport (>= 3.0)
       phony (~> 2.12)
@@ -442,7 +442,7 @@ DEPENDENCIES
   annotate
   awesome_print
   bcrypt (~> 3.1.7)
-  bootstrap-sass (~> 3.3.4)
+  bootstrap-sass
   byebug
   cancancan (~> 1.10.1)
   capistrano-passenger
