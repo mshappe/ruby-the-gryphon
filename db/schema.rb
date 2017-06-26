@@ -256,7 +256,7 @@ ActiveRecord::Schema.define(version: 20170623203220) do
   end
 
   add_index "branches", ["branch_type_id"], name: "index_branches_on_branch_type_id", using: :btree
-  add_index "branches", ["name"], name: "index_branches_on_name", unique: true, using: :btree
+  add_index "branches", ["name"], name: "index_branches_on_name", using: :btree
   add_index "branches", ["parent_branch_id"], name: "index_branches_on_parent_branch_id", using: :btree
 
   create_table "champions", force: :cascade do |t|

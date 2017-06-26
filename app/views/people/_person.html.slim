@@ -1,21 +1,25 @@
-- if user_signed_in?
-  h3= person.name
-  - unless person.private_address
-    .row
-      .col-md-1
-        .glyphicon.glyphicon-home
-      .col-md-11= render 'shared/address', address: person.address
-  - unless person.private_email
-    .row
-      .col-md-1
-        .glyphicon.glyphicon-envelope
-      .col-md-11
-        div.code &lt;#{person.email}&gt;
-  - unless person.private_phone
-    .row
-      .col-md-1
-        .glyphicon.glyphicon-phone
-      .col-md-11
-        = person.phone
-- else
-  div You must sign in to see personal information.
+.panel.panel-default
+  - if user_signed_in?
+    .panel-heading
+      = person.name
+    .panel-body
+      - unless person.private_address
+        .row
+          .col-md-1
+            .glyphicon.glyphicon-home
+          .col-md-11= render 'shared/address', address: person.address
+      - unless person.private_email
+        .row
+          .col-md-1
+            .glyphicon.glyphicon-envelope
+          .col-md-11
+            div.code &lt;#{person.email}&gt;
+      - unless person.private_phone
+        .row
+          .col-md-1
+            .glyphicon.glyphicon-phone
+          .col-md-11
+            = person.phone
+  - else
+    .panel-body
+      'You must sign in to see personal information.

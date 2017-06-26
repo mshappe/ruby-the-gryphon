@@ -1,0 +1,6 @@
+.panel.panel-default
+  .panel-heading
+    'Personas
+  .panel-body
+    - personas.each do |p|
+      div= link_to(p.name, p) + ' ' + persona_badge(p)

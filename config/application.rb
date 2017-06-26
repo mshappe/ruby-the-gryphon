@@ -40,5 +40,6 @@ module RubyTheGryphon
 
     defaults = YAML.load(File.read 'config/defaults.yml').symbolize_keys
     config.x.branch_name = defaults[:branch_name]
+    config.x.branch_type = defaults[:branch_type]
   end
 end

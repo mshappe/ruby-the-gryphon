@@ -11,8 +11,7 @@ class AwardsController < ApplicationController
     @awards = @q.result.includes(:branch)
       .order('branches.name')
       .order(:precedence)
-      .page(params[:page])
-    @awards = restrict_by_branch(params[:branch])
+    @awards = restrict_by_branch(params[:branch]).page(params[:page])
   end
 
   def show
@@ -33,9 +32,9 @@ class AwardsController < ApplicationController
   protected
 
   def restrict_by_branch(branch)
-    return @awards.where(branch: Branch.default_branch) if branch.nil?
-    return @awards.where(branches: { id: branch[:id] }) if branch.is_a?(Hash) && branch.has_key?(:id)
-    @awards
+    return @awards if branch == 'all'
+    branch ||= Branch.default_branch
+    return @awards.where(branch: branch[:id])
   end
 
   def award_params

@@ -26,7 +26,7 @@
 # Indexes
 #
 #  index_branches_on_branch_type_id    (branch_type_id)
-#  index_branches_on_name              (name) UNIQUE
+#  index_branches_on_name              (name)
 #  index_branches_on_parent_branch_id  (parent_branch_id)
 #
 

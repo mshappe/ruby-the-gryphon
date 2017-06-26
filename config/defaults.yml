@@ -1,4 +1,5 @@
 branch_name: Northshield
+branch_type: Kingdom
 award_type_names: # Name in DropDownList as AwardType
   aoa: "Award of Arms Bearing"
   goa: "Grant of Arms Bearing"
@@ -8,10 +9,3 @@ award_type_names: # Name in DropDownList as AwardType
   unspec: "Award type not specified"
   vigilant: "Vigilant"
   youth: "Youth Awards"
-
-
-
-
-
-
-
