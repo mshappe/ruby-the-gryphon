@@ -11,7 +11,7 @@ for the [Kingdom of Northshield](http://northshield.org), a division of the
 means, you're in the wrong place! :-)
 
 If you would like to contribute to this project, please contact the Chief Cook
-and Bottle Washer, [Michael Shappe (aka Maol Mhichil mac Giolla Pheadair)](mailto:sith-herald@melm.org).
+and Bottle Washer, [Michael Shappe (aka Yehudah elteber ben Yitzhak)](mailto:yehudah.ns@zoho.com).
 Note that all direct contributors must be willing to assign copyright to the SCA, Inc.,
 although credit will be retained in a the [CONTRIBUTORS](CONTRIBUTORS) file.
 As this is licensed under the [MIT License](LICENSE), others may fork this project at will and
