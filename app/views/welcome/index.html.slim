@@ -9,9 +9,13 @@ h3= link_to 'Release Notes', release_notes_path
   .panel-heading
     .panel-title
       .row
-        .col-md-4.col-sm-12
+        .col-md-3.col-sm-12
           | Upcoming events
-        .col-md-5.col-sm-6
+        .col-md-3.col-sm-12
+          = search_form_for @q, url: events_path, class: 'form-inline' do |f|
+            .form-group
+              = f.search_field :name_cont, class: 'form-control', placeholder: 'Event name contains'
+        .col-md-3.col-sm-6
           = link_to events_url(range: :upcoming) do
             .glyphicon.glyphicon-list
             | All upcoming events

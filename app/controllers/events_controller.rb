@@ -6,7 +6,8 @@ class EventsController < ApplicationController
 
 
   def index
-    @events = Event.approved_eager
+    @q = @events.ransack(query)
+    @events = @q.result.approved_eager
     @events = @events.all_future unless params[:include] == 'past'
   end
 
@@ -65,5 +66,9 @@ class EventsController < ApplicationController
                                   :submitter_legal_name, :submitter_phone, :submitter_email,
                                   :steward_persona_id, :steward_sca_name, :steward_legal_name,
                                   :steward_phone, :steward_email, :submission_state, :supersedes_id, :superseded_by_id)
+  end
+
+  def query
+    params.permit(q: [:name_cont]).fetch(:q, nil)
   end
 end
