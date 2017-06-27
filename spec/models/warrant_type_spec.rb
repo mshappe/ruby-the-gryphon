@@ -20,6 +20,10 @@
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #
+# Indexes
+#
+#  index_warrant_types_on_superior_warrant_id  (superior_warrant_id)
+#
 
 require 'rails_helper'
 

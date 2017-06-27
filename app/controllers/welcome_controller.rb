@@ -6,5 +6,6 @@ class WelcomeController < ApplicationController
 
   def get_events
     @events = Event.approved.next_three_months.order(:start_at)
+    @q = @events.ransack()
   end
 end

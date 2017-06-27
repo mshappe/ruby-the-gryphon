@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602202440) do
+ActiveRecord::Schema.define(version: 20170623203220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,10 +83,12 @@ ActiveRecord::Schema.define(version: 20170602202440) do
 
   create_table "authorization_types", force: :cascade do |t|
     t.string   "name"
-    t.integer  "group"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "martial_activity_type_id"
   end
+
+  add_index "authorization_types", ["martial_activity_type_id"], name: "index_authorization_types_on_martial_activity_type_id", using: :btree
 
   create_table "authorizations", force: :cascade do |t|
     t.integer  "person_id"
@@ -106,11 +108,15 @@ ActiveRecord::Schema.define(version: 20170602202440) do
     t.binary  "file_contents"
   end
 
+  add_index "award_badges", ["award_id"], name: "index_award_badges_on_award_id", using: :btree
+
   create_table "award_recipient_images", force: :cascade do |t|
     t.integer "award_recipient_id"
     t.string  "style"
     t.binary  "file_contents"
   end
+
+  add_index "award_recipient_images", ["award_recipient_id"], name: "index_award_recipient_images_on_award_recipient_id", using: :btree
 
   create_table "award_recipient_recommendations", force: :cascade do |t|
     t.integer  "award_recipient_id"
@@ -127,6 +133,8 @@ ActiveRecord::Schema.define(version: 20170602202440) do
     t.string  "style"
     t.binary  "file_contents"
   end
+
+  add_index "award_recipient_thumbnails", ["award_recipient_id"], name: "index_award_recipient_thumbnails_on_award_recipient_id", using: :btree
 
   create_table "award_recipients", force: :cascade do |t|
     t.integer  "award_id"
@@ -176,6 +184,8 @@ ActiveRecord::Schema.define(version: 20170602202440) do
   add_index "award_recommendations", ["award_id"], name: "index_award_recommendations_on_award_id", using: :btree
   add_index "award_recommendations", ["branch_id"], name: "index_award_recommendations_on_branch_id", using: :btree
   add_index "award_recommendations", ["persona_id"], name: "index_award_recommendations_on_persona_id", using: :btree
+  add_index "award_recommendations", ["planned_court_id"], name: "index_award_recommendations_on_planned_court_id", using: :btree
+  add_index "award_recommendations", ["submitted_by_user_id"], name: "index_award_recommendations_on_submitted_by_user_id", using: :btree
 
   create_table "award_scribes", force: :cascade do |t|
     t.integer  "award_recipient_id"
@@ -213,6 +223,8 @@ ActiveRecord::Schema.define(version: 20170602202440) do
     t.binary  "file_contents"
   end
 
+  add_index "branch_heraldries", ["branch_id"], name: "index_branch_heraldries_on_branch_id", using: :btree
+
   create_table "branch_types", force: :cascade do |t|
     t.string   "name"
     t.boolean  "full_status"
@@ -244,7 +256,8 @@ ActiveRecord::Schema.define(version: 20170602202440) do
   end
 
   add_index "branches", ["branch_type_id"], name: "index_branches_on_branch_type_id", using: :btree
-  add_index "branches", ["name"], name: "index_branches_on_name", unique: true, using: :btree
+  add_index "branches", ["name"], name: "index_branches_on_name", using: :btree
+  add_index "branches", ["parent_branch_id"], name: "index_branches_on_parent_branch_id", using: :btree
 
   create_table "champions", force: :cascade do |t|
     t.integer  "persona_id"
@@ -272,7 +285,10 @@ ActiveRecord::Schema.define(version: 20170602202440) do
   end
 
   add_index "courts", ["event_id"], name: "index_courts_on_event_id", using: :btree
+  add_index "courts", ["herald_persona_id"], name: "index_courts_on_herald_persona_id", using: :btree
+  add_index "courts", ["regent_persona_id"], name: "index_courts_on_regent_persona_id", using: :btree
   add_index "courts", ["reign_id"], name: "index_courts_on_reign_id", using: :btree
+  add_index "courts", ["reporter_persona_id"], name: "index_courts_on_reporter_persona_id", using: :btree
 
   create_table "drop_down_items", force: :cascade do |t|
     t.string   "name"
@@ -343,23 +359,29 @@ ActiveRecord::Schema.define(version: 20170602202440) do
   add_index "events", ["submission_state"], name: "index_events_on_submission_state", using: :btree
   add_index "events", ["submitter_persona_id"], name: "index_events_on_submitter_persona_id", using: :btree
 
-  create_table "heradry_images", force: :cascade do |t|
-    t.integer "person_id"
-    t.string  "style"
-    t.binary  "file_contents"
-  end
-
   create_table "heraldic_images", force: :cascade do |t|
     t.integer "person_id"
     t.string  "style"
     t.binary  "file_contents"
   end
 
+  add_index "heraldic_images", ["person_id"], name: "index_heraldic_images_on_person_id", using: :btree
+
   create_table "map_images", force: :cascade do |t|
     t.integer "branch_id"
     t.string  "style"
     t.binary  "file_contents"
   end
+
+  add_index "map_images", ["branch_id"], name: "index_map_images_on_branch_id", using: :btree
+
+  create_table "martial_activity_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "martial_activity_types", ["name"], name: "index_martial_activity_types_on_name", using: :btree
 
   create_table "peer_candidate_comments", force: :cascade do |t|
     t.integer  "peer_candidate_id"
@@ -423,6 +445,8 @@ ActiveRecord::Schema.define(version: 20170602202440) do
     t.string  "style"
     t.binary  "file_contents"
   end
+
+  add_index "persona_images", ["persona_id"], name: "index_persona_images_on_persona_id", using: :btree
 
   create_table "persona_types", force: :cascade do |t|
     t.string   "name"
@@ -491,11 +515,15 @@ ActiveRecord::Schema.define(version: 20170602202440) do
     t.binary  "file_contents"
   end
 
+  add_index "reign_images", ["reign_id"], name: "index_reign_images_on_reign_id", using: :btree
+
   create_table "reign_maps", force: :cascade do |t|
     t.integer "reign_id"
     t.string  "style"
     t.binary  "file_contents"
   end
+
+  add_index "reign_maps", ["reign_id"], name: "index_reign_maps_on_reign_id", using: :btree
 
   create_table "reigns", force: :cascade do |t|
     t.string   "name"
@@ -518,6 +546,13 @@ ActiveRecord::Schema.define(version: 20170602202440) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
+
+  add_index "reigns", ["combatant_persona_id"], name: "index_reigns_on_combatant_persona_id", using: :btree
+  add_index "reigns", ["consort_persona_id"], name: "index_reigns_on_consort_persona_id", using: :btree
+  add_index "reigns", ["coronation_event_id"], name: "index_reigns_on_coronation_event_id", using: :btree
+  add_index "reigns", ["crown_event_id"], name: "index_reigns_on_crown_event_id", using: :btree
+  add_index "reigns", ["runner_up_consort_persona_id"], name: "index_reigns_on_runner_up_consort_persona_id", using: :btree
+  add_index "reigns", ["runner_up_persona_id"], name: "index_reigns_on_runner_up_persona_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -638,6 +673,8 @@ ActiveRecord::Schema.define(version: 20170602202440) do
     t.binary  "file_contents"
   end
 
+  add_index "warrant_badges", ["warrant_type_id"], name: "index_warrant_badges_on_warrant_type_id", using: :btree
+
   create_table "warrant_types", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -656,6 +693,8 @@ ActiveRecord::Schema.define(version: 20170602202440) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
+
+  add_index "warrant_types", ["superior_warrant_id"], name: "index_warrant_types_on_superior_warrant_id", using: :btree
 
   create_table "warrants", force: :cascade do |t|
     t.integer  "person_id"

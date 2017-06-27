@@ -1,11 +1,15 @@
 .panel.panel-primary
   .panel-heading
     .row
-      .col-md-6.col-sm-6
+      .col-md-4.col-sm-6
         .panel-title
           = params[:include] == 'past' ? "All" : "Upcoming"
           |  Events
-      .col-md-6.col-sm-6
+      .col-md-4.col-sm-12
+        = search_form_for @q, url: events_path do |f|
+          = f.label :name_cont
+          = f.search_field :name_cont
+      .col-md-4.col-sm-6
         .text-right
           .panel-title
             = link_to 'See past events', events_path(include: 'past') unless params[:include] == 'past'

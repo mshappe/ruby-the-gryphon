@@ -42,4 +42,6 @@ class AwardRecipient < ActiveRecord::Base
   validates_attachment_content_type :award_recipient_image, content_type: /\Aimage\/.*\Z/
 
   scope :by_award, ->(award) { where(award_id: award.id) }
+
+  delegate :name, to: :persona, prefix: true
 end

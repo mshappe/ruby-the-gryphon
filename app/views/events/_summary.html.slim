@@ -3,7 +3,7 @@
     strong= link_to event.name, event
   div= event_date(event, format: :date_only).html_safe
   div
-    div = link_to event.branch.name, event.branch if event.branch
+    div = link_to event.branch_name, event.branch if event.branch
     div
       = event.address.try :city
       | &nbsp;&nbsp;

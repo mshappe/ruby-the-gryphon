@@ -20,11 +20,12 @@ html lang='en'
             ul.nav.nav-tabs.nav-justified
               =active_link_to 'Home', root_path, wrap_tag: :li, active: :exclusive
               =active_link_to 'Kingdom Calendar', events_path, wrap_tag: :li
+              =active_link_to 'Awards and Honors', awards_path, wrap_tag: :li
               =active_link_to 'Your Dashboard', dashboard_path(user_id: current_user), wrap_tag: :li if current_user
       .row
         .col-md-12
-          = render partial: 'alert', locals: { type: 'success', text: notice} if notice
-          = render partial: 'alert', locals: { type: 'danger', text: alert } if alert
+          = render 'alert', type: 'success', text: notice if notice
+          = render 'alert', type: 'danger', text: alert if alert
 
       .row
         #navigation.col-lg-3.col-md-3.col-sm-5.col-xs-12

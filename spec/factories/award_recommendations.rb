@@ -21,9 +21,11 @@
 #
 # Indexes
 #
-#  index_award_recommendations_on_award_id    (award_id)
-#  index_award_recommendations_on_branch_id   (branch_id)
-#  index_award_recommendations_on_persona_id  (persona_id)
+#  index_award_recommendations_on_award_id              (award_id)
+#  index_award_recommendations_on_branch_id             (branch_id)
+#  index_award_recommendations_on_persona_id            (persona_id)
+#  index_award_recommendations_on_planned_court_id      (planned_court_id)
+#  index_award_recommendations_on_submitted_by_user_id  (submitted_by_user_id)
 #
 
 FactoryGirl.define do

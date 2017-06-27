@@ -24,7 +24,7 @@
 
 FactoryGirl.define do
   factory :award do
-    name "MyString"
+    sequence(:name) { |n| "#{n}-MyString" }
     description "MyText"
     precedence 1
     award_type_id 1

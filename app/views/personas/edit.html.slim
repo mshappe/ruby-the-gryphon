@@ -3,4 +3,4 @@ h2
   = link_to 'Delete', { action: :destroy, id: @persona.id },
               { method: :delete, class: 'btn btn-danger btn-inline', data: { confirm: 'Are you sure you want to delete this persona?' } }
 
-= render partial: 'form'
+= render 'form', persona: @persona

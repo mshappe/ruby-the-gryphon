@@ -15,7 +15,7 @@ class CreateBranches < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :branches, :name, unique: true
+    add_index :branches, :name
     add_foreign_key "branches", "branches", column: :parent_branch_id, primary_key: :id, on_delete: :nullify
   end
 end

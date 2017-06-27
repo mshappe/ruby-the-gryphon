@@ -54,4 +54,6 @@ class Person < ActiveRecord::Base
 
   validates :name, presence: true
   validates :phone, phony_plausible: true
+
+  delegate :email, to: :user
 end

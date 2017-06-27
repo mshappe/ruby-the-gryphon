@@ -1,4 +1,4 @@
-= simple_form_for @persona, class: 'form-horizontal', wrapper: :horizontal_form do |f|
+= simple_form_for persona, class: 'form-horizontal', wrapper: :horizontal_form do |f|
   = f.input :name, disabled: (action_name == 'edit')
   = f.input :honorific
   = f.association :persona_type
@@ -7,7 +7,7 @@
   .form-group
     .col-md-9.col-sm-9= f.input :persona_image
     .col-md-3.col-sm-3
-      = image_tag @persona.persona_image.url, class: 'img-responsive' if @persona.persona_image.present?
+      = image_tag persona.persona_image.url, class: 'img-responsive' if persona.persona_image.present?
   .form-group
     .col-md-offset-3.col-sm-offset-3.col-md-9
       = f.button :submit, 'Save', class: 'btn-primary'

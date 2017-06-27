@@ -7,13 +7,16 @@ class AwardsController < ApplicationController
   downloads_files_for :award, :award_badge
 
   def index
-    @awards = @awards.includes(:branch)
-    @awards = @awards.order('branches.name').order(:precedence) # Default to precedence order if no parameters given to the contrary
-    @awards = restrict_by_branch params[:branch]
+    @q = @awards.ransack(query)
+    @awards = @q.result.includes(:branch)
+      .order('branches.name')
+      .order(:precedence)
+    @awards = restrict_by_branch(params[:branch]).page(params[:page])
   end
 
   def show
-    @award_recipients = AwardRecipient.by_award(@award)
+    @q = AwardRecipient.by_award(@award).ransack(query)
+    @award_recipients = @q.result.page(page)
   end
 
   def create
@@ -29,13 +32,22 @@ class AwardsController < ApplicationController
   protected
 
   def restrict_by_branch(branch)
-    return @awards.where(branch: Branch.default_branch) if branch.nil?
-    return @awards.where(branches: { id: branch[:id] }) if branch.is_a?(Hash) && branch.has_key?(:id)
-    @awards
+    return @awards if branch == 'all'
+    branch ||= Branch.default_branch
+    return @awards.where(branch: branch[:id])
   end
 
   def award_params
-    params.require(:award).permit!
+    params.require(:award).permit(:name, :description, :precedence, :award_badge,
+                                  :award_type_id, :branch_id, :active)
+  end
+
+  def page
+    params.permit(:page).fetch(:page, nil)
+  end
+
+  def query
+    params.permit(q: [:court_event_name_cont, :persona_name_cont, :name_cont]).fetch(:q, nil)
   end
 
 end

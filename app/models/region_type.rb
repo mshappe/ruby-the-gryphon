@@ -11,5 +11,5 @@
 #  updated_at  :datetime         not null
 #
 
-class Region < DropDownItem
+class RegionType < DropDownItem
 end

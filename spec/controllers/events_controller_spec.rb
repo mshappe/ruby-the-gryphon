@@ -72,6 +72,17 @@ RSpec.describe EventsController, :type => :controller do
     end
   end
 
+  describe 'GET #index to search' do
+    before :each do
+      get :index, q: { name_cont: @good_event.name }
+    end
+
+    it 'should succeed' do
+      expect(response).to be_success
+      expect(assigns[:events]).to match_array [@good_event]
+    end
+  end
+
   describe 'GET #queued' do
     describe 'for visitors' do
       it 'should fail' do

@@ -66,4 +66,7 @@ class Event < ActiveRecord::Base
 
   scope :next_three_months, -> { where start_at: (Date.today..3.months.from_now) }
   scope :all_future, -> { where 'start_at >= ?', Date.today }
+  scope :approved_eager, -> { approved.includes(:branch, :address).order(:start_at) }
+
+  delegate :name, to: :branch, prefix: true
 end

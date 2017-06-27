@@ -25,15 +25,16 @@
 #
 # Indexes
 #
-#  index_branches_on_branch_type_id  (branch_type_id)
-#  index_branches_on_name            (name) UNIQUE
+#  index_branches_on_branch_type_id    (branch_type_id)
+#  index_branches_on_name              (name)
+#  index_branches_on_parent_branch_id  (parent_branch_id)
 #
 
 FactoryGirl.define do
   factory :branch do
     sequence(:name) { Faker::Name.name }
-    branch_type
-    region
+    association :branch_type
+    association :region
     map_coordinates "MyString"
     parent_branch_id nil
     city "MyString"

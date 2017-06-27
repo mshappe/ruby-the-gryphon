@@ -1,18 +1,24 @@
 .panel.panel-primary
   .panel-heading
     .row
-      .col-md-6.col-sm-6
+      .col-md-2.col-sm-4
         .panel-title
           | Awards
-      .col-md-6.col-sm-6
-        .text-right
-          .panel-title
-            = form_tag awards_path, method: :get do
-              = select('branch', 'id', Branch.all.reject { |b| b.awards.count == 0 }.collect { |b| [b.name, b.id]}, \
-                { selected: params[:branch].present? ? params[:branch][:id] : Branch.default_branch.id })
-              = submit_tag 'Change branch', class: 'btn btn-sm'
+      .col-md-4.col-sm-8
+        .panel-title
+          = search_form_for @q do |f|
+            = f.label :name_cont
+            = f.search_field :name_cont
+      .col-md-5.col-sm-6.pull-right
+        .panel-title.pull-right
+          = form_tag awards_path, method: :get do
+            = select('branch', 'id', Branch.all.reject { |b| b.awards.count == 0 }.collect { |b| ["#{b.branch_type.name} of #{b.name}", b.id]}, \
+              { selected: params[:branch].present? ? params[:branch][:id] : Branch.default_branch.id })
+            = submit_tag 'Change branch', class: 'btn btn-sm'
   .panel-body
+    = paginate @awards
     = render partial: 'awards/summary', collection: @awards, as: :award
+    = paginate @awards
 
 
 coffee:

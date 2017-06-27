@@ -4,10 +4,7 @@
 
 .row
   .col-md-9.col-sm-9
-    - if user_signed_in?
-      = render partial: 'people/person', locals: { person: @persona.person } if @persona.person.present?
-    - else
-      div You must sign in to see personal information.
+    = render 'people/person', person: @persona.person if @persona.person.present?
   .col-md-3
     = image_tag @persona.persona_image.url, class: 'img-responsive' if @persona.persona_image.present?
 
@@ -15,4 +12,3 @@
   .col-md-12
     h3.heading Description
     p= @persona.description
-
