@@ -8,7 +8,7 @@ class OfficersController < ApplicationController
   protected
 
   def get_officers
-    @officers = WarrantType.where('stallari_order > ?', 0).where(superior_warrant_id: [0, nil])
+    @officers = WarrantType.where('stallari_order > ?', 0).where(superior_warrant_id: [0, nil]).order(:stallari_order)
   end
 
   def get_officer
