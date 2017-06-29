@@ -1,0 +1,24 @@
+.heading
+  .row
+    .col-md-8
+      =image_tag @officer.warrant_badge
+      h1.title= @officer.name
+      h3.title= "#{@person.personas_primary.honorific} #{@person.personas_primary.name}"
+      = render 'people/person', person: @person, email: @officer.email
+    .col-md-4
+      = image_tag @person.personas_primary.persona_image, class: 'img-responsive pull-right'
+.body
+  .row
+    - @post_types.each do |post_type|
+      - page_name = post_type.name.gsub(/\s+/,'')
+      - page_param = "#{page_name}_page"
+      .col-md-6
+        .panel.panel-default.panel-fixed-height
+          .panel-heading
+            .panel-title
+              a[id="#{page_name}" name="#{page_name}"]= post_type.name.pluralize
+          .panel-body
+          
+            - posts = @posts.where(post_type: post_type).order(approved: :desc).page(params[page_param])
+            .list-group= render posts
+            nav[aria-label="#{post_type.name} paginator"]= paginate posts, window: 1, param_name: page_param, params: { anchor: page_name }

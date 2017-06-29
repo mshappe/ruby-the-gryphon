@@ -39,6 +39,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development do
+  gem 'better_errors'
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
   gem 'capistrano-rvm'

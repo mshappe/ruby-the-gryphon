@@ -24,9 +24,6 @@ end
 class ImageType <DropDownItem
 end
 
-class PostType < DropDownItem
-end
-
 class Report < DropDownItem
 end
 
