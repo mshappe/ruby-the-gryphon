@@ -1,7 +1,9 @@
 class OfficersController < ApplicationController
   before_filter :get_officers, only: [:index]
   before_filter :get_officer, only: [:show]
-  skip_authorization_check only: [:index, :show]
+  skip_authorization_check only: [:index, :show, :warrant_badges]
+
+  downloads_files_for :warrant_type, :warrant_badge
 
   protected
 
