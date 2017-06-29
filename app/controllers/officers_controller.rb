@@ -1,12 +1,14 @@
 class OfficersController < ApplicationController
   before_filter :get_officers, only: [:index]
   before_filter :get_officer, only: [:show]
-  skip_authorization_check only: [:index, :show]
+  skip_authorization_check only: [:index, :show, :warrant_badges]
+
+  downloads_files_for :warrant_type, :warrant_badge
 
   protected
 
   def get_officers
-    @officers = WarrantType.where('stallari_order > ?', 0).where(superior_warrant_id: [0, nil])
+    @officers = WarrantType.where('stallari_order > ?', 0).where(superior_warrant_id: [0, nil]).order(:stallari_order)
   end
 
   def get_officer

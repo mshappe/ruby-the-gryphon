@@ -119,6 +119,9 @@ Rails.application.routes.draw do
 
   resources :posts, only: [:show]
 
+  # We currently have no crud for warrant_types and the route for showing is :officers, so
+  get '/warrant_types/warrant_badges/:id', controller: 'officers', action: 'warrant_badges'
+
   devise_for :users, controllers: { confirmations: 'users/confirmations', passwords: 'users/passwords',
                                     registrations: 'users/registrations', sessions: 'users/sessions',
                                     unlocks: 'users/unlocks' }
