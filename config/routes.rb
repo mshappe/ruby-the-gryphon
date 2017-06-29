@@ -96,7 +96,7 @@ Rails.application.routes.draw do
   resources :awards, except: [:destroy]
   get '/awards/award_badges/:id', controller: 'awards', action: 'award_badges'
 
-  resources :branches
+  resources :branches, only: [:show]
   get '/branches/branch_heraldries/:id', controller: 'branches', action: 'branch_heraldries'
   get '/branches/map_images/:id', controller: 'branches', action: 'map_images'
 
@@ -108,12 +108,16 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :officers, only: [:index, :show]
+
   resources :personas, except: [:index] do
     collection do
       get :search
     end
   end
   get '/personas/persona_images/:id', controller: 'personas', action: 'persona_images'
+
+  resources :posts, only: [:show]
 
   devise_for :users, controllers: { confirmations: 'users/confirmations', passwords: 'users/passwords',
                                     registrations: 'users/registrations', sessions: 'users/sessions',

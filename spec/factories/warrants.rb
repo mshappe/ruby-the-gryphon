@@ -26,7 +26,7 @@ FactoryGirl.define do
     person nil
 warrant_type nil
 tenure_start "2016-02-19 14:52:57"
-tenure_end "2016-02-19 14:52:57"
+tenure_end nil
 branch nil
 approved "2016-02-19 14:52:57"
 introduction "MyText"

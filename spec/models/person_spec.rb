@@ -46,6 +46,7 @@ RSpec.describe Person, :type => :model do
   it { is_expected.to belong_to :address }
   it { is_expected.to belong_to :branch }
   it { is_expected.to have_many :authorizations }
+  it { is_expected.to have_many(:personas).through(:user) }
   it { is_expected.to have_many :warrants }
   it { is_expected.to accept_nested_attributes_for :address }
 

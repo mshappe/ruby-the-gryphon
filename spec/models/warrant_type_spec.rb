@@ -31,4 +31,6 @@ RSpec.describe WarrantType, :type => :model do
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_uniqueness_of :name }
   it { is_expected.to belong_to :superior_warrant }
+  it { is_expected.to have_many :posts }
+  it { is_expected.to have_many :warrants }
 end

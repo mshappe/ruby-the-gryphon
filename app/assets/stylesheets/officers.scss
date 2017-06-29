@@ -1,0 +1,14 @@
+// Place all the styles related to the Officers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.panel-fixed-height {
+  height: 25em;
+  max-height: 25em;
+  font-size: smaller;
+
+  .pagination-sm > li > a,
+  .pagination-sm > li > span {
+    font-size: smaller;
+  }
+}

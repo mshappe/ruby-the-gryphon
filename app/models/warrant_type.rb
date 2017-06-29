@@ -29,6 +29,8 @@ class WarrantType < ActiveRecord::Base
   has_paper_trail
 
   belongs_to :superior_warrant, class_name: 'WarrantType', foreign_key: 'superior_warrant_id'
+  has_many :posts
+  has_many :warrants
   has_attached_file :warrant_badge
 
   validates :name, presence: true, uniqueness: true

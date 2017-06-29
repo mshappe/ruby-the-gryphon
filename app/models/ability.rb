@@ -26,6 +26,11 @@ class Ability
       user.personas.pluck(:id).include?(event.submitter_persona_id)
     end
 
+    can :read, WarrantType
+    can :cru, Post, persona_id: user.persona_ids
+    can :read, Post do |post|
+      post.approved != nil
+    end
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end

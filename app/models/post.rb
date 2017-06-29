@@ -23,5 +23,11 @@
 
 class Post < ActiveRecord::Base
   belongs_to :persona
+  belongs_to :post_type
   belongs_to :warrant_type
+  validates :title, presence: true
+
+  delegate :name, to: :persona, prefix: true
+
+  paginates_per 5
 end

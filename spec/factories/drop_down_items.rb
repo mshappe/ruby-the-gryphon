@@ -21,4 +21,8 @@ FactoryGirl.define do
   factory :region, parent: :drop_down_item, class: RegionType do
     active true
   end
+
+  factory :post_type, parent: :drop_down_item, class: PostType do
+    active true
+  end
 end
