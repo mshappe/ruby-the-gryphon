@@ -43,4 +43,18 @@ Rails.application.configure do
  # config.assets.manifest = "public/assets/manifest-#{SecureRandom.hex(16)}.json"
 
   config.cache_store = :memory_store
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {from: 'no-reply@bee.itasca.net'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :port           => ENV['MAILGUN_SMTP_PORT'],
+    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :authentication => :plain,
+    domain: ENV['MAILGUN_DOMAIN']
+  }
 end
