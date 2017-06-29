@@ -81,10 +81,15 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = {from: 'no-reply@bee.itasca.net'}
-  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.mailgun_settings = {
-  		api_key: ENV['MAILGUN_API_KEY'],
-  		domain: ENV['MAILGUN_DOMAIN']
+    :port           => ENV['MAILGUN_SMTP_PORT'],
+    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :authentication => :plain,
+    api_key: ENV['MAILGUN_API_KEY'],
+  	domain: ENV['MAILGUN_DOMAIN']
   }
 
   # config.assets.manifest = "public/assets/manifest-#{SecureRandom.hex(16)}.json"
