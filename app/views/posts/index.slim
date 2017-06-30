@@ -1,6 +1,12 @@
 .panel.panel-default
   .panel-heading
-    .panel-title Announcements
+    .panel-title
+      .row
+        .col-md-3
+          = link_to section_posts_path(@post_type_name)
+            => @post_type_name.try :pluralize
+        .col-md-9
+          = render 'search', post_type_name: @post_type_name
   .panel-body
     = paginate @posts
     = render @posts

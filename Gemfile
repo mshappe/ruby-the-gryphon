@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'puma'
 gem 'rails', '~> 4.2.1'
 gem 'pg'
+gem 'pg_search'
 
 gem 'active_link_to'
 gem 'activeadmin', github: 'activeadmin'

@@ -22,6 +22,8 @@
 #
 
 class Post < ActiveRecord::Base
+  include PgSearch
+
   belongs_to :persona
   belongs_to :post_type
   belongs_to :warrant_type
@@ -29,6 +31,17 @@ class Post < ActiveRecord::Base
 
   delegate :name, to: :persona, prefix: true
 
+  pg_search_scope :search_for, against: {
+    title: 'A',
+    body: 'B'
+  }, using: {
+    tsearch: {
+      prefix: true,
+      negation: true,
+      any_word: true,
+      dictionary: 'english'
+    }
+  }
   paginates_per 5
 
   scope :approved, ->() { where.not(approved: nil) }

@@ -5,7 +5,13 @@ class PostsController < ApplicationController
   protected
 
   def get_posts
-    @q = Post.joins(:post_type).approved.ransack(params[:q])
-    @posts = @q.result.order(start_date: :desc).page(params[:page]).per(10)
+    @post_type_name = params[:post_type_name] if params[:post_type_name]
+    @search_term = params[:full_text_search] if params[:full_text_search]
+    post_type = PostType.find_by!(name: @post_type_name) if @post_type_name
+    @posts = Post.approved
+      .where(post_type: post_type)
+      .order(start_date: :desc)
+      .page(params[:page]).per(10)
+    @posts = @posts.search_for(@search_term) if @search_term.present?
   end
 end

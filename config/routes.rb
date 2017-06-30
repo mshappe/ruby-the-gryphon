@@ -117,7 +117,11 @@ Rails.application.routes.draw do
   end
   get '/personas/persona_images/:id', controller: 'personas', action: 'persona_images'
 
-  resources :posts, only: [:index, :show]
+  resources :posts, only: [:index, :show] do
+    collection do
+      get '/:post_type_name', action: :index, as: 'section'
+    end
+  end
 
   # We currently have no crud for warrant_types and the route for showing is :officers, so
   get '/warrant_types/warrant_badges/:id', controller: 'officers', action: 'warrant_badges'
