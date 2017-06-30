@@ -30,4 +30,7 @@ class Post < ActiveRecord::Base
   delegate :name, to: :persona, prefix: true
 
   paginates_per 5
+
+  scope :approved, ->() { where.not(approved: nil) }
+  scope :announcements, ->() { joins(:post_type).where(drop_down_items: { type: 'PostType', name: 'Announcement' } )}
 end

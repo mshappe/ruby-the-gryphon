@@ -9,6 +9,15 @@ h3= link_to 'Release Notes', release_notes_path
   .panel-heading
     .panel-title
       .row
+        .col-md-9
+          | Announcements
+        .col-md-3= link_to 'All Announcements', posts_path(q: { post_type_name_eq: 'Announcement' })
+  .panel-body
+    = render @posts
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      .row
         .col-md-3.col-sm-12
           | Upcoming events
         .col-md-3.col-sm-12

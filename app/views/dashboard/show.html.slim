@@ -53,8 +53,8 @@
                   tr
                     td= w.warrant_type.name
                     td= w.branch.name
-                    td= sca_date w.tenure_start, format: :date_only
-                    td= sca_date w.tenure_end, format: :date_only
+                    td= sca_date w.tenure_start, format: :date_only if w.tenure_start.present?
+                    td= sca_date w.tenure_end, format: :date_only if w.tenure_end.present?
 .row
   - unless @auths.blank?
     .col-md-8.col-sm-6

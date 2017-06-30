@@ -27,10 +27,11 @@ class Warrant < ActiveRecord::Base
   belongs_to :branch
   validates :tenure_start, presence: true
 
+  scope :approved, -> { where.not(approved: nil) }
   scope :current_holders_by_type, -> (type) do
     now = DateTime.current
     where(warrant_type: type)
-      .where.not(approved: nil)
+      .approved
       .where('tenure_start < ?', now)
       .where('tenure_end IS NULL')
       .order(:tenure_start)

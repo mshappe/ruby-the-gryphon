@@ -5,7 +5,14 @@ class WelcomeController < ApplicationController
   protected
 
   def get_events
-    @events = Event.approved.next_three_months.order(:start_at)
-    @q = @events.ransack()
+    @q = Event.ransack(params[:q])
+    @events = @q.result
+      .approved
+      .next_three_months.order(:start_at)
+
+    @posts = Post.approved
+      .announcements
+      .order(start_date: :desc)
+      .limit(5)
   end
 end
