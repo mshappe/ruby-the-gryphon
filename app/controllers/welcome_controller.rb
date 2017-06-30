@@ -9,7 +9,7 @@ class WelcomeController < ApplicationController
     @q = @events.ransack(params[:q])
     @events = @q.result
     # TODO find a better way
-    @posts = Post.where.not(approved: nil)
+    @posts = Post.approved
       .where(post_type: PostType.where(name: 'Announcement'))
       .order(start_date: :desc)
       .limit(5)

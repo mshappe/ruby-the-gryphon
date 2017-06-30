@@ -18,7 +18,7 @@ class OfficersController < ApplicationController
     now = DateTime.current
     @posts = @officer.posts.where('start_date < ?', now)
       .where('end_date > ? OR end_date IS NULL', now)
-      .where.not(approved: nil)
+      .approved
     @post_types = PostType.for_officer_page
   end
 end
