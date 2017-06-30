@@ -10,7 +10,6 @@ class WelcomeController < ApplicationController
       .approved
       .next_three_months.order(:start_at)
 
-    # TODO find a better way
     @posts = Post.approved
       .announcements
       .order(start_date: :desc)
