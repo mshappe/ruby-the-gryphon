@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
 
     @events = @user.personas.includes(:events).map { |p| p.events.next_three_months }.flatten
     @awards = @user.personas.includes(:received_awards).map(&:received_awards).flatten.sort { |a, b| a.received <=> b.received }
-    @auths = @user.authorizations.includes(:authorization_type).sort { |a, b| a.authorization_type.group <=> b.authorization_type.group }
+    @auths = @user.authorizations.includes(:authorization_type).sort { |a, b| a.authorization_type.martial_activity_type_id <=> b.authorization_type.martial_activity_type_id }
     @warrants = @user.warrants.includes(:warrant_type).order(:tenure_start)
   end
 

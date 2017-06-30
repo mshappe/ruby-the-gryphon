@@ -29,7 +29,7 @@ html lang='en'
           = render 'alert', type: 'danger', text: alert if alert
 
       .row
-        #navigation.col-lg-3.col-md-3.col-sm-5.col-xs-12
+        #side-navigation.col-lg-3.col-md-3.col-sm-5.col-xs-12
           = render 'users/sessions/new' unless user_signed_in?
           = render 'users/sessions/logged_in' if user_signed_in?
           = render 'application/event_officer_menu' if can? :manage, Event
