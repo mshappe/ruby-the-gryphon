@@ -9,9 +9,10 @@ h3= link_to 'Release Notes', release_notes_path
   .panel-heading
     .panel-title
       .row
-        .col-md-9
+        .col-md-3
           | Announcements
-        .col-md-3= link_to 'All Announcements', posts_path(q: { post_type_name_eq: 'Announcement' })
+        .col-md-6= render 'posts/search', post_type_name: 'Announcement'
+        .col-md-3= link_to 'All Announcements', section_posts_path('Announcement')
   .panel-body
     = render @posts
 .panel.panel-default

@@ -1,18 +1,45 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  describe 'get #index'do
+  describe 'get #index with a section' do
     before :each do
       @post_type = create :post_type, name: 'Announcement'
       @post = create :post, post_type: @post_type, start_date: 3.days.ago, approved: 3.days.ago
       @other_post_type = create :post_type
       @other_post = create :post, post_type: @other_post_type, start_date: 2.days.ago, approved: 2.days.ago
-      get :index, q: { post_type_name_eq: 'Announcement' }
+      get :index, post_type_name: 'Announcement'
     end
 
     it "should get the type that's searched for" do
       expect(response).to be_success
       expect(assigns(:posts)).to match_array [@post]
+    end
+
+    describe "with full text search" do
+      before :each do
+        @other_text = create :post, post_type: @post_type, title: 'NotIt', body: 'NotIt', start_date: 3.days.ago, approved: 3.days.ago
+      end
+      describe 'positive search' do
+        before :each do
+          get :index, post_type_name: 'Announcement', full_text_search: @post.title
+        end
+
+        it 'should find what we searched for' do
+          expect(response).to be_success
+          expect(assigns(:posts)).to match_array [@post]
+        end
+      end
+
+      describe 'negative search' do
+        before :each do
+          get :index, post_type_name: 'Announcement', full_text_search: "!#{@post.title}"
+        end
+
+        it 'should find what we searched against' do
+          expect(response).to be_success
+          expect(assigns(:posts)).to match_array [@other_text]
+        end
+      end
     end
   end
 

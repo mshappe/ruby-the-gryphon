@@ -11,4 +11,4 @@
 .row
   .col-md-12
     h3.heading Description
-    p= @persona.description
+    p= raw sanitize @persona.description
