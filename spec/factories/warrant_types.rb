@@ -32,7 +32,7 @@ FactoryGirl.define do
     missive false
     stallari_order 1
     job_description "MyText"
-    superior_warrant_id 1
+    superior_warrant_id nil
     background_check_required false
     northwatch_display false
     icon_file_name "MyString"

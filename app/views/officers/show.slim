@@ -2,24 +2,35 @@
   .row
     .col-md-8
       h1.title
-        =image_tag @officer.warrant_badge
+        = image_tag @officer.warrant_badge if @officer.warrant_badge?
         = @officer.name
+        - if @officer.superior_warrant.present?
+          h3 
+            | (reports to #{link_to @officer.superior_warrant.name, officer_path(@officer.superior_warrant)})
       h3.title= "#{@person.personas_primary.honorific} #{@person.personas_primary.name}"
       = render 'people/person', person: @person, email: @officer.email
     .col-md-4
       = image_tag @person.personas_primary.persona_image, class: 'img-responsive pull-right'
 .body
+  - unless @subordinate_officers.blank?
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading
+            .panel-title Lesser Officers and Deputies
+          .panel-body
+            = render partial: 'officers/officer', collection: @subordinate_officers
   .row
     - @post_types.each do |post_type|
       - page_name = post_type.name.gsub(/\s+/,'')
       - page_param = "#{page_name}_page"
+      - posts = @posts.where(post_type: post_type).order(approved: :desc).page(params[page_param])
+      - next if posts.blank?
       .col-md-6
         .panel.panel-default.panel-fixed-height
           .panel-heading
             .panel-title
               a[id="#{page_name}" name="#{page_name}"]= post_type.name.pluralize
           .panel-body
-          
-            - posts = @posts.where(post_type: post_type).order(approved: :desc).page(params[page_param])
             .list-group= render posts
             nav[aria-label="#{post_type.name} paginator"]= paginate posts, window: 1, param_name: page_param, params: { anchor: page_name }

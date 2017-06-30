@@ -31,6 +31,7 @@ RSpec.describe OfficersController, type: :controller do
     it 'should succeed for everyone and show current approved posts' do
       expect(response).to be_success
       expect(assigns(:officer)).to eq @officer
+      expect(assigns(:subordinate_officers)).to be_empty
       expect(assigns(:person)).to eq @warrant.person
       expect(assigns(:posts)).to match_array [@post]
     end
