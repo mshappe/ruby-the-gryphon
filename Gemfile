@@ -24,7 +24,7 @@ gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
 gem 'paper_trail', '~> 3.0.7'
 gem 'paperclip_database', '~> 2.0'
 gem 'phony_rails', '~> 0.12.4'
-gem 'rails_12factor', group: :production
+gem 'rails_12factor', group: [:production,:staging]
 gem 'ransack'
 gem 'responders', '~> 2.1.0'
 gem 'rolify', '~> 4.0.0'
