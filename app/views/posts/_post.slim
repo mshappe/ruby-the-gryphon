@@ -1,1 +1,6 @@
-.list-group-item=link_to post.title, post.url? ? post.url : post
+.list-group-item
+  => link_to post.title, post.url? ? post.url : post
+  | by
+  =<> link_to post.persona.name, post.persona if post.persona.present?
+  | on
+  =< sca_date(post.approved)

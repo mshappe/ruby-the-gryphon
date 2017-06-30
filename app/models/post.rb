@@ -30,4 +30,6 @@ class Post < ActiveRecord::Base
   delegate :name, to: :persona, prefix: true
 
   paginates_per 5
+
+  scope :approved, ->() { where.not(approved: nil) }
 end
