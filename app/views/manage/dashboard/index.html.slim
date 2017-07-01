@@ -1,0 +1,18 @@
+h1 Management Dashboard
+h2.text-danger DANGER WILL ROBINSON
+p You are currently doing administrative things to the site. Tremendous power, tremendous responsibility.class_selector
+  yada yada yada.
+  
+.row
+  .col-md-6
+    .panel.panel-danger
+      .panel-heading
+        a#manage-users
+          | Users
+          =< search_form_for @user_q, url: manage_path do |f|
+            = f.search_field :email_cont, placeholder: 'Email contains'
+      .panel-body
+        = paginate @users, param_name: :user_page, params: { anchor: 'manage-users' }
+        = render @users
+        = paginate @users, param_name: :user_page, params: { anchor: 'manage-users' }
+  

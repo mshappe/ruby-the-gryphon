@@ -1,0 +1,78 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+*/
+
+@import url(https://fonts.googleapis.com/css?family=EB+Garamond&subset=cyrillic,cyrillic-ext,latin,latin-ext);
+
+$font-family-base: 'EB Garamond', Georgia, "Times New Roman", serif;
+$font-size-base: 18px;
+$brand-primary: black;
+$btn-primary-color: gold;
+$btn-primary-border: gold;
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-datetimepicker";
+@import "select2";
+@import "select2-bootstrap";
+
+
+body {
+  font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+  -moz-font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+  -ms-font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+  -o-font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+  -webkit-font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+
+  font-feature-settings: 'onum', 'liga', 'dlig', 'calt';
+  -moz-font-feature-settings:'onum', 'liga', 'dlig', 'calt';
+  -ms-font-feature-settings: 'onum', 'liga', 'dlig', 'calt';
+  -o-font-feature-settings: 'onum', 'liga', 'dlig', 'calt';
+  -webkit-font-feature-settings: 'onum', 'liga', 'dlig', 'calt';
+
+  background-color: black;
+  color: white;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+  margin-top: ($line-height-computed / 2)
+}
+
+.jumbotron {
+  margin-bottom: 6px;
+}
+
+#navigation {
+  margin-bottom: 6px;
+}
+
+#side-navigation {
+  font-size: smaller;
+}
+
+#alerts {
+  margin-bottom: 6px;
+}
+
+.nav.nav-tabs li.active a {
+  background-color: $brand-primary;
+  color: $btn-primary-color;
+  font-weight: bolder;
+}
+
+select,input[type='text'],input[type='search'] {
+  background-color: white;
+  color: black;
+}
