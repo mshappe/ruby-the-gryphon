@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702210904) do
+ActiveRecord::Schema.define(version: 20170703234301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -700,9 +700,11 @@ ActiveRecord::Schema.define(version: 20170702210904) do
     t.text     "comments"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.datetime "deleted_at"
   end
 
   add_index "warrants", ["branch_id"], name: "index_warrants_on_branch_id", using: :btree
+  add_index "warrants", ["deleted_at"], name: "index_warrants_on_deleted_at", using: :btree
   add_index "warrants", ["person_id"], name: "index_warrants_on_person_id", using: :btree
   add_index "warrants", ["warrant_type_id"], name: "index_warrants_on_warrant_type_id", using: :btree
 
