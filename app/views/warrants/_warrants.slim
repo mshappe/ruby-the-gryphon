@@ -1,0 +1,14 @@
+.panel.panel-default
+  .panel-heading
+    'Office Warrants past and present
+  .panel-body
+    .table-responsive
+      table.table.table-striped.table-hover
+        thead
+          tr
+            th Office
+            th Branch
+            th Start
+            th End
+        tbody
+          = render partial: 'warrants/warrant', collection: warrants, as: :warrant

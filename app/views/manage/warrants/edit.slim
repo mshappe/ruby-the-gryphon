@@ -1,0 +1,23 @@
+row
+  .col-md-12
+    h1 Editing warrant #{@warrant.warrant_type.name} for #{@warrant.person.name}
+    h2.text-danger If this warrant was assigned to the wrong person, you must delete it and let a new warrant be created.
+
+=simple_form_for @warrant, url: manage_warrant_path(@warrant), wrapper: :horizontal_form, class: 'form-horizontal' do |f|
+  .row
+    .col-md-12
+      =f.association :branch
+      =f.input :tenure_start, as: :datetime_picker, wrapper: :ranged_datetime
+      =f.input :tenure_end, as: :datetime_picker, wrapper: :ranged_datetime
+      =f.input :approved, as: :datetime_picker, wrapper: :ranged_datetime
+  .row
+    .col-md-12
+      =f.input :introduction, as: :text
+      =f.input :comments, as: :text
+  .row
+    .col-md-12
+      =f.button :submit
+      =link_to 'Delete', manage_warrant_path(@warrant), method: :delete, class: 'btn btn-danger', data: { confirm: 'Be Sure! Be very sure!'}
+
+coffee:
+  $('#warrant_branch_id').selectize()

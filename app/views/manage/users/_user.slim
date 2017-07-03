@@ -1,0 +1,8 @@
+.row
+  .col-md-6.ellipsis
+    = link_to user.email, manage_user_path(user)
+  .col-md-3
+    - user.roles.each do |r|
+      span.label.label-info= r.name
+  .col-md-3
+    = link_to 'Delete', manage_user_path(user), method: :delete, class: 'pull-right btn btn-danger btn-xs', data: { confirm: 'Be sure. Be Very sure!' }

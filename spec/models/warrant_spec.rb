@@ -13,10 +13,12 @@
 #  comments        :text
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  deleted_at      :datetime
 #
 # Indexes
 #
 #  index_warrants_on_branch_id        (branch_id)
+#  index_warrants_on_deleted_at       (deleted_at)
 #  index_warrants_on_person_id        (person_id)
 #  index_warrants_on_warrant_type_id  (warrant_type_id)
 #

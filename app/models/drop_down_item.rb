@@ -27,8 +27,5 @@ end
 class Report < DropDownItem
 end
 
-class State < DropDownItem
-end
-
 class TreatyType < DropDownItem
 end

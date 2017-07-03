@@ -29,11 +29,13 @@
 #  updated_at                  :datetime         not null
 #  address_id                  :integer
 #  branch_id                   :integer
+#  deleted_at                  :datetime
 #
 # Indexes
 #
 #  index_people_on_address_id  (address_id)
 #  index_people_on_branch_id   (branch_id)
+#  index_people_on_deleted_at  (deleted_at)
 #  index_people_on_user_id     (user_id)
 #
 

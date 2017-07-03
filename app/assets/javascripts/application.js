@@ -16,6 +16,8 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require pickers
-//= require select2
+//= require selectize
 //= require turbolinks
+//= require sweetalert2
+//= require rails-sweetalert2-confirm
 //= require_tree .

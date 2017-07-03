@@ -6,10 +6,8 @@
       = link_to edit_user_registration_path, class: "btn btn-default text-right", 'aria-label' => "Edit", 'data-toggle' => "tooltip", 'data-placement' => "top", title: "Edit Profile"
         span.glyphicon.glyphicon-edit aria-hidden="true"
 .row
-  .col-md-5.col-sm-6
-    = render 'people/person', person: @user.personas.primary.person if @user.personas.primary.person.present?
-  .col-md-4.col-sm-6
-    =render 'personas/personas', personas: @user.personas
+  .col-md-5.col-sm-6=render 'people/person', person: @user.personas.primary.person if @user.personas.primary.person.present?
+  .col-md-4.col-sm-6=render 'personas/personas', personas: @user.personas
 
 - unless @events.blank?
   .row
@@ -21,40 +19,9 @@
           - @events.each do |e|
             div= e.name
 .row
-  .col-md-12.col-sm-12
-    .panel.panel-default
-      .panel-heading
-        'Received Awards
-      .panel-body
-        .table-responsive
-          table.table.table-striped.table-hover
-            - @awards.each do |a|
-              tr
-                td= link_to a.award.name, a.award
-                td= sca_date a.received, format: :date_only
-                td= link_to a.court.event.try(:name), a.court.try(:event) unless a.court.blank?
+  .col-md-12.col-sm-12=render 'awards/awards', awards: @awards unless @awards.blank?
 .row
-  - unless @warrants.blank?
-    .col-md-12.col-sm-12
-      .panel.panel-default
-        .panel-heading
-          'Office Warrants past and present
-        .panel-body
-          .table-responsive
-            table.table.table-striped.table-hover
-              thead
-                tr
-                  th Office
-                  th Branch
-                  th Start
-                  th End
-              tbody
-                - @warrants.each do |w|
-                  tr
-                    td= w.warrant_type.name
-                    td= w.branch.name
-                    td= sca_date w.tenure_start, format: :date_only if w.tenure_start.present?
-                    td= sca_date w.tenure_end, format: :date_only if w.tenure_end.present?
+  .col-md-12.col-sm-12=render 'warrants/warrants', warrants: @warrants unless @warrants.blank?
 .row
   - unless @auths.blank?
     .col-md-8.col-sm-6

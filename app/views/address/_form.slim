@@ -1,0 +1,10 @@
+=f.simple_fields_for :address do |a|
+  = a.input :address
+  = a.input :city
+  = a.input :state, collection: State.all, label_method: :description, value_method: :name
+  = a.input :postal_code
+  = a.input :country
+
+coffee:
+  $('#user_person_attributes_address_attributes_state').selectize()
+  $('select.country').selectize()

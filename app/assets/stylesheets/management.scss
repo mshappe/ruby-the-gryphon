@@ -1,0 +1,119 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ * =require 'sweetalert2'
+ *=require 'selectize'
+ *=require 'selectize.bootstrap3'
+*/
+
+@import url(https://fonts.googleapis.com/css?family=EB+Garamond&subset=cyrillic,cyrillic-ext,latin,latin-ext);
+
+$font-family-base: 'EB Garamond', Georgia, "Times New Roman", serif;
+$font-size-base: 12px;
+$brand-primary: black;
+$btn-primary-color: gold;
+$btn-primary-border: gold;
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-datetimepicker";
+
+body {
+  font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+  -moz-font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+  -ms-font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+  -o-font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+  -webkit-font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
+
+  font-feature-settings: 'onum', 'liga', 'dlig', 'calt';
+  -moz-font-feature-settings:'onum', 'liga', 'dlig', 'calt';
+  -ms-font-feature-settings: 'onum', 'liga', 'dlig', 'calt';
+  -o-font-feature-settings: 'onum', 'liga', 'dlig', 'calt';
+  -webkit-font-feature-settings: 'onum', 'liga', 'dlig', 'calt';
+
+  background-color: black;
+  color: white;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+  margin-top: ($line-height-computed / 2);
+  a {
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.jumbotron {
+  margin-bottom: 6px;
+}
+
+#navigation {
+  margin-bottom: 6px;
+}
+
+#side-navigation {
+  font-size: smaller;
+}
+
+#alerts {
+  margin-bottom: 6px;
+}
+
+#footer {
+  a, a:hover {
+    color: white;
+  }
+}
+
+.nav.nav-tabs li.active a {
+  background-color: $btn-primary-color;
+  color: $brand-primary;
+  font-weight: bolder;
+}
+
+.nav.nav-tabs li a {
+  background-color: $brand-primary;
+  color: white;
+}
+
+.panel {
+  background-color: $brand-danger;
+
+  .table-striped > tbody > tr:hover {
+    background-color: black;
+  }
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: gray;
+
+    &:hover {
+      background-color: black;
+    }
+  }
+
+  .clickable {
+    &:hover {
+      background-color: black;
+    }
+  }
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+}
+//select,input[type='text'],input[type='search'] {
+//  background-color: white;
+//  color: black;
+//}

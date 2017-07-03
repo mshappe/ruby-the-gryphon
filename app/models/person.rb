@@ -29,16 +29,19 @@
 #  updated_at                  :datetime         not null
 #  address_id                  :integer
 #  branch_id                   :integer
+#  deleted_at                  :datetime
 #
 # Indexes
 #
 #  index_people_on_address_id  (address_id)
 #  index_people_on_branch_id   (branch_id)
+#  index_people_on_deleted_at  (deleted_at)
 #  index_people_on_user_id     (user_id)
 #
 
 class Person < ActiveRecord::Base
   has_paper_trail
+  acts_as_paranoid
   has_attached_file :heraldic_image, storage: :database, cascade_deletion: true
   validates_attachment_content_type :heraldic_image, :content_type => /\Aimage\/.*\Z/
 

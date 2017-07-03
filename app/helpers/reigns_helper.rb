@@ -1,0 +1,2 @@
+module ReignsHelper
+end

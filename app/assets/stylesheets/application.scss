@@ -10,12 +10,15 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *=require 'sweetalert2'
+ *=require 'selectize'
+ *=require 'selectize.bootstrap3'
 */
 
 @import url(https://fonts.googleapis.com/css?family=EB+Garamond&subset=cyrillic,cyrillic-ext,latin,latin-ext);
 
 $font-family-base: 'EB Garamond', Georgia, "Times New Roman", serif;
-$font-size-base: 18px;
+$font-size-base: 16px;
 $brand-primary: black;
 $btn-primary-color: gold;
 $btn-primary-border: gold;
@@ -26,9 +29,6 @@ $btn-primary-border: gold;
 @import 'awards';
 @import 'events';
 @import 'officers';
-@import "select2";
-@import "select2-bootstrap";
-
 
 body {
   font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
