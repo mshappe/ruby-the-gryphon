@@ -10,12 +10,13 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ * =require 'sweetalert2'
 */
 
 @import url(https://fonts.googleapis.com/css?family=EB+Garamond&subset=cyrillic,cyrillic-ext,latin,latin-ext);
 
 $font-family-base: 'EB Garamond', Georgia, "Times New Roman", serif;
-$font-size-base: 18px;
+$font-size-base: 12px;
 $brand-primary: black;
 $btn-primary-color: gold;
 $btn-primary-border: gold;
@@ -25,7 +26,6 @@ $btn-primary-border: gold;
 @import "bootstrap-datetimepicker";
 @import "select2";
 @import "select2-bootstrap";
-
 
 body {
   font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;
@@ -67,12 +67,29 @@ h3, .h3 {
 }
 
 .nav.nav-tabs li.active a {
-  background-color: $brand-primary;
-  color: $btn-primary-color;
+  background-color: $btn-primary-color;
+  color: $brand-primary;
   font-weight: bolder;
 }
 
-select,input[type='text'],input[type='search'] {
+.nav.nav-tabs li a {
+  background-color: $brand-primary;
+  color: white;
+}
+
+.select2-container {
   background-color: white;
   color: black;
 }
+
+.panel {
+  background-color: $brand-danger;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+}
+//select,input[type='text'],input[type='search'] {
+//  background-color: white;
+//  color: black;
+//}

@@ -67,6 +67,9 @@ Rails.application.routes.draw do
   namespace :manage do
     get '/', controller: 'dashboard', action: 'index'
     get '/users/:id/edit', controller: 'users', action: 'edit', as: :edit_user
+    patch '/users/:id', controller: 'users', action: 'update', as: :user
+    put '/users/:id', controller: 'users', action: 'update'
+    delete '/users/:id', controller: 'users', action: 'destroy', as: :delete_user
   end
 
   root to: 'welcome#index'
@@ -112,9 +115,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { confirmations: 'users/confirmations', passwords: 'users/passwords',
                                     registrations: 'users/registrations', sessions: 'users/sessions',
                                     unlocks: 'users/unlocks' }
-  #devise_for :adminusers, ActiveAdmin::Devise.config
-  #ActiveAdmin.routes(self)
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

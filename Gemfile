@@ -8,7 +8,6 @@ gem 'pg'
 gem 'pg_search'
 
 gem 'active_link_to'
-gem 'activeadmin', github: 'activeadmin'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass'
 gem 'cancancan', '~> 1.10.1'
@@ -24,7 +23,10 @@ gem 'mailgun_rails'
 gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
 gem 'paper_trail', '~> 3.0.7'
 gem 'paperclip_database', '~> 2.0'
+gem "paranoia", "~> 2.2"
 gem 'phony_rails', '~> 0.12.4'
+gem 'rails-sweetalert2-confirm'
+gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
 gem 'rails_12factor', group: [:production,:staging]
 gem 'ransack'
 gem 'responders', '~> 2.1.0'

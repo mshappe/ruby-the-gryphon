@@ -18,11 +18,8 @@ html lang='en'
         .col-md-12
           nav
             ul.nav.nav-tabs.nav-justified
-              =active_link_to 'Home', root_path, wrap_tag: :li, active: :exclusive
-              =active_link_to 'Kingdom Calendar', events_path, wrap_tag: :li
-              =active_link_to 'Officers', officers_path, wrap_tag: :li
-              =active_link_to 'Awards and Honors', awards_path, wrap_tag: :li
-              =active_link_to 'Your Dashboard', dashboard_path(user_id: current_user), wrap_tag: :li if current_user
+              =active_link_to 'Site Home', root_url, wrap_tag: :li, data: { no_turbolink: true }, target: 'rtg', active: :exclusive
+              =active_link_to 'Management Dashboard', manage_url, wrap_tag: :li, data: { no_turbolink: true }
       .row
         .col-md-12
           = render 'alert', type: 'success', text: notice if notice

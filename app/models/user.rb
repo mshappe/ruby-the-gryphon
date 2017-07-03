@@ -25,10 +25,12 @@
 #  uuid                   :uuid
 #  username               :string
 #  comment                :text
+#  deleted_at             :datetime
 #
 # Indexes
 #
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
+#  index_users_on_deleted_at            (deleted_at)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
@@ -38,6 +40,7 @@
 
 class User < ActiveRecord::Base
   has_paper_trail
+  acts_as_paranoid
   rolify
 
   # Include default devise modules. Others available are:
@@ -45,8 +48,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable, :lockable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_one :person
-  has_many :personas
+  has_one :person, dependent: :destroy
+  has_many :personas, dependent: :destroy
   has_many :authorizations, through: :person
   has_many :warrants, through: :person
 

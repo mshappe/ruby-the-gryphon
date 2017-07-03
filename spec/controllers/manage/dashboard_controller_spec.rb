@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Manage::DashboardController, type: :controller do
-  it_behaves_like "a management controller"
+  it_behaves_like "a management controller", :index, :user
 
   describe 'get #index as admin' do
     login_user :admin

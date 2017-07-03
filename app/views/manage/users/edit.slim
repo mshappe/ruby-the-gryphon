@@ -1,0 +1,19 @@
+.row
+  .col-md-12
+    h1.heading Editing user #{@user.email}. Be gentle!
+.row
+  .col-md-12
+    = simple_form_for @user, url: manage_user_path(@user), wrapper: :horizontal_form, class: 'form-horizontal' do |f|
+      = f.input :email
+      = f.input :password
+      = f.input :password_confirmation
+      = f.association :roles
+      = f.button :submit
+      
+coffee:
+  $(document).ready(()->
+    $('#user_role_ids').select2 {
+      placeholder: 'Select roles for this user'
+      
+    }
+  )

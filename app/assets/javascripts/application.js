@@ -18,4 +18,6 @@
 //= require pickers
 //= require select2
 //= require turbolinks
+//= require sweetalert2
+//= require rails-sweetalert2-confirm
 //= require_tree .

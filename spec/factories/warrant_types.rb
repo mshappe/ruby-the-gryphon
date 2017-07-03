@@ -19,9 +19,11 @@
 #  active                     :boolean
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
+#  deleted_at                 :datetime
 #
 # Indexes
 #
+#  index_warrant_types_on_deleted_at           (deleted_at)
 #  index_warrant_types_on_superior_warrant_id  (superior_warrant_id)
 #
 
