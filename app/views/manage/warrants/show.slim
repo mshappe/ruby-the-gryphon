@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    .panel.panel-danger
+      .panel-heading
+        .panel-title.row
+          .col-md-12
+            ' Warrant for 
+            => link_to @warrant.person.name, manage_user_path(@warrant.person.user)
+            ' for 
+            => @warrant.warrant_type.name
+            ' of 
+            = @warrant.branch.name
+      .panel-body      
+        .row
+          .col-md-6= "Began #{sca_date(@warrant.tenure_start)}" if @warrant.tenure_start.present?
+          .col-md-6= "Ended #{sca_date(@warrant.tenure_end)}" if @warrant.tenure_end.present?
+        .row
+          -if @warrant.approved.present?
+            .col-md-6= "Approved #{sca_date(@warrant.approved)}"
+          -else
+            | Not yet approved

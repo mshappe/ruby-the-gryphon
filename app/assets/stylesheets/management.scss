@@ -47,7 +47,13 @@ body {
 h1, .h1,
 h2, .h2,
 h3, .h3 {
-  margin-top: ($line-height-computed / 2)
+  margin-top: ($line-height-computed / 2);
+  a {
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
 }
 
 .jumbotron {
