@@ -1,0 +1,2 @@
+module Manage::PersonasHelper
+end

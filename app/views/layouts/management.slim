@@ -32,10 +32,10 @@ html lang='en'
           = content_for?(:main) ? yield(:main) : yield
 
       .row
-        #footer
-          .col-md-12
+        .col-md-12
+          #footer
             .center-block style='width: 440px; text-align: center'
-              .text-muted #{link_to 'Code', 'http://github.com/mshappe/ruby-the-gryphon'} Copyright © 2015 Society for Creative Anachronism, Inc.
+              .text-muted #{link_to 'Code', 'http://github.com/mshappe/ruby-the-gryphon'} Copyright © 2015-2017 Society for Creative Anachronism, Inc.
               .text-muted Licensed under the #{link_to 'MIT License', 'http://github.com/mshappe/ruby-the-gryphon/LICENSE'}.
               .text-muted This site is NOT currently an official offering of the Society for Creative Anachronism, Inc. This is an experimental site.
               .text-muted #{link_to "Version #{version_number}: #{version_name}", release_notes_path}

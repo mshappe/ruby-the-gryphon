@@ -1,0 +1,13 @@
+.row
+  .col-md-9
+    h1
+      = @user.email
+      - @user.roles.each do |r|
+        span.label.label-info= r.name
+.row
+  .col-md-8= render 'people/person', person: @user.person
+  .col-md-4= render 'personas'
+.row
+  .col-md-12.col-sm-12=render 'warrants/warrants', warrants: @user.warrants unless @user.warrants.blank?
+.row
+  .col-md-12= link_to 'Edit', edit_manage_user_path(@user), class: 'btn btn-danger'

@@ -1,19 +1,59 @@
 .row
   .col-md-12
     h1.heading Editing user #{@user.email}. Be gentle!
-.row
-  .col-md-12
-    = simple_form_for @user, url: manage_user_path(@user), wrapper: :horizontal_form, class: 'form-horizontal' do |f|
-      = f.input :email
-      = f.input :password
-      = f.input :password_confirmation
-      = f.association :roles
-      = f.button :submit
+  .row
+    .col-md-8= simple_form_for @user, url: manage_user_path(@user), wrapper: :horizontal_form, class: 'form-horizontal' do |f|
+        = f.input :email
+        = f.input :password
+        = f.input :password_confirmation
+        = f.association :roles
+        - if @user.person.present?
+          h3 Personal info
+          = f.simple_fields_for :person do |p|
+            = p.input :name
+            = render 'address/form', f: p
+        = f.button :submit
+    .col-md-4
+      = render 'personas'
+      .row
+        .col-md-12
+          button.btn.btn-warn.btn-sm type='button' data-toggle='modal' data-target='#orphaned-persona-modal'
+            | Assign orphaned personas
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          .row
+            .col-md-12
+              | Warrants (click to edit)
+        .panel-body
+          - @user.warrants.each do |warrant|
+            .row.clickable data-href=edit_manage_warrant_path(warrant)
+              .col-md-3=warrant.warrant_type.name
+              .col-md-3=warrant.branch.name
+              .col-md-3=sca_date warrant.tenure_start, format: :date_only if warrant.tenure_start.present?
+              .col-md-3=sca_date warrant.tenure_end, format: :date_only if warrant.tenure_end.present?
       
+#orphaned-persona-modal.modal.fade tabindex='-1' role='dialog' aria-labelledby='orphaned-persona-modal-label'
+  .modal-dialog role='document'
+    .modal-content
+      .modal-header
+        button.close type='button' data-dismiss='modal' aria-label='close'
+          span aria-hidden='true'
+            .glyphicon.glyphicon-remove-sign
+        h4 Assign Oprphaned Persona to @user.name
+      .modal-body
+        .row
+          .col-md-12=simple_form_for @user, url: manage_user_path(@user), remote: true, wrapper: :horizontal_form, class: 'form-horizontal' do |f|
+            = f.association :personas, collection: Persona.where(user_id: [nil, @user.id])
+            = f.button :submit  
 coffee:
   $(document).ready(()->
-    $('#user_role_ids').select2 {
-      placeholder: 'Select roles for this user'
-      
+    $('#user_role_ids').selectize {
+      placeholder: 'Select roles for this user'      
     }
+    $('#user_persona_ids').selectize()
+    $('.clickable').click(()->
+      window.location = $(this).data('href')
+    )
   )

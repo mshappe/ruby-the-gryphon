@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *=require 'sweetalert2'
+ *=require 'selectize'
+ *=require 'selectize.bootstrap3'
 */
 
 @import url(https://fonts.googleapis.com/css?family=EB+Garamond&subset=cyrillic,cyrillic-ext,latin,latin-ext);
@@ -27,9 +29,6 @@ $btn-primary-border: gold;
 @import 'awards';
 @import 'events';
 @import 'officers';
-@import "select2";
-@import "select2-bootstrap";
-
 
 body {
   font-variant: oldstyle-nums common-ligatures discretionary-ligatures contextual;

@@ -66,10 +66,10 @@ Rails.application.routes.draw do
 
   namespace :manage do
     get '/', controller: 'dashboard', action: 'index'
-    get '/users/:id/edit', controller: 'users', action: 'edit', as: :edit_user
-    patch '/users/:id', controller: 'users', action: 'update', as: :user
-    put '/users/:id', controller: 'users', action: 'update'
-    delete '/users/:id', controller: 'users', action: 'destroy', as: :delete_user
+
+    resources :users, only: [:show, :edit, :update, :destroy]
+    resources :personas, only: [:show, :edit, :update, :destroy]
+    resources :warrants, only: [:show, :edit, :update, :destroy]
   end
 
   root to: 'welcome#index'

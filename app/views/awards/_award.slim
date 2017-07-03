@@ -1,0 +1,4 @@
+tr
+  td= link_to award.award.name, award.award
+  td= sca_date award.received, format: :date_only
+  td= link_to award.court.event.try(:name), award.court.try(:event) unless award.court.blank?
