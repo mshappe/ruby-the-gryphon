@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   namespace :manage do
     get '/', controller: 'dashboard', action: 'index'
 
+    resources :roles, only: [:create, :destroy]
     resources :users, only: [:show, :edit, :update, :destroy]
     resources :personas, only: [:show, :edit, :update, :destroy]
     resources :warrants, only: [:show, :edit, :update, :destroy]
@@ -84,7 +85,7 @@ Rails.application.routes.draw do
 
   get '/dashboard/:user_id', controller: 'dashboard', action: 'show', as: :dashboard
 
-  resources :events do
+  resources :events, except: [:destroy] do
     collection do
       get :queued
     end

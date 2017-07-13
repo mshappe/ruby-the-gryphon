@@ -1,10 +1,14 @@
-=f.simple_fields_for :address do |a|
+= f.simple_fields_for :address, wrapper: :horizontal_form do |a|
   = a.input :address
   = a.input :city
-  = a.input :state, collection: State.all, label_method: :description, value_method: :name
+  .form-group
+    .col-md-offset-3.col-md-9
+      = a.subregion_select :state, (a.object.country.present? ? a.object.country : 'US'), { priority: %w(MN WI ND SD MI) }, class: 'form-control'
   = a.input :postal_code
-  = a.input :country
+  .form-group
+    .col-md-offset-3.col-md-9
+      = a.country_select :country, %w(US CA), { object: a.object, prompt: 'Country' }, class: 'form-control'
 
 coffee:
   $('#user_person_attributes_address_attributes_state').selectize()
-  $('select.country').selectize()
+  $('#user_person_attributes_address_attributes_country').selectize()

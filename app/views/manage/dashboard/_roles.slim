@@ -1,0 +1,10 @@
+.panel.panel-danger
+  .panel-heading
+    a#manage-roles name='manage-roles'
+      .row
+        .col-md-12 Roles
+  .panel-body
+    =render roles
+  .panel-footer
+    =simple_form_for :role, url: manage_roles_path, wrapper: :inline_form, html: { class: 'form-inline' } do |f|
+      =f.input :name, placeholder: 'New role name'

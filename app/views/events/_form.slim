@@ -1,6 +1,6 @@
 h3  #{event.persisted? ? 'Edit' : 'Submit' } an Event
 
-= simple_form_for event, class: 'form-horizontal', wrapper: :horizontal_form do |f|
+= simple_form_for event, html: { class: 'form-horizontal' } wrapper: :horizontal_form do |f|
   - if event.persisted? && can?(:manage, event)
 
     .panel.panel-warning
@@ -28,15 +28,7 @@ h3  #{event.persisted? ? 'Edit' : 'Submit' } an Event
       .panel-title Location
     .panel-body
       = f.input :site_name
-      = f.simple_fields_for :address, wrapper: :horizontal_form do |a|
-        = a.input :address
-        = a.input :city
-        .form-group
-          .col-md-offset-3.col-md-9.col-sm-offset-3.col-sm-9=render 'shared/state_selector', a: a, address: event.address
-        = a.input :postal_code, label: 'Postal&nbsp;code'.html_safe
-        .form-group
-          .col-md-offset-3.col-md-9.col-sm-offset-3.col-sm-9
-            = a.country_select :country, { priority: %w(US CA), prompt: 'Country' }, class: 'form-control'
+      = render 'address/form', f: f
 
   .panel.panel-default
     .panel-heading

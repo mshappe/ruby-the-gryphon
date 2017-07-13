@@ -1,6 +1,6 @@
 row
   .col-md-12
-    h1 Editing warrant #{@warrant.warrant_type.name} for #{@warrant.person.name}
+    h1 Editing warrant #{@warrant.warrant_type_name} for #{@warrant.person_name}
     h2.text-danger If this warrant was assigned to the wrong person, you must delete it and let a new warrant be created.
 
 =simple_form_for @warrant, url: manage_warrant_path(@warrant), wrapper: :horizontal_form, class: 'form-horizontal' do |f|

@@ -29,6 +29,7 @@ RSpec.describe Warrant, :type => :model do
   it { is_expected.to belong_to :warrant_type }
   it { is_expected.to belong_to :person }
   it { is_expected.to belong_to :branch }
+  it { is_expected.to have_one(:user).through :person }
   it { is_expected.to validate_presence_of :tenure_start }
 
   describe '.current_holders_by_type' do

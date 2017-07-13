@@ -25,10 +25,11 @@
 
 class Warrant < ActiveRecord::Base
   acts_as_paranoid
-  
+
   belongs_to :person
   belongs_to :warrant_type
   belongs_to :branch
+  has_one :user, through: :person
   validates :tenure_start, presence: true
 
   scope :approved, -> { where.not(approved: nil) }
@@ -40,4 +41,8 @@ class Warrant < ActiveRecord::Base
       .where('tenure_end IS NULL')
       .order(:tenure_start)
   end
+
+  delegate :name, to: :warrant_type, prefix: true
+  delegate :name, to: :person, prefix: true
+  delegate :name, to: :branch, prefix: true
 end

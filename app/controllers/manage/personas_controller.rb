@@ -1,6 +1,9 @@
 class Manage::PersonasController < Manage::ManagementController
   load_and_authorize_resource
 
+  def show; end
+  def edit; end
+
   def update
     @persona.update_attributes(persona_params)
     respond_with @persona, location: manage_persona_path

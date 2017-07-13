@@ -1,6 +1,9 @@
 class Manage::UsersController < Manage::ManagementController
   load_and_authorize_resource
 
+  def show; end
+  def edit; end
+
   def update
     @user.skip_reconfirmation!
     @user.update_attributes(user_params)

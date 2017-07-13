@@ -16,60 +16,18 @@ h2.header
               = resource.unconfirmed_email
           = f.input :password, autocomplete: "off", hint: "(leave blank if you don't want to change it)"
           = f.input :password_confirmation, autocomplete: "off"
-      = f.simple_fields_for :person, wrapper: :horizontal_form do |p|
-        .panel.panel-default
-          .panel-heading
-            .panel-title Personal Information
-          .panel-body
-            = p.input :name, autocomplete: 'off'
-            = p.simple_fields_for :address, wrapper: :horizontal_form do |a|
-              = a.input :address
-              = a.input :city
-              .form-group
-                .col-md-offset-3.col-md-9
-                  = a.subregion_select :state, (a.object.country.present? ? a.object.country : 'US'), { priority: %w(US CA) }, class: 'form-control'
-              = a.input :postal_code
-              .form-group
-                .col-md-offset-3.col-md-9
-                  = a.country_select :country, { priority: %w(US CA), prompt: 'Country' }, class: 'form-control'
-            = p.association :branch
-            = image_tag p.object.heraldic_image.url if p.object.heraldic_image.present?
-            = p.input :heraldic_image, as: :file
-        .panel.panel-default
-          .panel-heading
-            .panel-title Privacy Settings
-          .panel-body
-            .row
-              .col-lg-3.col-md-6.col-sm-6
-                = p.input :private_email, label: 'Hide Email', wrapper: false, inline_label: true
-              .col-lg-3.col-md-6.col-sm-6
-                = p.input :private_address, label: 'Hide Address', wrapper: false, inline_label: true
-              .col-lg-3.col-md-6.col-sm-6
-                = p.input :private_phone, label: 'Hide Phone', wrapper: false, inline_label: true
-              .col-lg-3.col-md-6.col-sm-6
-                = p.input :private_persona, label: 'Hide Persona', wrapper: false, inline_label: true
+      = render 'people/form', f: f
       .form-group
         .col-md-9
           = f.input :current_password, autocomplete: "off", hint: "(we need your current password to confirm your changes)"
         .col-md-3.col-sm-12.col-xs-12
           = f.button :submit, "Update", class: 'btn-primary'
 
-  .col-md-4.col-sm-12.col-xs-12
-    .panel.panel-info.panel
-      .panel-heading
-        .panel-title Personas
-      .panel-body
-        .list-group
-          = link_to 'Add a persona', new_persona_path, class: 'list-group-item'
-          - resource.personas.each do |p|
-            = link_to(edit_persona_path(p), { class: 'list-group-item' }) do
-              .row
-                .col-md-8
-                  = p.name
-                .col-md-2
-                  = persona_badge(p)
+  =render 'personas/edit_persona_chooser', resource: resource
+
 h3.header
   | Cancel my account
 = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'
-.row
-  = link_to "Back", :back
+
+coffee:
+  $('#user_person_attributes_branch_id').selectize()

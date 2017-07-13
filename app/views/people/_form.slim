@@ -1,0 +1,13 @@
+= f.simple_fields_for :person, wrapper: :horizontal_form, class: 'form-horizontal' do |p|
+  .panel.panel-default
+    .panel-heading
+      .panel-title Personal Information
+    .panel-body
+      = p.input :name, autocomplete: 'off'
+      = render 'address/form', f: p
+      = p.association :branch
+      .form-group
+        .col-md-offset-3.col-md-9
+          = image_tag p.object.heraldic_image.url if p.object.heraldic_image.present?
+          = p.input :heraldic_image, as: :file
+  = render 'people/privacy_form', p: p

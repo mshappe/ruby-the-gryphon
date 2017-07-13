@@ -1,0 +1,14 @@
+.col-md-4.col-sm-12.col-xs-12
+  .panel.panel-info.panel
+    .panel-heading
+      .panel-title Personas
+    .panel-body
+      .list-group
+        = link_to 'Add a persona', new_persona_path, class: 'list-group-item'
+        - resource.personas.each do |p|
+          = link_to(edit_persona_path(p), { class: 'list-group-item' }) do
+            .row
+              .col-md-8
+                = p.name
+              .col-md-2
+                = persona_badge(p)

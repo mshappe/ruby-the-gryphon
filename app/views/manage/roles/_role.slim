@@ -1,0 +1,5 @@
+.row
+  .col-md-8.col-sm-8
+    = link_to role.name, manage_role_path(role)
+  .col-md-4.col-sm-4
+    = link_to 'Delete', manage_role_path(role), method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: 'Be sure! Be very sure!' }

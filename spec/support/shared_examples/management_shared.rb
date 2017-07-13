@@ -30,6 +30,47 @@ RSpec.shared_examples 'a management controller' do |action=:index, fact|
   end
 end
 
+RSpec.shared_examples 'a management creator' do |fact, params|
+  describe 'post #create' do
+    describe 'for anonymous users' do
+      before :each do
+        post :create, fact => params
+      end
+
+      it 'should redirect to login' do
+        expect(response).to redirect_to :new_user_session
+      end
+    end
+
+    describe 'for ordinary users' do
+      login_user
+
+      before :each do
+        post :create, fact => params
+      end
+
+      it 'should redirect to root' do
+        expect(response).to redirect_to :root
+      end
+    end
+
+    describe 'for admins' do
+      login_user :admin
+
+      before :each do
+        @klass = fact.to_s.classify.constantize
+        @count = @klass.count
+        post :create, fact => params
+      end
+
+      it 'should create and redirect to manage' do
+        expect(response).to redirect_to manage_path
+        expect(@klass.count).to eq @count + 1
+      end
+    end
+  end
+end
+
 RSpec.shared_examples 'a management updater' do |fact, params, test_attr|
   describe 'patch #update' do
     before :each do

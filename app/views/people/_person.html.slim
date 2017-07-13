@@ -5,7 +5,7 @@
     .panel-body
       - unless person.private_address
       = render 'shared/address', address: person.address
-      - email ||= person.email unless person.private_email 
+      - email ||= person.email unless person.private_email
       = render 'shared/email', email: email if email.present?
       = render 'shared/phone', phone: person.phone if person.phone? && !person.private_phone
   - else

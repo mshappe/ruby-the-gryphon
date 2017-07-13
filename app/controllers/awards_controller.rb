@@ -19,6 +19,9 @@ class AwardsController < ApplicationController
     @award_recipients = @q.result.page(page)
   end
 
+  def new; end
+  def edit; end
+
   def create
     flash[:error] = 'Your submission had errors.' unless @award.save
     respond_with @award
