@@ -64,7 +64,7 @@ class Event < ActiveRecord::Base
   validates :start_at, presence: true
   validates :end_at, presence: true
 
-  scope :next_three_months, -> { where start_at: (Date.today..3.months.from_now) }
+  scope :next_three_months, -> { where end_at: (Date.today..3.months.from_now) }
   scope :all_future, -> { where 'start_at >= ?', Date.today }
   scope :approved_eager, -> { approved.includes(:branch, :address).order(:start_at) }
 

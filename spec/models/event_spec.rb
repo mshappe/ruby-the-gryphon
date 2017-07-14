@@ -65,20 +65,21 @@ RSpec.describe Event, :type => :model do
 
   describe 'scopes' do
     before :each do
-      @good_event = create :event, start_at: Date.tomorrow
-      @old_event = create :event, start_at: 2.days.ago
-      @future_event = create :event, start_at: 4.months.from_now
+      @good_event = create :event, start_at: Date.tomorrow, end_at: Date.tomorrow
+      @other_good_event = create :event, start_at: Date.today, end_at: 3.days.from_now
+      @old_event = create :event, start_at: 2.days.ago, end_at: 2.days.ago
+      @future_event = create :event, start_at: 4.months.from_now, end_at: 4.months.from_now
     end
 
     describe '#next_three_months' do
       it 'should only have @good_event' do
-        expect(Event.next_three_months).to match_array [@good_event]
+        expect(Event.next_three_months).to match_array [@good_event, @other_good_event]
       end
     end
 
     describe '#all_future' do
       it 'should include @future_event' do
-        expect(Event.all_future).to match_array [@good_event, @future_event]
+        expect(Event.all_future).to match_array [@good_event, @future_event, @other_good_event]
       end
     end
   end
