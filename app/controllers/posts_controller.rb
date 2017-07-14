@@ -2,6 +2,9 @@ class PostsController < ApplicationController
   before_filter :get_posts, only: [:index]
   load_and_authorize_resource
 
+  def index; end
+  def show; end
+
   protected
 
   def get_posts

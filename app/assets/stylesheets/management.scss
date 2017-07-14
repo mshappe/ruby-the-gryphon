@@ -16,8 +16,10 @@
 */
 
 @import url(https://fonts.googleapis.com/css?family=EB+Garamond&subset=cyrillic,cyrillic-ext,latin,latin-ext);
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-$font-family-base: 'EB Garamond', Georgia, "Times New Roman", serif;
+$headings-font-family: 'EB Garamond', Georgia, "Times New Roman", serif;
+$font-family-base: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-size-base: 12px;
 $brand-primary: black;
 $btn-primary-color: gold;

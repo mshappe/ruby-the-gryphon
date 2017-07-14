@@ -6,6 +6,10 @@ class PersonasController < ApplicationController
   load_and_authorize_resource except: [:persona_images]
   skip_authorization_check only: [:persona_images]
 
+  def show; end
+  def new; end
+  def edit; end
+
   def create
     @persona = Persona.create(persona_params)
     respond_with @persona

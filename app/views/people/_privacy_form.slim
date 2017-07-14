@@ -1,0 +1,13 @@
+.panel.panel-default
+  .panel-heading
+    .panel-title Privacy Settings
+  .panel-body
+    .row
+      .col-lg-3.col-md-6.col-sm-6
+        = p.input :private_email, label: 'Hide Email', wrapper: false, inline_label: true
+      .col-lg-3.col-md-6.col-sm-6
+        = p.input :private_address, label: 'Hide Address', wrapper: false, inline_label: true
+      .col-lg-3.col-md-6.col-sm-6
+        = p.input :private_phone, label: 'Hide Phone', wrapper: false, inline_label: true
+      .col-lg-3.col-md-6.col-sm-6
+        = p.input :private_persona, label: 'Hide Persona', wrapper: false, inline_label: true

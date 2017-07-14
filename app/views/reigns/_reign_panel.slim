@@ -1,0 +1,51 @@
+- manage = request.fullpath.match('manage')
+.panel class="panel-#{manage ? 'danger' : 'default'}"
+  .panel-heading
+    .panel-title.text-center
+      - if reign.coronation_event_start_at < DateTime.now
+        h1 Their Dread Stellar Majesties
+      - else
+        h1 Their Stellar Highnesses
+      h2=link_to reign.name, reign.url
+      =< link_to 'Edit', edit_manage_reign_path(reign), class: 'btn btn-default' if manage && can?(:edit, reign)
+  .panel-body
+    .row
+      .col-md-3=link_to view_reign_image_path(reign)
+        =image_tag reign.reign_image.url, class: 'img-responsive' if reign.reign_image.present?
+      .col-md-9
+        .row
+          .col-md-4
+            strong Victors
+          .col-md-8
+            => link_to reign.combatant_persona_name, reign.combatant_persona
+            strong for the honor of
+            =<link_to reign.consort_persona_name, reign.consort_persona
+        .row
+          .col-md-4
+            strong Vanquished
+          .col-md-8
+            => link_to reign.runner_up_persona_name, reign.runner_up_persona
+            strong for the honor of
+            =< link_to reign.runner_up_consort_persona_name, reign.runner_up_consort_persona
+        .row
+          .col-md-4
+            strong Won at
+          .col-md-8
+            => link_to reign.crown_event_name, reign.crown_event
+            ' held
+            => event_date(reign.crown_event, format: :date_only)
+            ' in
+            =link_to reign.crown_event_branch_name, reign.crown_event.branch
+        
+  - if reign.coronation_event_id?
+    .panel-footer.text-center
+      - if DateTime.now < reign.coronation_event_start_at
+        | Will be crowned at
+      -else
+        | Reigned since
+      =<> link_to reign.coronation_event_name, reign.coronation_event if reign.coronation_event_id?
+      ' held
+      => event_date(reign.coronation_event, format: :date_only)
+      ' in 
+      =link_to reign.coronation_event_branch_name, reign.coronation_event.branch
+              

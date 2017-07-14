@@ -46,4 +46,6 @@ class Post < ActiveRecord::Base
 
   scope :approved, ->() { where.not(approved: nil) }
   scope :announcements, ->() { joins(:post_type).where(drop_down_items: { type: 'PostType', name: 'Announcement' } )}
+
+  delegate :name, to: :persona, prefix: true
 end

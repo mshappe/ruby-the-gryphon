@@ -5,6 +5,9 @@ class OfficersController < ApplicationController
 
   downloads_files_for :warrant_type, :warrant_badge
 
+  def index; end
+  def show; end
+
   protected
 
   def get_officers

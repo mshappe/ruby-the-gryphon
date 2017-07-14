@@ -16,9 +16,11 @@
 */
 
 @import url(https://fonts.googleapis.com/css?family=EB+Garamond&subset=cyrillic,cyrillic-ext,latin,latin-ext);
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-$font-family-base: 'EB Garamond', Georgia, "Times New Roman", serif;
-$font-size-base: 16px;
+$headings-font-family: 'EB Garamond', Georgia, "Times New Roman", serif;
+$font-family-base: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-size-base: 14px;
 $brand-primary: black;
 $btn-primary-color: gold;
 $btn-primary-border: gold;
@@ -50,6 +52,10 @@ h3, .h3 {
   margin-top: ($line-height-computed / 2)
 }
 
+strong {
+  font-weight: 800;
+}
+
 .jumbotron {
   margin-bottom: 6px;
 }
@@ -70,6 +76,12 @@ h3, .h3 {
   background-color: $brand-primary;
   color: $btn-primary-color;
   font-weight: bolder;
+}
+
+.no-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 select,input[type='text'],input[type='search'] {

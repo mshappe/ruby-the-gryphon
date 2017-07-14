@@ -1,13 +1,2 @@
-.panel.panel-default
-  .panel-heading
-    h4.panel-title
-      | Log in
-  .panel-body.row
-    .col-md-12
-      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        = f.input :email, input_html: { class: 'input-sm' }
-        = f.input :password, as: :password, autocomplete: "off", input_html: { class: 'input-sm' }
-        - if devise_mapping.rememberable?
-          = f.input :remember_me, as: :boolean
-        = f.button :submit, "Log in", class: 'btn-primary btn-sm'
-      = render "users/shared/links"
+li= link_to 'Log in', new_user_session_path
+li= link_to 'Sign up', new_user_registration_path

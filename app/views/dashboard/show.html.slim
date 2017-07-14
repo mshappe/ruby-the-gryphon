@@ -3,10 +3,10 @@
     h2= @user.personas.primary.name
   -if can? :edit, @user
     .col-md-1.col-sm-1.col-xs-1
-      = link_to edit_user_registration_path, class: "btn btn-default text-right", 'aria-label' => "Edit", 'data-toggle' => "tooltip", 'data-placement' => "top", title: "Edit Profile"
+      = link_to edit_user_registration_path, id: 'edit-user', class: "btn btn-default text-right", 'aria-label' => "Edit", 'data-toggle' => "tooltip", 'data-placement' => "top", title: "Edit Profile"
         span.glyphicon.glyphicon-edit aria-hidden="true"
 .row
-  .col-md-5.col-sm-6=render 'people/person', person: @user.personas.primary.person if @user.personas.primary.person.present?
+  .col-md-5.col-sm-6=render 'people/person', person: @user.person if @user.person.present?
   .col-md-4.col-sm-6=render 'personas/personas', personas: @user.personas
 
 - unless @events.blank?

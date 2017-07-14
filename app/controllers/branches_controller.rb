@@ -8,6 +8,8 @@ class BranchesController < ApplicationController
 
   before_action :get_events, only: [:show]
 
+  def show; end
+
   protected
 
   def get_events

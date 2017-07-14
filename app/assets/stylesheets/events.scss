@@ -3,7 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .event-summary {
+  @extend .col-md-6;
   margin-bottom: 12px;
+}
+
+.event-name {
+  font-weight: 800;
+  font-size: larger;
 }
 
 .event-detail {

@@ -2,21 +2,9 @@ h1 Management Dashboard
 h2.text-danger DANGER WILL ROBINSON
 h3 You are currently doing administrative things to the site. Tremendous power, tremendous responsibility.
   Yada yada yada. Try not to break anything.
-  
+
 .row
-  .col-md-9
-    .panel.panel-danger
-      .panel-heading
-        a#manage-users name='manage-users'
-          .row
-            .col-md-3 Users
-            .col-md-9
-              =< search_form_for @user_q, url: manage_path(anchor: 'manage-users'), as: :user_q, class: 'form-inline' do |f|
-                = f.search_field :email_or_roles_name_cont, placeholder: 'Email or role contains'
-      .panel-body
-        .row
-          .col-md-12= paginate @users, param_name: :user_page, params: { anchor: 'manage-users' }
-        = render @users
-        .row
-          .col-md-12= paginate @users, param_name: :user_page, params: { anchor: 'manage-users' }
-  
+  .col-md-9=render 'users', users: @users, q: @user_q
+  .col-md-3=render 'roles', roles: @roles
+.row
+  .col-md-9=render 'reigns', reigns: @reigns, q: @reign_q

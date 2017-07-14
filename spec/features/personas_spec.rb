@@ -9,7 +9,7 @@ RSpec.describe 'Persona stuff', type: :feature do
     user.confirm!
     user.save!
 
-    visit '/'
+    visit '/users/sign_in'
     fill_in 'Email', with: persona.user.email
     fill_in 'Password', with: 'doomdoom'
     find_button('Log in').click

@@ -13,9 +13,9 @@ class Ability
     can :manage, Event if user.has_role? :event_officer
 
     # What can be publicly read?
-    can :read, [Award, Branch, Person, Persona]
+    can :read, [Award, Branch, Person, Persona, Reign]
     can :read, Event, submission_state: 'approved'
-    can :read, User, id: user.id
+    can [:read, :edit, :update], User, id: user.id
 
     # What belongs to a specific user and can be edited by that user
     can :update, Person,  user_id: user.id

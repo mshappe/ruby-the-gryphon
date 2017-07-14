@@ -1,6 +1,9 @@
 class Manage::WarrantsController < Manage::ManagementController
   load_and_authorize_resource
 
+  def show; end
+  def edit; end
+
   def update
     @warrant.update_attributes(warrant_params)
     respond_with @warrant, location: :manage_warrant

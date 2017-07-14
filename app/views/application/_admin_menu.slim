@@ -1,0 +1,2 @@
+li.divider role='separator'
+=active_link_to 'Management', manage_url, wrap_tag: :li, target: 'rtg_management', data: { no_turbolink: true } if current_user && current_user.has_role?(:admin)

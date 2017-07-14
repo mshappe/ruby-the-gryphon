@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 # Specs in this file have access to a helper object that includes
-# the Manage::ManagementHelper. For example:
+# the Manage::ReignsHelper. For example:
 #
-# describe Manage::ManagementHelper do
+# describe Manage::ReignsHelper do
 #   describe "string concat" do
 #     it "concats two strings with spaces" do
 #       expect(helper.concat_strings("this","that")).to eq("this that")
 #     end
 #   end
 # end
-RSpec.describe Manage::ManagementHelper, type: :helper do
+RSpec.describe Manage::ReignsHelper, type: :helper do
   pending "add some examples to (or delete) #{__FILE__}"
 end

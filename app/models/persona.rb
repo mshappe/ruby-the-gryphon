@@ -44,4 +44,8 @@ class Persona < ActiveRecord::Base
   validates_attachment_content_type :persona_image, :content_type => /\Aimage\/.*\Z/
 
   scope :primary, -> { joins(:persona_type).where(persona_types: { name: 'Primary Name' }).first }
+
+  def honorific_and_name
+    "#{honorific} #{name}".strip
+  end
 end

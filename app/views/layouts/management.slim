@@ -26,16 +26,9 @@ html lang='en'
           = render 'alert', type: 'danger', text: alert if alert
 
       .row
-        #side-navigation.col-lg-3.col-md-3.col-sm-5.col-xs-12
-          = yield :sidebar
-        #main.col-lg-9.col-md-9.col-sm-7.col-xs-12
+        #main.col-md-12
           = content_for?(:main) ? yield(:main) : yield
 
       .row
-        .col-md-12
-          #footer
-            .center-block style='width: 440px; text-align: center'
-              .text-muted #{link_to 'Code', 'http://github.com/mshappe/ruby-the-gryphon'} Copyright © 2015-2017 Society for Creative Anachronism, Inc.
-              .text-muted Licensed under the #{link_to 'MIT License', 'http://github.com/mshappe/ruby-the-gryphon/LICENSE'}.
-              .text-muted This site is NOT currently an official offering of the Society for Creative Anachronism, Inc. This is an experimental site.
-              .text-muted #{link_to "Version #{version_number}: #{version_name}", release_notes_path}
+        #footer.col-md-12
+          = render 'application/indicia'

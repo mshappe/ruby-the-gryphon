@@ -4,7 +4,6 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :create_nested_models, only: [:new, :edit]
 
-
   def index
     @q = @events.ransack(query)
     @events = @q.result.approved_eager
@@ -14,6 +13,9 @@ class EventsController < ApplicationController
   def queued
     @events = Event.queued
   end
+
+  def show; end
+  def new; end
 
   def create
     enforce_submission_state

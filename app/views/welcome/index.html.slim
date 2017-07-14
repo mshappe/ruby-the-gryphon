@@ -1,10 +1,10 @@
-.text-warning NOTA BENE
-| The navigation above is not intended to represent any expected real-world menu structure yet. It's just for experimentation.
+.row
+  .col-md-12
+    h3= link_to 'Release Notes', release_notes_path
 
-h1 And so, it begins
-
-h3= link_to 'Release Notes', release_notes_path
-
+.row
+  .col-md-6=render 'reigns/reign_panel', reign: @trm if @trm.present?
+  .col-md-6=render 'reigns/reign_panel', reign: @trh if @trh.present?
 .panel.panel-default
   .panel-heading
     .panel-title

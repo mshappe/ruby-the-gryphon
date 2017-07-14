@@ -5,7 +5,7 @@
         = image_tag @officer.warrant_badge if @officer.warrant_badge?
         = @officer.name
         - if @officer.superior_warrant.present?
-          h3 
+          h3
             | (reports to #{link_to @officer.superior_warrant.name, officer_path(@officer.superior_warrant)})
       h3.title= "#{@person.personas_primary.honorific} #{@person.personas_primary.name}"
       = render 'people/person', person: @person, email: @officer.email

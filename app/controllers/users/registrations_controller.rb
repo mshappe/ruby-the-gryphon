@@ -6,9 +6,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   skip_authorization_check
 
 # GET /resource/sign_up
-  def new
-    super
-  end
+# def new
+#  super
+#  end
 
 # POST /resource
 # def create
@@ -21,9 +21,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # end
 
 # PUT /resource
-# def update
-#   super
-# end
+#def update
+# super
+#end
 
 # DELETE /resource
 # def destroy
@@ -48,11 +48,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 # You can put the params you want to permit in the empty array.
   def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation,
-                                                                   :current_password,
-                                                                   person_attributes: [:name,
-                                                                                       address_attributes: [:address, :city, :state, :postal_code, :country]]) }
-
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(:email, :password, :password_confirmation,
+               :current_password,
+               person_attributes: [
+                :id, :branch_id, :name, :private_email, :private_address,
+                :private_phone, :private_persona,
+                address_attributes: [:id, :address, :city, :state, :postal_code, :country]
+              ])
+    end
   end
 
   def create_nested_models
