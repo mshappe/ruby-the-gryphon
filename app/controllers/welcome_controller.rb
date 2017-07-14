@@ -14,5 +14,9 @@ class WelcomeController < ApplicationController
       .announcements
       .order(start_date: :desc)
       .limit(5)
+
+    @trm = Reign.includes(:coronation_event).where('events.start_at < ?', DateTime.now).order('events.start_at DESC').first
+    @trh = Reign.includes(:crown_event).where('events.start_at < ?', DateTime.now).order('events.start_at DESC').first
+    @trh = nil if @trh == @trm
   end
 end

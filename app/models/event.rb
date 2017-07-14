@@ -69,4 +69,8 @@ class Event < ActiveRecord::Base
   scope :approved_eager, -> { approved.includes(:branch, :address).order(:start_at) }
 
   delegate :name, to: :branch, prefix: true
+
+  def name_and_date
+    "#{name} #{start_at.to_date}"
+  end
 end

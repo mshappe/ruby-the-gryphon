@@ -49,4 +49,11 @@ class Reign < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates_attachment_content_type :reign_image, :content_type => /\Aimage\/.*\Z/
   validates_attachment_content_type :reign_map, :content_type => /\Aimage\/.*\Z/
+
+  delegate :name, :honorific_and_name, to: :combatant_persona, prefix: true
+  delegate :name, :honorific_and_name, to: :consort_persona, prefix: true
+  delegate :name, :honorific_and_name, to: :runner_up_persona, prefix: true
+  delegate :name, :honorific_and_name, to: :runner_up_consort_persona, prefix: true
+  delegate :name, :start_at, :branch_name, to: :crown_event, prefix: true
+  delegate :name, :start_at, :branch_name, to: :coronation_event, prefix: true
 end

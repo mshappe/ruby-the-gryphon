@@ -7,6 +7,8 @@ class Manage::DashboardController < Manage::ManagementController
     @user_q = User.ransack(params[:user_q])
     @users = @user_q.result.order(email: :asc).page(params[:user_page]).per(10)
     @roles = Role.all
+    @reign_q = Reign.ransack(params[:reign_q])
+    @reigns = @reign_q.result.order(id: :desc).page(params[:reign_page]).per(10)
     authorize! :manage, @users
   end
 end
