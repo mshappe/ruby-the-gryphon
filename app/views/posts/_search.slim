@@ -1,7 +1,9 @@
 = form_tag section_posts_path(post_type_name), class: 'form-inline', method: :get
-  = text_field_tag :full_text_search, params[:full_text_search], placeholder: "Search #{post_type_name.try(:pluralize)}", class: 'form-control input-sm'
-  span[data-toggle='modal' data-target='#search-help']
-    span.glyphicon.glyphicon-question-sign
+  .form-group
+    .col-md-10.col-xs-10= text_field_tag :full_text_search, params[:full_text_search], placeholder: "Search #{post_type_name.try(:pluralize)}", class: 'form-control input-sm'
+    .col-md-2.col-xs-2 
+      span[data-toggle='modal' data-target='#search-help']
+        span.glyphicon.glyphicon-question-sign
 
 div#search-help.modal.fade[tabindex='-1' role='dialog' aria-labelledby='search-help-header']
   .modal-dialog[role='document']

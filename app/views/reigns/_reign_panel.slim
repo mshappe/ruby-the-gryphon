@@ -14,23 +14,23 @@
         =image_tag reign.reign_image.url, class: 'img-responsive' if reign.reign_image.present?
       .col-md-9
         .row
-          .col-md-4
+          .col-md-4.col-xs-4
             strong Victors
-          .col-md-8
+          .col-md-.col-xs-8
             => link_to reign.combatant_persona_name, reign.combatant_persona
             strong for the honor of
             =<link_to reign.consort_persona_name, reign.consort_persona
         .row
-          .col-md-4
+          .col-md-4.col-xs-4
             strong Vanquished
-          .col-md-8
+          .col-md-8.col-xs-8
             => link_to reign.runner_up_persona_name, reign.runner_up_persona
             strong for the honor of
             =< link_to reign.runner_up_consort_persona_name, reign.runner_up_consort_persona
         .row
-          .col-md-4
+          .col-md-4.col-xs-4
             strong Won at
-          .col-md-8
+          .col-md-8.col-xs-8
             => link_to reign.crown_event_name, reign.crown_event
             ' held
             => event_date(reign.crown_event, format: :date_only)

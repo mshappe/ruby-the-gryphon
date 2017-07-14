@@ -1,8 +1,8 @@
 .row
-  .col-md-6.ellipsis
+  .col-md-6.col-xs-6.no-overflow
     = link_to user.email, manage_user_path(user)
-  .col-md-3
+  .col-md-3.col-xs-3
     - user.roles.each do |r|
       span.label.label-info= r.name
-  .col-md-3
+  .col-md-3.col-xs-3
     = link_to 'Delete', manage_user_path(user), method: :delete, class: 'pull-right btn btn-danger btn-xs', data: { confirm: 'Be sure. Be Very sure!' }
