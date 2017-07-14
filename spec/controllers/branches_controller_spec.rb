@@ -36,10 +36,10 @@ RSpec.describe BranchesController, :type => :controller do
   describe '#show' do
     before :each do
       @branch = create :branch
-      @event = create :event, branch: @branch, start_at: Date.tomorrow
-      @other_event = create :event, sponsor_branch: @branch, start_at: 2.months.from_now
-      @old_event = create :event, branch: @branch, start_at: 2.days.ago
-      @someone_else_event = create :event, start_at: Date.tomorrow
+      @event = create :event, branch: @branch, start_at: Date.tomorrow, end_at: Date.tomorrow
+      @other_event = create :event, sponsor_branch: @branch, start_at: 2.months.from_now, end_at: 2.months.from_now
+      @old_event = create :event, branch: @branch, start_at: 2.days.ago, end_at: 2.days.ago
+      @someone_else_event = create :event, start_at: Date.tomorrow, end_at: Date.tomorrow
       get :show, id: @branch.id
     end
 
