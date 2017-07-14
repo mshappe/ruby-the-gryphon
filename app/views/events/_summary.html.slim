@@ -1,6 +1,6 @@
 .event-summary
   .event-name= link_to event.name, event
-  div= event_date(event, format: :date_only).html_safe
+  div= event_date(event, format: :date_only)
   div
     div
       => link_to event.branch_name, event.branch if event.branch

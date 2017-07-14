@@ -84,6 +84,15 @@ strong {
   text-overflow: ellipsis;
 }
 
+@media (max-width: $screen-xs-max) {
+  .list-group {
+    margin-bottom: 5px;
+  }
+  .pagination-sm {
+    margin: 2px 0;
+  }
+}
+
 select,input[type='text'],input[type='search'] {
   background-color: white;
   color: black;

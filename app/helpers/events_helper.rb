@@ -22,7 +22,7 @@ module EventsHelper
       sca_date(event.start_at, format: format)
     else
       sca_date(event.start_at, format: format) +
-          ' &ndash; ' +
+          raw('&ndash;') +
           sca_date(event.end_at, format: format)
     end
   end

@@ -63,7 +63,7 @@ RSpec.describe EventsHelper, :type => :helper do
         event.end_at = event.start_at + 48.hours
 
         expect(helper.event_date(event, format: :date_only)).to eq sca_date(event.start_at.to_s, format: :date_only) +
-                                                                       ' &ndash; ' +
+                                                                       raw('&ndash;') +
                                                                        sca_date(event.end_at.to_s, format: :date_only)
       end
     end
@@ -76,7 +76,7 @@ RSpec.describe EventsHelper, :type => :helper do
         event.end_at = event.start_at + 48.hours
 
         expect(helper.event_date(event)).to eq sca_date(event.start_at.to_s) +
-                                                   ' &ndash; ' +
+                                                   raw('&ndash;') +
                                                    sca_date(event.end_at.to_s)
       end
     end

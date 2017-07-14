@@ -1,4 +1,4 @@
-.list-group-item
+li.list-group-item.no-overflow
   => link_to post.title, post.url? ? post.url : post
   | by
   =<> link_to post.persona_name, post.persona if post.persona.present?

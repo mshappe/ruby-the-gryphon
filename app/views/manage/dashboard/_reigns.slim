@@ -2,7 +2,7 @@
   .panel-heading
     a#manage-users name='manage-reigns'
       .row
-        .col-md-3 Reigns
+        .col-md-3.col-xs-3 Reigns
         .col-md-6.text-center
           =< search_form_for q, url: manage_path(anchor: 'manage-reigns'), as: :reign_q, class: 'form-inline' do |f|
             = f.search_field :name_cont, placeholder: 'Name contains'
@@ -11,7 +11,7 @@
   .panel-body
     .row
       .col-md-12= paginate reigns, param_name: :reign_page, params: { anchor: 'manage-reigns' }
-    .row
+    .row.hidden-xs
       .col-md-6 Name
       .col-md-3 Crown
       .col-md-3 Coronation

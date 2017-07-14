@@ -11,8 +11,8 @@ html lang='en'
     .container
       .row
         #header.jumbotron
-          .center-block style='width:440px'
-            img= link_to image_tag('Poster.gif'), root_url
+          .center-block style='max-width: 440px'
+            img= link_to image_tag('Poster.gif', class: 'img-responsive'), root_url
 
       nav.navbar.navbar-default
         .container-fluid
