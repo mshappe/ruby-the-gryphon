@@ -1,0 +1,5 @@
+tr
+  td= link_to "#{award_recommendation.persona_name} (#{award_recommendation.person_name})", award_recommendation
+  td #{award_recommendation.submitter_persona_name} (#{award_recommendation.submitter_person_name})
+  td= award_recommendation.award_name
+  td= sca_date award_recommendation.created_at

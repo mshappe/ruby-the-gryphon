@@ -26,6 +26,10 @@ class Ability
       user.personas.pluck(:id).include?(event.submitter_persona_id)
     end
 
+    can :create, AwardRecommendation if user.persisted? # no visitors
+    can :show, AwardRecommendation, submitted_by_person_id: user.person.try(:id)
+    can :manage, AwardRecommendation if user.has_role?(:royalty)
+
     can :read, WarrantType
     can :cru, Post, persona_id: user.persona_ids
     can :read, Post do |post|

@@ -38,6 +38,7 @@ html lang='en'
                       .glyphicon.glyphicon-cog
                     ul.dropdown-menu
                       = render 'application/event_officer_menu' if can? :manage, Event
+                      = render 'application/award_rec_manager_menu' if can? :manage, AwardRecommendation
                       = render 'application/admin_menu' if current_user.has_role? :admin
               - else
                 = render 'users/sessions/new' unless user_signed_in?

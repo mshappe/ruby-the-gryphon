@@ -1,0 +1,2 @@
+module AwardRecommendationsHelper
+end

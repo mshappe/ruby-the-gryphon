@@ -1,0 +1,11 @@
+URL: <%= award_recommendation_url(@rec.id) %>
+
+Recommended by: <%= @submitter.personas.primary.try(:name) %> (<%= @submitter.name %>)
+Recommendation for: <%= @rec.persona_name %> (<%= @rec.person_name %>) of <%= @rec.branch_name %>
+To receive: <%= @rec.award.name %>
+Gender: <%= @rec.gender %>
+Submitter-provided persona description: <%= @rec.persona_description %>
+Candidate-provided persona description: <%= @rec.persona.try(:description) || 'None' %>
+Under 18? <%= @rec.is_youth ? 'Yes' : 'No'%>
+Reason:
+<%= @rec.reason %>

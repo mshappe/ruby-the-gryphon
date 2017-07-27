@@ -150,15 +150,21 @@ RSpec.describe EventsController, :type => :controller do
     describe 'for users' do
       login_user
 
+      before :each do
+        mail = double
+        expect(EventNotification).to receive(:notify_submitter) { mail }
+        expect(mail).to receive(:deliver_later)
+      end
+
       specify 'should succeed, object should be queued' do
-        expect { post :create, event: attributes_for(:event, submitter_persona_id: @user.personas.first.id) }.to change { ActionMailer::Base.deliveries.count }.by 1
+        post :create, event: attributes_for(:event, submitter_persona_id: @user.personas.first.id)
         expect(response).to redirect_to event_url Event.last
         is_expected.to set_flash.to 'Event submitted. It will be reviewed by the Event Information Officer.'
         expect(assigns[:event].submission_state).to eq 'queued'
       end
 
       specify 'should force state to queued if it is anything other than queued' do
-        expect { post :create, event: attributes_for(:event, submission_state: 'approved', submitter_persona_id: @user.personas.first.id) }.to change { ActionMailer::Base.deliveries.count }.by 1
+        post :create, event: attributes_for(:event, submission_state: 'approved', submitter_persona_id: @user.personas.first.id)
         expect(response).to redirect_to event_url Event.last
         is_expected.to set_flash.to 'Event submitted. It will be reviewed by the Event Information Officer.'
         expect(assigns[:event].submission_state).to eq 'queued'

@@ -62,7 +62,12 @@
 #                          GET    /users/unlock(.:format)                     users/unlocks#show
 #
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  authenticate :user, lambda { |u| u.has_role?(:admin) } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   namespace :manage do
     get '/', controller: 'dashboard', action: 'index'
@@ -79,6 +84,8 @@ Rails.application.routes.draw do
 
   resources :awards, except: [:destroy]
   get '/awards/award_badges/:id', controller: 'awards', action: 'award_badges'
+
+  resources :award_recommendations
 
   resources :branches, only: [:show]
   get '/branches/branch_heraldries/:id', controller: 'branches', action: 'branch_heraldries'

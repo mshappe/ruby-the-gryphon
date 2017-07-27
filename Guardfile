@@ -93,8 +93,6 @@ guard 'annotate' do
   watch( 'config/routes.rb' )
 end
 
-
-
-guard :railsbp do
-  watch(%r{^app/(.+)\.(rb|slim)$})
-end
+#guard :railsbp do
+#  watch(%r{^app/(.+)\.(rb|slim)$})
+#end

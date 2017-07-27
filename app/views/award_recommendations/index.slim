@@ -1,0 +1,26 @@
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        .row
+          .col-md-9
+            h1.panel-title= @title
+          .col-md-3
+            .pull-right
+              - if params[:hidden]
+                = link_to 'View Active', award_recommendations_url, class: 'btn btn-primary'
+              - else
+                = link_to 'View Inactive', award_recommendations_url(hidden: true), class: 'btn btn-primary'
+      .panel-body
+        = paginate @award_recommendations
+        .table-resonsive
+          table.table.table-striped
+            thead
+              tr
+                th Candidate
+                th Submitter
+                th Award
+                th Recommended on
+            tbody
+              = render @award_recommendations
+        = paginate @award_recommendations

@@ -1,0 +1,30 @@
+.panel.panel-default
+  .panel-body
+    =simple_form_for award_recommendation, wrapper: :horizontal_form, html: { class: 'form-horizontal'},  wrapper_mappings: { \
+    check_boxes: :horizontal_radio_and_checkboxes,\
+    radio_buttons: :horizontal_radio_and_checkboxes,\
+    file: :horizontal_file_input,\
+    boolean: :horizontal_boolean } do |f|
+      =f.input :submitted_by_person_id, as: :hidden, input_html: { value: current_user.person.id }
+      =f.input :status, as: :hidden, input_html: { value: AwardRecommendation::STATUS_SHOW }
+      =f.association :persona, collection: Persona.order(:name), input_html: { 'aria-describedy' => 'persona-help' }
+      span#persona-help.help-block Please try to find the person using the search box above before entering details manually!
+      .panel.panel-warning
+        .panel-heading
+          .panel-title Do not fill these out if you found the persona above!
+        .panel-body
+          =f.input :persona_name
+          =f.input :legal_name
+          =f.association :branch
+      =f.input :persona_description
+      =f.input :is_youth, label: "Are they under 18 years old?"
+      =f.association :award, collection: awards, as: :grouped_select, group_method: :last
+      =f.input :reason
+      =f.button :submit, class: 'btn btn-primary'
+      
+      
+coffee:
+  $('#award_recommendation_persona_id').selectize(placeholder: 'Whom are you recommending?')
+  $('#award_recommendation_branch_id').selectize(placeholder: 'What branch are they from?')
+  $('#award_recommendation_award_id').selectize(placeholder: 'What award do you recommend?')
+  

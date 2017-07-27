@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703234301) do
+ActiveRecord::Schema.define(version: 20170727200743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,16 +161,15 @@ ActiveRecord::Schema.define(version: 20170703234301) do
     t.text     "reason"
     t.string   "status"
     t.integer  "planned_court_id"
-    t.integer  "submitted_by_user_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "submitted_by_person_id"
   end
 
   add_index "award_recommendations", ["award_id"], name: "index_award_recommendations_on_award_id", using: :btree
   add_index "award_recommendations", ["branch_id"], name: "index_award_recommendations_on_branch_id", using: :btree
   add_index "award_recommendations", ["persona_id"], name: "index_award_recommendations_on_persona_id", using: :btree
   add_index "award_recommendations", ["planned_court_id"], name: "index_award_recommendations_on_planned_court_id", using: :btree
-  add_index "award_recommendations", ["submitted_by_user_id"], name: "index_award_recommendations_on_submitted_by_user_id", using: :btree
 
   create_table "award_scribes", force: :cascade do |t|
     t.integer  "award_recipient_id"

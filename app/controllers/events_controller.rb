@@ -24,7 +24,6 @@ class EventsController < ApplicationController
       EventNotification.notify_submitter(current_user, @event).deliver_later
       flash[:notice] = 'Event submitted. It will be reviewed by the Event Information Officer.'
     else
-      ap @event.errors
       flash[:error] = 'Your submission had errors.'
     end
     respond_with @event

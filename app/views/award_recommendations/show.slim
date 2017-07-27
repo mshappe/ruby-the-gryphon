@@ -1,0 +1,34 @@
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        h1.panel-title Award Recommendation for #{@award_recommendation.persona_name} (#{@award_recommendation.person_name}) to receive #{@award_recommendation.award_name}
+      .panel-body
+        .row
+          .col-md-3
+            strong Status
+          .col-md-9= @award_recommendation.status
+        .row
+          .col-md-3
+            strong Submitted on
+          .col-md-9= sca_date(@award_recommendation.created_at)
+        .row
+          .col-md-3
+            strong Recommended by
+          .col-md-9 #{@award_recommendation.submitter_persona_name} (#{@award_recommendation.submitter_person_name})
+        .row
+          .col-md-3
+            strong Submitter's persona description
+          .col-md-9
+            = @award_recommendation.persona_description
+        - if @award_recommendation.persona.present?
+          .row
+            .col-md-3
+              strong Candidate's persona description
+            .col-md-9
+              = raw @award_recommendation.persona.description
+        .row
+          .col-md-3
+            strong Reason for recommendation
+          .col-md-9= @award_recommendation.reason
+          
