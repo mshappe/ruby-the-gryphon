@@ -20,5 +20,6 @@
 require 'rails_helper'
 
 RSpec.describe StallariQuestion, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to validate_presence_of :question }
+  it { is_expected.to belong_to :answered_persona }
 end

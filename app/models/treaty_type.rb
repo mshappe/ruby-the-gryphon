@@ -1,0 +1,2 @@
+class TreatyType < DropDownItem
+end

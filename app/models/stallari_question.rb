@@ -19,4 +19,6 @@
 
 class StallariQuestion < ActiveRecord::Base
   belongs_to :answered_persona, class_name: 'Persona'
+
+  validates :question, presence: true
 end

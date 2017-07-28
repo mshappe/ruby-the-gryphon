@@ -29,4 +29,6 @@
 class Treaty < ActiveRecord::Base
   belongs_to :persona
   belongs_to :reign
+  belongs_to :treaty_type
+  belongs_to :foreign_branch, class_name: 'Branch'
 end

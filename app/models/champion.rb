@@ -18,4 +18,6 @@
 class Champion < ActiveRecord::Base
   belongs_to :persona
   belongs_to :reign
+
+  validates :name, presence: true
 end

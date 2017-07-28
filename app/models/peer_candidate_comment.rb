@@ -19,4 +19,6 @@
 class PeerCandidateComment < ActiveRecord::Base
   belongs_to :peer_candidate
   belongs_to :person
+
+  validates :comments, presence: true
 end

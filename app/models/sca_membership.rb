@@ -12,4 +12,7 @@
 
 class ScaMembership < ActiveRecord::Base
   self.primary_key = :sca_number
+
+  validates :sca_number, presence: true, uniqueness: true
+  validates :sca_exp_date, presence: true
 end

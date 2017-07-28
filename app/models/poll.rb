@@ -10,4 +10,5 @@
 #
 
 class Poll < ActiveRecord::Base
+  has_many :poll_answers, dependent: :destroy
 end

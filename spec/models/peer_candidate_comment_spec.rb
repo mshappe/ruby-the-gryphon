@@ -19,5 +19,7 @@
 require 'rails_helper'
 
 RSpec.describe PeerCandidateComment, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to belong_to :peer_candidate }
+  it { is_expected.to belong_to :person }
+  it { is_expected.to validate_presence_of :comments }
 end

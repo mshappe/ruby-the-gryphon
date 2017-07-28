@@ -23,6 +23,3 @@ end
 
 class Report < DropDownItem
 end
-
-class TreatyType < DropDownItem
-end

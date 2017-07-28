@@ -42,7 +42,6 @@ RSpec.describe AwardRecommendationsController, type: :controller do
       end
 
       it 'should fail' do
-        ap assigns
         expect(response).to redirect_to :root
       end
     end
