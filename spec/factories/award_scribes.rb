@@ -16,7 +16,7 @@
 #  index_award_scribes_on_person_id             (person_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :award_scribe do
     award_recipient nil
 user nil

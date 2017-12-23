@@ -1,9 +1,9 @@
-#ruby=2.4
+#ruby=2.4.1
 #ruby-gemset=ruby-gryphon
 source 'https://rubygems.org'
 
 gem 'puma'
-gem 'rails', '~> 4.2.1'
+gem 'rails', '~> 4.2.10'
 gem 'pg'
 gem 'pg_search'
 gem 'sidekiq'
@@ -64,7 +64,7 @@ group :development, :test do
   gem 'byebug'
   gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit', branch: 'master'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails', '~> 3'
   gem 'shoulda'

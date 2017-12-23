@@ -39,7 +39,7 @@
 #  index_people_on_user_id     (user_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :person do
     user
     address

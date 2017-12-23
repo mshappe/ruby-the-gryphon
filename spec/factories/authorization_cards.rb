@@ -13,7 +13,7 @@
 #  index_authorization_cards_on_user_id  (user_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :authorization_card do
     user nil
 expiration_date "2016-02-19 12:50:03"

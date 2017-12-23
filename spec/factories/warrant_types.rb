@@ -27,7 +27,7 @@
 #  index_warrant_types_on_superior_warrant_id  (superior_warrant_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :warrant_type do
     name "MyString"
     email "MyString"

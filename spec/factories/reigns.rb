@@ -33,7 +33,7 @@
 #  index_reigns_on_runner_up_persona_id          (runner_up_persona_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :reign do
     name "MyString"
     combatant_persona_id 1

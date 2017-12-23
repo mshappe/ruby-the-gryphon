@@ -14,7 +14,7 @@
 #  index_award_recipient_recommendations_on_award_recipient_id  (award_recipient_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :award_recipient_recommendation do
     award_recipient nil
 award_recommendation nil

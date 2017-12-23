@@ -22,7 +22,7 @@
 #  index_awards_on_branch_id      (branch_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :award do
     sequence(:name) { |n| "#{n}-MyString" }
     description "MyText"

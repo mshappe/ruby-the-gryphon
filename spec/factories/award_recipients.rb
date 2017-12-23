@@ -31,7 +31,7 @@
 #  index_award_recipients_on_persona_id  (persona_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :award_recipient do
     association :award
     association :persona

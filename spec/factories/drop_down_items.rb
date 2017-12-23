@@ -11,7 +11,7 @@
 #  updated_at  :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :drop_down_item do
     sequence(:name) { Faker::Name.name }
     description "MyText"

@@ -15,7 +15,7 @@
 #  index_poll_answers_on_poll_id  (poll_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :poll_answer do
     poll nil
     active false

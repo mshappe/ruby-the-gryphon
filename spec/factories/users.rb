@@ -38,7 +38,7 @@
 #  index_users_on_uuid                  (uuid) UNIQUE
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   pw = SecureRandom.uuid
   factory :user do
     sequence(:email) { Faker::Internet.email }

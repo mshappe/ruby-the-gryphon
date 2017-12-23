@@ -21,7 +21,7 @@
 #  index_posts_on_warrant_type_id  (warrant_type_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :post do
     post_type_id 1
     persona nil

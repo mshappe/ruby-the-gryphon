@@ -12,7 +12,7 @@
 #  index_persona_types_on_name  (name)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :persona_type do
     sequence(:name) { Faker::Name.name }
   end

@@ -13,7 +13,7 @@
 #  index_authorization_types_on_martial_activity_type_id  (martial_activity_type_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :authorization_type do
     name "MyString"
   end

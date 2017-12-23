@@ -17,7 +17,7 @@
 #  index_stallari_questions_on_answered_persona_id  (answered_persona_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :stallari_question do
     question "MyText"
     answer "MyText"

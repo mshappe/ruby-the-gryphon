@@ -15,7 +15,7 @@
 #  index_champions_on_reign_id    (reign_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :champion do
     persona nil
     reign nil

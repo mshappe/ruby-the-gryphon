@@ -18,7 +18,7 @@
 #  index_event_attendees_on_warrant_type_id          (warrant_type_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event_attendee do
     event nil
 persona nil

@@ -30,7 +30,7 @@
 #  index_branches_on_parent_branch_id  (parent_branch_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :branch do
     sequence(:name) { Faker::Name.name }
     association :branch_type

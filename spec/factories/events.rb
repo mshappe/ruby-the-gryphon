@@ -42,7 +42,7 @@
 #  index_events_on_submitter_persona_id  (submitter_persona_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event do
     sequence(:name) { Faker::Name.name }
     start_at 10.days.from_now

@@ -28,7 +28,7 @@
 #  index_award_recommendations_on_submitted_by_user_id  (submitted_by_user_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :award_recommendation do
     association :award
     association :persona

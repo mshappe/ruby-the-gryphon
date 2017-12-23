@@ -26,7 +26,7 @@
 #  index_treaties_on_treaty_type_type_and_treaty_type_id  (treaty_type_type,treaty_type_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :treaty do
     persona nil
     treaty_type ""

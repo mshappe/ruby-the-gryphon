@@ -12,7 +12,7 @@
 #  index_martial_activity_types_on_name  (name)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :martial_activity_type do
     name "MyString"
   end

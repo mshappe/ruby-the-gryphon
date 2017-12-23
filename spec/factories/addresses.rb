@@ -18,7 +18,7 @@
 #  index_addresses_on_latitude_and_longitude  (latitude,longitude)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :address do
     address "MyString"
     city "MyString"

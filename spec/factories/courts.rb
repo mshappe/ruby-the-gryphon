@@ -24,7 +24,7 @@
 #  index_courts_on_reporter_persona_id  (reporter_persona_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :court do
     court_order 1
     court_date "2015-07-19 17:51:54"

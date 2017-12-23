@@ -24,7 +24,7 @@
 #  index_personas_on_user_id          (user_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :persona do
     user
     sequence(:name) { Faker::Name.name }

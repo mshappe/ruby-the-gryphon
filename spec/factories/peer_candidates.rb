@@ -16,7 +16,7 @@
 #  index_peer_candidates_on_persona_id  (persona_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :peer_candidate do
     award nil
     persona nil

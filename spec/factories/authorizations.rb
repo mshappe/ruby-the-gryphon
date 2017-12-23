@@ -16,7 +16,7 @@
 #  index_authorizations_on_person_id              (person_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :authorization do
     user nil
 authorization_type nil

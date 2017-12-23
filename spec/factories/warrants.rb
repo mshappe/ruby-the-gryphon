@@ -23,7 +23,7 @@
 #  index_warrants_on_warrant_type_id  (warrant_type_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :warrant do
     person nil
 warrant_type nil

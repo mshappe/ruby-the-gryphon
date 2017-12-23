@@ -16,7 +16,7 @@
 #  index_peer_candidate_comments_on_person_id          (person_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :peer_candidate_comment do
     peer_candidate nil
     person nil
