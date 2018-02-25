@@ -4,7 +4,7 @@ module EventsHelper
   def sca_date(datetime, format: '')
     datetime = datetime.to_time # Just in case
     strformat = "%e %B #{sca_year(datetime)}"
-    strformat += ' (%Y&nbsp;CE)' unless format.to_s =~ %r[no_ce]
+    strformat += ' (%YCE)' unless format.to_s =~ %r[no_ce]
     strformat += ' %l:%M %P' unless format.to_s =~ %r[date_only]
 
     raw datetime.strftime strformat

@@ -30,13 +30,13 @@ RSpec.describe EventsHelper, :type => :helper do
   describe '#sca_date(datetime)' do
     describe '30 April 2015' do
       it 'should be 30 April 49 (2015 CE)' do
-        expect(helper.sca_date('30 April 2015 8:00 pm')).to eq '30 April 49 (2015&nbsp;CE)  8:00 pm'
+        expect(helper.sca_date('30 April 2015 8:00 pm')).to eq '30 April 49 (2015CE)  8:00 pm'
       end
     end
 
     describe '1 May 2015' do
       it 'should be 1 May 50 (2015 CE)' do
-        expect(helper.sca_date('1 May 2015 8:00 pm')).to eq ' 1 May 50 (2015&nbsp;CE)  8:00 pm'
+        expect(helper.sca_date('1 May 2015 8:00 pm')).to eq ' 1 May 50 (2015CE)  8:00 pm'
       end
     end
   end

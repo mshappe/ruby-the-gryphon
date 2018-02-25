@@ -1,4 +1,4 @@
 .row
   .col-md-6.col-xs-8=link_to reign.name, edit_manage_reign_path(reign)
-  .col-md-3.hidden-xs=event_date(reign.crown_event, format: :date_only_no_ce)
-  .col-md-3.hidden-xs=event_date(reign.coronation_event, format: :date_only_no_ce) if reign.coronation_event_id?
+  .col-md-3.hidden-xs=event_date(reign.crown_event, format: :date_only)
+  .col-md-3.hidden-xs=event_date(reign.coronation_event, format: :date_only) if reign.coronation_event_id?

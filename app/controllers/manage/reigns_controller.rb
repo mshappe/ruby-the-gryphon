@@ -33,8 +33,8 @@ class Manage::ReignsController < Manage::ManagementController
   end
 
   def get_reign_events
-    @crowns = Event.where('name ILIKE ?', '%Crown Tour%').select(:id, :name, :start_at).order(start_at: :desc)
-    @coronations = Event.where('name ILIKE ?', '%Coronation%').select(:id, :name, :start_at).order(start_at: :desc)
+    @crowns = Event.where('name SIMILAR TO ?', '%(Fall|Spring|st|th) Crown%').select(:id, :name, :start_at).order(start_at: :desc)
+    @coronations = Event.where('name SIMILAR TO ?', '%(Fall|Spring|st|th) Coronation%').select(:id, :name, :start_at).order(start_at: :desc)
   end
 
   def next_id

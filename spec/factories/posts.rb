@@ -14,10 +14,13 @@
 #  approved        :datetime
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  type            :string           default("Post")
+#  body_fields     :jsonb
 #
 # Indexes
 #
 #  index_posts_on_persona_id       (persona_id)
+#  index_posts_on_type             (type)
 #  index_posts_on_warrant_type_id  (warrant_type_id)
 #
 

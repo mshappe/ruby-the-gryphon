@@ -72,6 +72,7 @@ Rails.application.routes.draw do
     resources :reigns, except: [:destroy]
     resources :users, only: [:show, :edit, :update, :destroy]
     resources :warrants, only: [:show, :edit, :update, :destroy]
+    resources :reports, only: [:show, :edit, :update, :destroy]
   end
 
   root to: 'welcome#index'

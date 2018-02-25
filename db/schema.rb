@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703234301) do
+ActiveRecord::Schema.define(version: 20171225204703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -491,11 +491,14 @@ ActiveRecord::Schema.define(version: 20170703234301) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "approved"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.string   "type",                        default: "Post"
+    t.jsonb    "body_fields"
   end
 
   add_index "posts", ["persona_id"], name: "index_posts_on_persona_id", using: :btree
+  add_index "posts", ["type"], name: "index_posts_on_type", using: :btree
   add_index "posts", ["warrant_type_id"], name: "index_posts_on_warrant_type_id", using: :btree
 
   create_table "reign_images", force: :cascade do |t|
@@ -542,6 +545,16 @@ ActiveRecord::Schema.define(version: 20170703234301) do
   add_index "reigns", ["crown_event_id"], name: "index_reigns_on_crown_event_id", using: :btree
   add_index "reigns", ["runner_up_consort_persona_id"], name: "index_reigns_on_runner_up_consort_persona_id", using: :btree
   add_index "reigns", ["runner_up_persona_id"], name: "index_reigns_on_runner_up_persona_id", using: :btree
+
+  create_table "report_templates", force: :cascade do |t|
+    t.integer  "warrant_type_id"
+    t.string   "title"
+    t.jsonb    "fields"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "report_templates", ["warrant_type_id"], name: "index_report_templates_on_warrant_type_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -748,6 +761,7 @@ ActiveRecord::Schema.define(version: 20170703234301) do
   add_foreign_key "personas", "persona_types"
   add_foreign_key "personas", "users", on_delete: :nullify
   add_foreign_key "poll_answers", "polls"
+  add_foreign_key "report_templates", "warrant_types"
   add_foreign_key "warrants", "branches"
   add_foreign_key "warrants", "people"
   add_foreign_key "warrants", "warrant_types"

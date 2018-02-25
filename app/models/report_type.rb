@@ -11,18 +11,5 @@
 #  updated_at  :datetime         not null
 #
 
-class DropDownItem < ActiveRecord::Base
-  validates :name, presence: true, uniqueness: true
-end
-
-class AwardScribeType < DropDownItem
-end
-
-class AwardType < DropDownItem
-end
-
-class ImageType <DropDownItem
-end
-
-class TreatyType < DropDownItem
+class ReportType < PostType
 end

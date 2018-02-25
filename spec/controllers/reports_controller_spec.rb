@@ -24,31 +24,8 @@
 #  index_posts_on_warrant_type_id  (warrant_type_id)
 #
 
-class Post < ActiveRecord::Base
-  include PgSearch
+require 'rails_helper'
 
-  belongs_to :persona
-  belongs_to :post_type
-  belongs_to :warrant_type
-  validates :title, presence: true
+RSpec.describe ReportsController, type: :controller do
 
-  delegate :name, to: :persona, prefix: true
-
-  pg_search_scope :search_for, against: {
-    title: 'A',
-    body: 'B'
-  }, using: {
-    tsearch: {
-      prefix: true,
-      negation: true,
-      any_word: true,
-      dictionary: 'english'
-    }
-  }
-  paginates_per 5
-
-  scope :approved, ->() { where.not(approved: nil) }
-  scope :announcements, ->() { joins(:post_type).where(drop_down_items: { type: 'PostType', name: 'Announcement' } )}
-
-  delegate :name, to: :persona, prefix: true
 end
