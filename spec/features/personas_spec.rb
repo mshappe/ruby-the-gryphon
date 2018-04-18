@@ -6,7 +6,7 @@ RSpec.describe 'Persona stuff', type: :feature do
   let(:persona) { create :persona, user: user }
 
   before :each do
-    user.confirm!
+    user.confirm
     user.save!
 
     visit '/users/sign_in'

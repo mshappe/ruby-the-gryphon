@@ -32,7 +32,7 @@ Capybara::Webkit.configure do |webkit_config|
 end
 
 RSpec.configure do |config|
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
   config.include FactoryBot::Syntax::Methods
   config.include Paperclip::Shoulda::Matchers

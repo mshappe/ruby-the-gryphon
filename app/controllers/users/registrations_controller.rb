@@ -48,15 +48,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 # You can put the params you want to permit in the empty array.
   def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:email, :password, :password_confirmation,
-               :current_password,
-               person_attributes: [
+    devise_parameter_sanitizer.permit(:account_update,
+      keys: [:email, :password, :password_confirmation,
+             :current_password,
+             person_attributes: [
                 :id, :branch_id, :name, :private_email, :private_address,
                 :private_phone, :private_persona,
                 address_attributes: [:id, :address, :city, :state, :postal_code, :country]
-              ])
-    end
+              ]
+            ]
+    )
   end
 
   def create_nested_models

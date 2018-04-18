@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'puma'
 gem 'rails', '~> 4.2.10'
-gem 'pg'
+gem 'pg', '~> 0.15'
 gem 'pg_search'
 gem 'sidekiq'
 
@@ -16,7 +16,7 @@ gem 'carmen-rails', '~> 1.0.1'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'country_select'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
-gem 'devise', '~> 3.4.1'
+gem 'devise', '~> 4.4.0'
 gem 'geocoder'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
@@ -46,9 +46,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development do
   gem 'better_errors'
-  gem 'capistrano-rails'
-  gem 'capistrano-passenger'
-  gem 'capistrano-rvm'
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rspec', require: false

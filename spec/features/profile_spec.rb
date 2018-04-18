@@ -5,7 +5,7 @@ RSpec.describe 'Profile' do
   let!(:person) { create :person, user: user }
 
   before :each do
-    user.confirm!
+    user.confirm
     user.save!
 
     visit '/'
