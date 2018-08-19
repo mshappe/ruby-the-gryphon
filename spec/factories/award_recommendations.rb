@@ -32,16 +32,16 @@ FactoryBot.define do
   factory :award_recommendation do
     association :award
     association :persona
-    persona_name "MyString"
-    legal_name "MyString"
+    persona_name { "MyString" }
+    legal_name { "MyString" }
     association :branch
-    gender "MyString"
-    persona_description "MyText"
-    is_youth false
-    sca_term 1
-    reason "MyText"
-    status ""
-    planned_court_id 1
-    submitted_by_user_id 1
+    gender { "MyString" }
+    persona_description { "MyText" }
+    is_youth { false }
+    sca_term { 1 }
+    reason { "MyText" }
+    status { "" }
+    planned_court_id { 1 }
+    submitted_by_user_id { 1 }
   end
 end

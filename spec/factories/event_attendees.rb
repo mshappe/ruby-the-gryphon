@@ -20,10 +20,10 @@
 
 FactoryBot.define do
   factory :event_attendee do
-    event nil
-persona nil
-warrant_type nil
-award_recommendation nil
+    event { nil }
+persona { nil }
+warrant_type { nil }
+award_recommendation { nil }
   end
 
 end

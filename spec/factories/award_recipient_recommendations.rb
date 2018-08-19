@@ -16,8 +16,8 @@
 
 FactoryBot.define do
   factory :award_recipient_recommendation do
-    award_recipient nil
-award_recommendation nil
+    award_recipient { nil }
+award_recommendation { nil }
   end
 
 end

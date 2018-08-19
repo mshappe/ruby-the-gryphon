@@ -25,11 +25,11 @@
 FactoryBot.define do
   factory :award do
     sequence(:name) { |n| "#{n}-MyString" }
-    description "MyText"
-    precedence 1
-    award_type_id 1
+    description { "MyText" }
+    precedence { 1 }
+    award_type_id { 1 }
     association :branch
-    active true
+    active { true }
   end
 
 end

@@ -45,29 +45,29 @@
 FactoryBot.define do
   factory :event do
     sequence(:name) { Faker::Name.name }
-    start_at 10.days.from_now
-    end_at 11.days.from_now
-    url "MyString"
-    branch nil
-    sponsor_branch nil
-    unlisted_host "MyString"
-    unlisted_sponsor "MyString"
-    site_name "MyString"
-    address nil
-    web_ad "MyText"
-    comments "MyText"
-    admin_comments "MyText"
-    submitter_persona nil
-    submitter_sca_name "MyString"
-    submitter_legal_name "MyString"
-    submitter_phone "MyString"
-    submitter_email "MyString"
-    steward_persona nil
-    steward_sca_name "MyString"
-    steward_legal_name "MyString"
-    steward_phone "MyString"
-    steward_email "MyString"
-    submission_state 'queued'
+    start_at { 10.days.from_now }
+    end_at { 11.days.from_now }
+    url { "MyString" }
+    branch { nil }
+    sponsor_branch { nil }
+    unlisted_host { "MyString" }
+    unlisted_sponsor { "MyString" }
+    site_name { "MyString" }
+    address { nil }
+    web_ad { "MyText" }
+    comments { "MyText" }
+    admin_comments { "MyText" }
+    submitter_persona { nil }
+    submitter_sca_name { "MyString" }
+    submitter_legal_name { "MyString" }
+    submitter_phone { "MyString" }
+    submitter_email { "MyString" }
+    steward_persona { nil }
+    steward_sca_name { "MyString" }
+    steward_legal_name { "MyString" }
+    steward_phone { "MyString" }
+    steward_email { "MyString" }
+    submission_state { 'queued' }
   end
 
 end

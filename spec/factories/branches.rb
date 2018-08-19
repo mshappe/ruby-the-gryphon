@@ -35,12 +35,12 @@ FactoryBot.define do
     sequence(:name) { Faker::Name.name }
     association :branch_type
     association :region
-    map_coordinates "MyString"
-    parent_branch_id nil
-    city "MyString"
-    state "MyString"
-    url "MyString"
-    active false
+    map_coordinates { "MyString" }
+    parent_branch_id { nil }
+    city { "MyString" }
+    state { "MyString" }
+    url { "MyString" }
+    active { false }
   end
 
 end

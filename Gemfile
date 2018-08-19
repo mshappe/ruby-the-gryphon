@@ -1,4 +1,4 @@
-#ruby=2.4.1
+#ruby=2.5.1
 #ruby-gemset=ruby-gryphon
 source 'https://rubygems.org'
 
@@ -59,8 +59,9 @@ group :development, :test do
   gem 'annotate'
   gem 'awesome_print'
   gem 'byebug'
-  gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit', branch: 'master'
+  gem 'capybara-webkit'
   gem 'database_cleaner'
+  gem 'dotenv'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails', '~> 3'

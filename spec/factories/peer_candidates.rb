@@ -18,7 +18,7 @@
 
 FactoryBot.define do
   factory :peer_candidate do
-    award nil
-    persona nil
+    award { nil }
+    persona { nil }
   end
 end

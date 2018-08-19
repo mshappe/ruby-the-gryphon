@@ -20,11 +20,11 @@
 
 FactoryBot.define do
   factory :address do
-    address "MyString"
-    city "MyString"
-    state 'MN'
-    postal_code "55423"
-    country "US"
+    address { "MyString" }
+    city { "MyString" }
+    state { 'MN' }
+    postal_code { "55423" }
+    country { "US" }
   end
 
 end

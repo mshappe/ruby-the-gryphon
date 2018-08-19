@@ -28,10 +28,10 @@ FactoryBot.define do
   factory :persona do
     user
     sequence(:name) { Faker::Name.name }
-    honorific "MyString"
+    honorific { "MyString" }
     persona_type
-    description "MyText"
-    name_registered "2015-04-13 20:25:33"
+    description { "MyText" }
+    name_registered { "2015-04-13 20:25:33" }
   end
 
 end

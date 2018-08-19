@@ -15,7 +15,7 @@
 
 FactoryBot.define do
   factory :authorization_type do
-    name "MyString"
+    name { "MyString" }
   end
 
 end

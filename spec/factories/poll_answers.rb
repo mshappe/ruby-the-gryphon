@@ -17,9 +17,9 @@
 
 FactoryBot.define do
   factory :poll_answer do
-    poll nil
-    active false
-    answer "MyText"
-    votes 1
+    poll { nil }
+    active { false }
+    answer { "MyText" }
+    votes { 1 }
   end
 end

@@ -11,7 +11,7 @@
 
 FactoryBot.define do
   factory :poll do
-    question "MyText"
-    active false
+    question { "MyText" }
+    active { false }
   end
 end

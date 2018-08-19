@@ -31,6 +31,13 @@ Capybara::Webkit.configure do |webkit_config|
   webkit_config.allow_url('fonts.googleapis.com')
 end
 
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.extend ControllerMacros, type: :controller

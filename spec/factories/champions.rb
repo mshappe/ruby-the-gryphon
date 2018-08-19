@@ -17,8 +17,8 @@
 
 FactoryBot.define do
   factory :champion do
-    persona nil
-    reign nil
-    name "MyString"
+    persona { nil }
+    reign { nil }
+    name { "MyString" }
   end
 end
