@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Manage::ManagementController < ApplicationController
   layout 'management'
   before_filter :authenticate_user!

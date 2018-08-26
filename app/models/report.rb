@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -25,7 +27,7 @@
 #
 
 class BodyFieldsValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
+  def validate_each(record, _attribute, _value)
     unless record.fields.blank? || record.fields.is_a?(Array)
       record.errors[:body_fields] << 'fields can be blank or must be an array or report field structures'
       return
@@ -36,7 +38,7 @@ class BodyFieldsValidator < ActiveModel::EachValidator
         record.errors[:body_fields] << 'fields must be JSON objects [hashes]'
         return
       end
-      unless f.keys.include?(:title) && f.keys.include?(:text)
+      unless f.key?(:title) && f.key?(:text)
         record.errors[:body_fields] << 'Each field record must have a title and text'
       end
       unless (f.keys - Report::FIELD_KEYS).blank?
@@ -47,7 +49,7 @@ class BodyFieldsValidator < ActiveModel::EachValidator
 end
 
 class Report < Post
-  FIELD_KEYS = %i(title text)
+  FIELD_KEYS = %i[title text].freeze
 
   belongs_to :report_type, foreign_key: 'post_type_id', class_name: 'ReportType'
 

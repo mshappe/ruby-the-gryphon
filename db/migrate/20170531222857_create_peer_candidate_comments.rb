@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePeerCandidateComments < ActiveRecord::Migration
   def change
     create_table :peer_candidate_comments do |t|

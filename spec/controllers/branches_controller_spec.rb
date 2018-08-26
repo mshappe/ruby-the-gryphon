@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: branches
@@ -32,7 +34,7 @@
 
 require 'rails_helper'
 
-RSpec.describe BranchesController, :type => :controller do
+RSpec.describe BranchesController, type: :controller do
   describe '#show' do
     before :each do
       @branch = create :branch
@@ -51,7 +53,5 @@ RSpec.describe BranchesController, :type => :controller do
       expect(assigns[:events]).to match_array [@event, @other_event]
       expect(assigns[:events]).to_not match_array [@old_event, @someone_else_event]
     end
-
   end
-
 end

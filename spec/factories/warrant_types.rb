@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: warrant_types
@@ -29,16 +31,15 @@
 
 FactoryBot.define do
   factory :warrant_type do
-    name "MyString"
-    email "MyString"
-    missive false
-    stallari_order 1
-    job_description "MyText"
-    superior_warrant_id nil
-    background_check_required false
-    northwatch_display false
-    icon_file_name "MyString"
-    active false
+    name { 'MyString' }
+    email { 'MyString' }
+    missive { false }
+    stallari_order { 1 }
+    job_description { 'MyText' }
+    superior_warrant_id { nil }
+    background_check_required { false }
+    northwatch_display { false }
+    icon_file_name { 'MyString' }
+    active { false }
   end
-
 end

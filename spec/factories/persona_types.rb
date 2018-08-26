@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: persona_types
@@ -16,5 +18,4 @@ FactoryBot.define do
   factory :persona_type do
     sequence(:name) { Faker::Name.name }
   end
-
 end

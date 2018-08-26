@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PersonasController < ApplicationController
   respond_to :html, :json
   downloads_files_for :persona, :persona_image
@@ -7,7 +9,9 @@ class PersonasController < ApplicationController
   skip_authorization_check only: [:persona_images]
 
   def show; end
+
   def new; end
+
   def edit; end
 
   def create

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: warrants
@@ -25,7 +27,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Warrant, :type => :model do
+RSpec.describe Warrant, type: :model do
   it { is_expected.to belong_to :warrant_type }
   it { is_expected.to belong_to :person }
   it { is_expected.to belong_to :branch }

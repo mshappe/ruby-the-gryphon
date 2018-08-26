@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class Manage::UsersController < Manage::ManagementController
   load_and_authorize_resource
 
   def show; end
+
   def edit; end
 
   def update
@@ -19,10 +22,8 @@ class Manage::UsersController < Manage::ManagementController
 
   def user_params
     p = params.require(:user).permit(:email, :password, :password_confirmation, role_ids: [], persona_ids: [],
-      person_attributes: [:id, :name,
-        address_attributes: [:id, :address, :city, :postal_code, :state, :country]
-      ]
-    )
+                                                                                person_attributes: [:id, :name,
+                                                                                                    address_attributes: %i[id address city postal_code state country]])
     if p[:password].blank? && p[:password_confirmation].blank?
       p.delete(:password)
       p.delete(:password_confirmation)

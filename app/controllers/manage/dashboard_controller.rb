@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Manage::DashboardController < Manage::ManagementController
   before_filter :get_managables
 

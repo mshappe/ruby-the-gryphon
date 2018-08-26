@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MakeUsernameIndexUnique < ActiveRecord::Migration
   def change
     remove_index :users, :username

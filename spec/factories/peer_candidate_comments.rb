@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: peer_candidate_comments
@@ -18,9 +20,9 @@
 
 FactoryBot.define do
   factory :peer_candidate_comment do
-    peer_candidate nil
-    person nil
-    timestamp "2017-05-31 17:28:57"
-    comments "MyText"
+    peer_candidate { nil }
+    person { nil }
+    timestamp { '2017-05-31 17:28:57' }
+    comments { 'MyText' }
   end
 end

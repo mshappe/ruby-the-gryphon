@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -41,7 +43,7 @@ RSpec.describe PostsController, type: :controller do
       expect(assigns(:posts)).to match_array [@post]
     end
 
-    describe "with full text search" do
+    describe 'with full text search' do
       before :each do
         @other_text = create :post, post_type: @post_type, title: 'NotIt', body: 'NotIt', start_date: 3.days.ago, approved: 3.days.ago
       end
@@ -113,5 +115,4 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
-
 end

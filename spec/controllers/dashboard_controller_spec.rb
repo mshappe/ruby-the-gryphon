@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe DashboardController, :type => :controller do
-
+RSpec.describe DashboardController, type: :controller do
   describe 'GET show' do
     login_user
 
@@ -17,5 +18,4 @@ RSpec.describe DashboardController, :type => :controller do
       expect(assigns[:warrants]).to_not be_nil
     end
   end
-
 end

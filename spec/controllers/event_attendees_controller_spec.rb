@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: event_attendees
@@ -26,8 +28,5 @@ describe EventAttendeesController do
       @event = create :event
       @persona = create :persona
     end
-
-
   end
-
 end

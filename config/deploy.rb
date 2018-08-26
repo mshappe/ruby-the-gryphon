@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
@@ -16,9 +18,7 @@ set :keep_releases, 3
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
-
 namespace :deploy do
-
   task :ensure_db do
     on roles(:db) do
       within release_path do
@@ -31,7 +31,6 @@ namespace :deploy do
 
   before :compile_assets, :ensure_db
 
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -40,5 +39,4 @@ namespace :deploy do
       # end
     end
   end
-
 end

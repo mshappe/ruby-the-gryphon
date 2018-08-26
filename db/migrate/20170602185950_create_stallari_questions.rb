@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateStallariQuestions < ActiveRecord::Migration
   def change
     create_table :stallari_questions do |t|

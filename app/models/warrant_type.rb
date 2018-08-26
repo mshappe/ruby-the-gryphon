@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: warrant_types
@@ -36,6 +38,17 @@ class WarrantType < ActiveRecord::Base
   has_attached_file :warrant_badge, storage: :database
 
   validates :name, presence: true, uniqueness: true
-  validates_attachment_content_type :warrant_badge,  :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :warrant_badge, content_type: /\Aimage\/.*\Z/
 
+  def most_recent_warrant
+    warrants.order(tenure_start: :desc).first
+  end
+
+  def most_recent_warranted_person
+    most_recent_warrant.person
+  end
+  
+  def most_recent_warranted_persona
+    most_recent_warranted_person.personas.primary
+  end
 end

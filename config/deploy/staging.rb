@@ -1,4 +1,6 @@
-server 'bee.itasca.net', user: 'rubygryphon', roles: %w{app db web}
+# frozen_string_literal: true
+
+server 'bee.itasca.net', user: 'rubygryphon', roles: %w[app db web]
 set :rails_env, :staging
 
 # Configuration
@@ -8,8 +10,6 @@ set :rails_env, :staging
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-
-
 
 # Custom SSH Options
 # ==================

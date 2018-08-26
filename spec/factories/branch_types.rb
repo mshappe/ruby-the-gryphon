@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: branch_types
@@ -13,8 +15,7 @@
 FactoryBot.define do
   factory :branch_type do
     sequence(:name) { Faker::Name.name }
-    full_status true
-    has_award false
+    full_status { true }
+    has_award { false }
   end
-
 end

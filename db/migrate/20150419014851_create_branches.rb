@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateBranches < ActiveRecord::Migration
   def change
     create_table :branches do |t|
@@ -16,6 +18,6 @@ class CreateBranches < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :branches, :name
-    add_foreign_key "branches", "branches", column: :parent_branch_id, primary_key: :id, on_delete: :nullify
+    add_foreign_key 'branches', 'branches', column: :parent_branch_id, primary_key: :id, on_delete: :nullify
   end
 end

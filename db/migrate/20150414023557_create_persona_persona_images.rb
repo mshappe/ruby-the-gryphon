@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePersonaPersonaImages < ActiveRecord::Migration
   def self.up
     create_table :persona_images do |t|

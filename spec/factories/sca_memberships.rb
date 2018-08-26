@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sca_memberships
@@ -12,7 +14,7 @@
 
 FactoryBot.define do
   factory :sca_membership do
-    sca_number "MyString"
-    sca_exp_date "2017-06-02 13:48:55"
+    sca_number { 'MyString' }
+    sca_exp_date { '2017-06-02 13:48:55' }
   end
 end

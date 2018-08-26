@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: award_recipients
@@ -36,13 +38,12 @@ FactoryBot.define do
     association :award
     association :persona
     association :court
-    status_id 1
-    received "2015-08-02 17:31:42"
-    revoked "2015-08-02 17:31:42"
-    award_content "MyText"
-    creation_notes "MyText"
-    reason "MyText"
-    note "MyText"
+    status_id { 1 }
+    received { '2015-08-02 17:31:42' }
+    revoked { '2015-08-02 17:31:42' }
+    award_content { 'MyText' }
+    creation_notes { 'MyText' }
+    reason { 'MyText' }
+    note { 'MyText' }
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: awards
@@ -24,7 +26,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Award, :type => :model do
+RSpec.describe Award, type: :model do
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to belong_to :award_type }
   it { is_expected.to belong_to :branch }

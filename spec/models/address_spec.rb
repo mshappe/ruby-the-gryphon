@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: addresses
@@ -20,7 +22,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Address, :type => :model do
+RSpec.describe Address, type: :model do
   it { is_expected.to have_one :person }
   it { is_expected.to respond_to :full_address }
 

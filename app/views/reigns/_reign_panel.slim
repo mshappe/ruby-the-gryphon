@@ -2,7 +2,7 @@
 .panel class="panel-#{manage ? 'danger' : 'default'}"
   .panel-heading
     .panel-title.text-center
-      - if reign.coronation_event_start_at < DateTime.now
+      - if (reign.coronation_event_start_at || DateTime.now) < DateTime.now
         h1 Their Dread Stellar Majesties
       - else
         h1 Their Stellar Highnesses

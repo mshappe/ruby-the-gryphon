@@ -1,6 +1,8 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.describe EventNotification, :type => :mailer do
+require 'rails_helper'
+
+RSpec.describe EventNotification, type: :mailer do
   let(:user) { create :user, personas: [create(:persona)] }
   let(:event) { create :event, submitter_persona: user.personas.first, submission_state: 'queued' }
 
@@ -14,7 +16,7 @@ RSpec.describe EventNotification, :type => :mailer do
   end
 
   describe 'update notification' do
-    let(:mail) { EventNotification.notify_submitter_update(->() { event.update_attribute(:submission_state, 'approved'); event }.call) }
+    let(:mail) { EventNotification.notify_submitter_update(-> { event.update_attribute(:submission_state, 'approved'); event }.call) }
 
     it 'renders useful information' do
       expect(mail.subject).to eq 'Your submission has been approved'

@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 class OfficersController < ApplicationController
   before_filter :get_officers, only: [:index]
   before_filter :get_officer, only: [:show]
-  skip_authorization_check only: [:index, :show, :warrant_badges]
+  skip_authorization_check only: %i[index show warrant_badges]
 
   downloads_files_for :warrant_type, :warrant_badge
 
   def index; end
+
   def show; end
 
   protected
@@ -20,8 +23,8 @@ class OfficersController < ApplicationController
     @subordinate_officers = WarrantType.where(superior_warrant: @officer)
     now = DateTime.current
     @posts = @officer.posts.where('start_date < ?', now)
-      .where('end_date > ? OR end_date IS NULL', now)
-      .approved
+                     .where('end_date > ? OR end_date IS NULL', now)
+                     .approved
     @post_types = PostType.for_officer_page
   end
 end

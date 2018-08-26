@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module VersionHelper
   def version_number
     '0.3.2'

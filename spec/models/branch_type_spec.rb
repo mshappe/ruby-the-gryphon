@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: branch_types
@@ -12,7 +14,7 @@
 
 require 'rails_helper'
 
-RSpec.describe BranchType, :type => :model do
+RSpec.describe BranchType, type: :model do
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_uniqueness_of :name }
 end

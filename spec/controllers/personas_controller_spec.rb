@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: personas
@@ -26,7 +28,7 @@
 
 require 'rails_helper'
 
-RSpec.describe PersonasController, :type => :controller do
+RSpec.describe PersonasController, type: :controller do
   describe 'GET new' do
     describe 'Not logged in' do
       before :each do
@@ -68,7 +70,7 @@ RSpec.describe PersonasController, :type => :controller do
   describe 'POST create' do
     describe 'Not logged in' do
       before :each do
-        post :create, { user_id: 42, name: 'Wombat von Wombatlips' }
+        post :create, user_id: 42, name: 'Wombat von Wombatlips'
       end
 
       it 'should fail' do
@@ -87,7 +89,7 @@ RSpec.describe PersonasController, :type => :controller do
       it 'should succeed' do
         expect(response).to have_http_status :redirect
         expect(response).to redirect_to Persona.last
-        is_expected.to set_flash.to %r[created]
+        is_expected.to set_flash.to /created/
       end
     end
 
@@ -120,7 +122,7 @@ RSpec.describe PersonasController, :type => :controller do
           expect(response).to have_http_status :redirect
           expect(response).to redirect_to @persona
           expect(@persona.description).to eq 'Beware the viscous giraffe'
-          is_expected.to set_flash.to %r[updated]
+          is_expected.to set_flash.to /updated/
         end
       end
     end
@@ -137,7 +139,7 @@ RSpec.describe PersonasController, :type => :controller do
         it 'should succeed' do
           expect(response).to have_http_status :redirect
           expect(response).to redirect_to edit_user_registration_path @controller.current_user
-          is_expected.to set_flash.to %r[destroyed]
+          is_expected.to set_flash.to /destroyed/
         end
       end
     end

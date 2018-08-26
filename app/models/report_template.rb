@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: report_templates
@@ -15,21 +17,19 @@
 #
 
 class FieldsValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
+  def validate_each(record, _attribute, _value)
     unless record.report_fields.blank? || record.report_fields.is_a?(Array)
       record.errors[:report_fields] << 'must be empty or an Array'
       return
     end
 
     record.report_fields&.each do |rf|
-      unless rf.keys.include?(:type) && rf.keys.include?(:title)
-        record.errors[:report_fields] << "must include a :type and :title"
-      end
+      record.errors[:report_fields] << 'must include a :type and :title' unless rf.key?(:type) && rf.key?(:title)
       unless ReportTemplate::FIELD_TYPES.include?(rf[:type])
         record.errors[:report_fields] << "type must be one of 'text' or 'choice'"
       end
       if rf[:type] == 'choice'
-        unless rf.keys.include?(:choices)
+        unless rf.key?(:choices)
           record.errors[:report_fields] << 'choice type must included choices field'
           next
         end
@@ -46,8 +46,8 @@ class FieldsValidator < ActiveModel::EachValidator
 end
 
 class ReportTemplate < ActiveRecord::Base
-  FIELD_TYPES = %w(text choice)
-  FIELD_KEYS = %i(type title choices)
+  FIELD_TYPES = %w[text choice].freeze
+  FIELD_KEYS = %i[type title choices].freeze
 
   belongs_to :warrant_type
 

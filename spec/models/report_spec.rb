@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -57,7 +59,7 @@ RSpec.describe Report, type: :model do
       ]
       expect(subject).to be_invalid
 
-      subject.fields = [ 'lizard' ]
+      subject.fields = ['lizard']
       expect(subject).to be_invalid
     end
   end

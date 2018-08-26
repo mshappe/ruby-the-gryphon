@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: authorization_cards
@@ -15,8 +17,7 @@
 
 FactoryBot.define do
   factory :authorization_card do
-    user nil
-expiration_date "2016-02-19 12:50:03"
+    user { nil }
+    expiration_date { '2016-02-19 12:50:03' }
   end
-
 end

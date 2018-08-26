@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: people
@@ -41,7 +43,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Person, :type => :model do
+RSpec.describe Person, type: :model do
   it { is_expected.to have_attached_file :heraldic_image }
 
   it { is_expected.to belong_to :user }

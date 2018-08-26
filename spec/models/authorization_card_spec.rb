@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: authorization_cards
@@ -15,7 +17,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AuthorizationCard, :type => :model do
+RSpec.describe AuthorizationCard, type: :model do
   it { is_expected.to belong_to :user }
   it { is_expected.to validate_presence_of :expiration_date }
 end

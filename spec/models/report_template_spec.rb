@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: report_templates
@@ -48,7 +50,7 @@ RSpec.describe ReportTemplate, type: :model do
 
     it 'must have a type and a title in each record' do
       subject.report_fields = [
-        { }
+        {}
       ]
       expect(subject).to be_invalid
 

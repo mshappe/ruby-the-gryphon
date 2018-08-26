@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: martial_activity_types
@@ -14,6 +16,6 @@
 
 FactoryBot.define do
   factory :martial_activity_type do
-    name "MyString"
+    name { 'MyString' }
   end
 end

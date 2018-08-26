@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -27,5 +29,4 @@
 require 'rails_helper'
 
 RSpec.describe ReportsController, type: :controller do
-
 end

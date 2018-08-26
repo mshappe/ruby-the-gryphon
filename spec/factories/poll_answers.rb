@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: poll_answers
@@ -17,9 +19,9 @@
 
 FactoryBot.define do
   factory :poll_answer do
-    poll nil
-    active false
-    answer "MyText"
-    votes 1
+    poll { nil }
+    active { false }
+    answer { 'MyText' }
+    votes { 1 }
   end
 end

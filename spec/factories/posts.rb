@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -26,14 +28,14 @@
 
 FactoryBot.define do
   factory :post do
-    post_type_id 1
-    persona nil
-    warrant_type nil
-    title "MyString"
-    body "MyText"
-    url "MyString"
-    start_date "2017-06-02 15:24:40"
-    end_date "2017-06-02 15:24:40"
-    approved "2017-06-02 15:24:40"
+    post_type_id { 1 }
+    persona { nil }
+    warrant_type { nil }
+    title { 'MyString' }
+    body { 'MyText' }
+    url { 'MyString' }
+    start_date { '2017-06-02 15:24:40' }
+    end_date { '2017-06-02 15:24:40' }
+    approved { '2017-06-02 15:24:40' }
   end
 end

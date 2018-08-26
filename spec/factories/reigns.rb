@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reigns
@@ -35,15 +37,14 @@
 
 FactoryBot.define do
   factory :reign do
-    name "MyString"
-    combatant_persona_id 1
-    consort_persona_id 1
-    crown_event_id 1
-    coronation_event_id 1
-    url "MyString"
-    runner_up_persona_id 1
-    runner_up_consort_persona_id 1
-    reign_map_description 1
+    name { 'MyString' }
+    combatant_persona_id { 1 }
+    consort_persona_id { 1 }
+    crown_event_id { 1 }
+    coronation_event_id { 1 }
+    url { 'MyString' }
+    runner_up_persona_id { 1 }
+    runner_up_consort_persona_id { 1 }
+    reign_map_description { 1 }
   end
-
 end

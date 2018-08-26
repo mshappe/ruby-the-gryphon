@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -42,8 +44,8 @@ FactoryBot.define do
   pw = SecureRandom.uuid
   factory :user do
     sequence(:email) { Faker::Internet.email }
-    password pw
-    password_confirmation pw
+    password { pw }
+    password_confirmation { pw }
 
     factory :adminuser
   end

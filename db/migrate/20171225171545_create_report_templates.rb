@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateReportTemplates < ActiveRecord::Migration
   def change
     create_table :report_templates do |t|

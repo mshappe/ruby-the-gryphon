@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reigns
@@ -36,5 +38,4 @@
 require 'rails_helper'
 
 RSpec.describe ReignsController, type: :controller do
-
 end

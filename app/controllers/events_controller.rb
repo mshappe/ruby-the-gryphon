@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :create_nested_models, only: [:new, :edit]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :create_nested_models, only: %i[new edit]
 
   def index
     @q = @events.ransack(query)
@@ -15,6 +17,7 @@ class EventsController < ApplicationController
   end
 
   def show; end
+
   def new; end
 
   def create
@@ -56,9 +59,7 @@ class EventsController < ApplicationController
   end
 
   def enforce_submission_state
-    if @event.submission_state? || cannot?(:manage, Event)
-      @event.submission_state = 'queued'
-    end
+    @event.submission_state = 'queued' if @event.submission_state? || cannot?(:manage, Event)
   end
 
   def event_params

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: branches
@@ -45,8 +47,8 @@ class Branch < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { scope: :branch_type_id }
   validates :branch_type, presence: true
   validates :region, presence: true
-  validates_attachment_content_type :branch_heraldry, :content_type => /\Aimage\/.*\Z/
-  validates_attachment_content_type :map_image, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :branch_heraldry, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :map_image, content_type: /\Aimage\/.*\Z/
 
   scope :by_name, -> { order :name }
 

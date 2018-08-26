@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: report_templates
@@ -16,8 +18,8 @@
 
 FactoryBot.define do
   factory :report_template do
-    warrant_type nil
-    title "MyString"
-    fields ""
+    warrant_type { nil }
+    title { 'MyString' }
+    fields { '' }
   end
 end

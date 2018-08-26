@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe WelcomeController, :type => :controller do
+RSpec.describe WelcomeController, type: :controller do
   describe 'GET :index' do
     before :each do
       create :event, submission_state: 'approved' # We don't need to reference it.
@@ -15,5 +17,4 @@ RSpec.describe WelcomeController, :type => :controller do
       expect(assigns(:posts)).to_not be_empty
     end
   end
-
 end

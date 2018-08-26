@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeUserToPersonInAuthorizations < ActiveRecord::Migration
   def change
     rename_column :authorizations, :user_id, :person_id

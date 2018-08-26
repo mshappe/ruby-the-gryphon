@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: personas
@@ -26,7 +28,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Persona, :type => :model do
+RSpec.describe Persona, type: :model do
   it { is_expected.to belong_to :user }
   it { is_expected.to belong_to :persona_type }
   it { is_expected.to have_one(:person).through :user }

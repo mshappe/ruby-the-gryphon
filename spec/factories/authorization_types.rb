@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: authorization_types
@@ -15,7 +17,6 @@
 
 FactoryBot.define do
   factory :authorization_type do
-    name "MyString"
+    name { 'MyString' }
   end
-
 end

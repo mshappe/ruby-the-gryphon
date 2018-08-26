@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixAuthorizationType < ActiveRecord::Migration
   def change
     remove_column :authorization_types, :group, :integer

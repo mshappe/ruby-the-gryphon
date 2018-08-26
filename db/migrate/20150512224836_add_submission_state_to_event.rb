@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSubmissionStateToEvent < ActiveRecord::Migration
   def change
     add_column :events, :submission_state, :string

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -40,7 +42,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, :type => :model do
+RSpec.describe User, type: :model do
   it { is_expected.to have_one :person }
   it { is_expected.to have_many :personas }
   it { is_expected.to have_many(:authorizations).through(:person) }

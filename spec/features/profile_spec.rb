@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Profile' do
@@ -5,7 +7,7 @@ RSpec.describe 'Profile' do
   let!(:person) { create :person, user: user }
 
   before :each do
-    user.confirm!
+    user.confirm
     user.save!
 
     visit '/'
