@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: award_recipient_recommendations
@@ -17,7 +19,6 @@
 FactoryBot.define do
   factory :award_recipient_recommendation do
     award_recipient { nil }
-award_recommendation { nil }
+    award_recommendation { nil }
   end
-
 end

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Ability
   include CanCan::Ability
 
-  # TODO Eventually, some permissions will be dynamically defined
+  # TODO: Eventually, some permissions will be dynamically defined
   def initialize(user)
     user ||= User.new
 
@@ -15,10 +17,10 @@ class Ability
     # What can be publicly read?
     can :read, [Award, Branch, Person, Persona, Reign]
     can :read, Event, submission_state: 'approved'
-    can [:read, :edit, :update], User, id: user.id
+    can %i[read edit update], User, id: user.id
 
     # What belongs to a specific user and can be edited by that user
-    can :update, Person,  user_id: user.id
+    can :update, Person, user_id: user.id
     can :crud, Persona, user_id: user.id
 
     can :create, Event if user.persisted? # No visitors
@@ -29,7 +31,7 @@ class Ability
     can :read, WarrantType
     can :cru, Post, persona_id: user.persona_ids
     can :read, Post do |post|
-      post.approved != nil
+      !post.approved.nil?
     end
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: champions
@@ -19,6 +21,6 @@ FactoryBot.define do
   factory :champion do
     persona { nil }
     reign { nil }
-    name { "MyString" }
+    name { 'MyString' }
   end
 end

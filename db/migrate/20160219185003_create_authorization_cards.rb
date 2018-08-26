@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAuthorizationCards < ActiveRecord::Migration
   def change
     create_table :authorization_cards do |t|

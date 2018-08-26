@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateReigns < ActiveRecord::Migration
   def change
     create_table :reigns do |t|

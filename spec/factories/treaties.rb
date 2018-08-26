@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: treaties
@@ -29,15 +31,15 @@
 FactoryBot.define do
   factory :treaty do
     persona { nil }
-    treaty_type { "" }
+    treaty_type { '' }
     reign { nil }
     foreign_branch_id { 1 }
-    user_comment { "MyText" }
-    royal_comment { "MyText" }
-    foreign_comment { "MyText" }
-    royal_approved { "2017-06-02 14:50:14" }
-    foreign_approved { "2017-06-02 14:50:14" }
-    royal_status { "" }
-    foreign_status { "" }
+    user_comment { 'MyText' }
+    royal_comment { 'MyText' }
+    foreign_comment { 'MyText' }
+    royal_approved { '2017-06-02 14:50:14' }
+    foreign_approved { '2017-06-02 14:50:14' }
+    royal_status { '' }
+    foreign_status { '' }
   end
 end

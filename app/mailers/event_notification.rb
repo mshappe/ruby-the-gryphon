@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventNotification < ApplicationMailer
   def notify_submitter(user, event)
     @submitter = event.submitter_persona

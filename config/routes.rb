@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Route Map
 #
 #                   Prefix Verb   URI Pattern                                 Controller#Action
@@ -63,15 +65,15 @@
 #
 
 Rails.application.routes.draw do
-
   namespace :manage do
     get '/', controller: 'dashboard', action: 'index'
 
-    resources :roles, only: [:create, :destroy]
-    resources :personas, only: [:show, :edit, :update, :destroy]
+    resources :roles, only: %i[create destroy]
+    resources :personas, only: %i[show edit update destroy]
     resources :reigns, except: [:destroy]
-    resources :users, only: [:show, :edit, :update, :destroy]
-    resources :warrants, only: [:show, :edit, :update, :destroy]
+    resources :users, only: %i[show edit update destroy]
+    resources :warrants, only: %i[show edit update destroy]
+    resources :reports, only: %i[show edit update destroy]
   end
 
   root to: 'welcome#index'
@@ -96,7 +98,7 @@ Rails.application.routes.draw do
     get '/', to: 'manage/dashboard#index'
   end
 
-  resources :officers, only: [:index, :show]
+  resources :officers, only: %i[index show]
 
   resources :personas, except: [:index] do
     collection do
@@ -107,7 +109,7 @@ Rails.application.routes.draw do
   get '/reigns/reign_images/:id', controller: 'reigns', action: 'reign_images'
   get '/reigns/reign_images/:id/view', controller: 'reigns', action: 'view_reign_image', as: 'view_reign_image'
 
-  resources :posts, only: [:index, :show] do
+  resources :posts, only: %i[index show] do
     collection do
       get '/:post_type_name', action: :index, as: 'section'
     end

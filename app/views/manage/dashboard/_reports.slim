@@ -1,0 +1,17 @@
+.panel.panel-danger
+  .panel-heading
+    a#manage-reports name='manage-reports'
+      .row
+        .col-md-3.col-xs-3 Reports
+        .col-md-6.text-center
+          =< search_form_for q, url: manage_path(anchor: 'manage-reports'), as: :report_q, class: 'form-inline' do |f|
+            = f.search_field :title_or_body_cont, placeholder: 'Title or body contains'
+  .panel-body
+    .row
+      .col-md-12= paginate reports, param_name: :report_page, params: { anchor: 'manage-reports' }
+    .row.hidden-xs
+      .col-md-6 Title
+      .col-md-6 Submitted on
+    = render reports
+    .row
+      .col-md-12= paginate reports, param_name: :report_page, params: { anchor: 'manage-reports' }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: adminusers
@@ -33,6 +35,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Adminuser, :type => :model do
+RSpec.describe Adminuser, type: :model do
   it { is_expected.to validate_presence_of :email }
 end

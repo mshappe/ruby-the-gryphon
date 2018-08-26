@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: drop_down_items
@@ -14,7 +16,7 @@
 FactoryBot.define do
   factory :drop_down_item do
     sequence(:name) { Faker::Name.name }
-    description { "MyText" }
+    description { 'MyText' }
     active { false }
   end
 

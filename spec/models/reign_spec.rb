@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reigns
@@ -35,7 +37,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Reign, :type => :model do
+RSpec.describe Reign, type: :model do
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_uniqueness_of :name }
   it { is_expected.to belong_to :combatant_persona }

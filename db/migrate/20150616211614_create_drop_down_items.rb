@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDropDownItems < ActiveRecord::Migration
   def change
     create_table :drop_down_items do |t|

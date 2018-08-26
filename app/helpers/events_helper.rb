@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 module EventsHelper
   AS1 = Date.new(1966, 5, 1)
 
   def sca_date(datetime, format: '')
     datetime = datetime.to_time # Just in case
     strformat = "%e %B #{sca_year(datetime)}"
-    strformat += ' (%Y&nbsp;CE)' unless format.to_s =~ %r[no_ce]
-    strformat += ' %l:%M %P' unless format.to_s =~ %r[date_only]
+    strformat += ' (%YCE)' unless format.to_s =~ /no_ce/
+    strformat += ' %l:%M %P' unless format.to_s =~ /date_only/
 
     raw datetime.strftime strformat
   end
@@ -18,12 +20,12 @@ module EventsHelper
   end
 
   def event_date(event, format: '')
-    if event.start_at.to_date === event.end_at.to_date && format =~ %r[date_only]
+    if event.start_at.to_date === event.end_at.to_date && format =~ /date_only/
       sca_date(event.start_at, format: format)
     else
       sca_date(event.start_at, format: format) +
-          raw('&ndash;') +
-          sca_date(event.end_at, format: format)
+        raw('&ndash;') +
+        sca_date(event.end_at, format: format)
     end
   end
 end

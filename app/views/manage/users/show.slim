@@ -6,7 +6,7 @@
         span.label.label-info= r.name
 .row
   .col-md-8= render 'people/person', person: @user.person if @user.person
-  .col-md-4= render 'personas'
+  .col-md-4= render 'personas', personas: @user.personas
 .row
   .col-md-12.col-sm-12=render 'warrants/warrants', warrants: @user.warrants unless @user.warrants.blank?
 .row

@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 module Submittable
   extend ActiveSupport::Concern
 
-  STATES = %w[queued approved rejected retired]
+  STATES = %w[queued approved rejected retired].freeze
 
   included do
-    belongs_to :supersedes, class_name: self.name
-    belongs_to :superseded_by, class_name: self.name
+    belongs_to :supersedes, class_name: name
+    belongs_to :superseded_by, class_name: name
 
     validates :submission_state, presence: true, inclusion: STATES
 
@@ -23,9 +25,9 @@ module Submittable
   end
 
   def update_attributes(params)
-    if self.submission_state == 'queued' && params['submission_state'] == 'approved' &&
-        self.supersedes.try(:submission_state) == 'approved'
-      self.supersedes.retire(self)
+    if submission_state == 'queued' && params['submission_state'] == 'approved' &&
+       supersedes.try(:submission_state) == 'approved'
+      supersedes.retire(self)
     end
 
     super(params)

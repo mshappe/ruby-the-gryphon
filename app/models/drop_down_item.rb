@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: drop_down_items
@@ -21,10 +23,7 @@ end
 class AwardType < DropDownItem
 end
 
-class ImageType <DropDownItem
-end
-
-class Report < DropDownItem
+class ImageType < DropDownItem
 end
 
 class TreatyType < DropDownItem

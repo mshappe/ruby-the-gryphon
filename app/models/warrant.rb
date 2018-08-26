@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: warrants
@@ -33,7 +35,7 @@ class Warrant < ActiveRecord::Base
   validates :tenure_start, presence: true
 
   scope :approved, -> { where.not(approved: nil) }
-  scope :current_holders_by_type, -> (type) do
+  scope :current_holders_by_type, ->(type) do
     now = DateTime.current
     where(warrant_type: type)
       .approved

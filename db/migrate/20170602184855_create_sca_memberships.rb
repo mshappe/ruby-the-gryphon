@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateScaMemberships < ActiveRecord::Migration
   def change
     create_table :sca_memberships, id: false do |t|

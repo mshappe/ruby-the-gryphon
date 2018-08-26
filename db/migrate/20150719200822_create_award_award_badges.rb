@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAwardAwardBadges < ActiveRecord::Migration
   def self.up
     create_table :award_badges do |t|

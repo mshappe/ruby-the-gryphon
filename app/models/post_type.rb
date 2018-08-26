@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: drop_down_items
@@ -13,12 +15,12 @@
 
 class PostType < DropDownItem
   OFFICER_PAGE_POST_TYPES = [
-    "Missives",
-    "Resource Links",
-    "Forms",
-    "Handbooks",
-    "Reporting Schedules"
-  ]
+    'Missives',
+    'Resource Links',
+    'Forms',
+    'Handbooks',
+    'Reporting Schedules'
+  ].freeze
 
   scope :for_officer_page, -> { where(active: true, name: OFFICER_PAGE_POST_TYPES) }
 end

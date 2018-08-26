@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: peer_candidates
@@ -18,6 +20,6 @@
 
 require 'rails_helper'
 
-RSpec.describe PeerCandidate, :type => :model do
+RSpec.describe PeerCandidate, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

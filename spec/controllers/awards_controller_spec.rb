@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: awards
@@ -30,9 +32,9 @@ RSpec.describe AwardsController, type: :controller do
     @other_branch = create :branch, name: 'A'
 
     @awards = (0..2).collect do |n|
-      create :award, precedence: 3-n, branch: @branch
+      create :award, precedence: 3 - n, branch: @branch
     end
-    @sorted_awards = @awards.sort { |x,y| x.precedence <=> y.precedence }
+    @sorted_awards = @awards.sort_by(&:precedence)
     @other_award = create :award, branch: @other_branch
 
     Rails.application.config.x.branch_name = @branch.name
@@ -146,7 +148,6 @@ RSpec.describe AwardsController, type: :controller do
           expect(assigns[:award_recipients].count).to eq 3
           expect(assigns[:award_recipients]).to match_array @award_recipients1
         end
-
       end
     end
   end

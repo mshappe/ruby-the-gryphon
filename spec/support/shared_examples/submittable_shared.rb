@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.shared_examples 'submittable' do |type|
@@ -15,9 +17,9 @@ RSpec.shared_examples 'submittable' do |type|
     end
 
     Submittable::STATES.each do |state|
-      describe "#{state}" do
+      describe state.to_s do
         it "should only have @#{state}" do
-          expect(Event.send state).to match_array [self.instance_variable_get("@#{state}")]
+          expect(Event.send(state)).to match_array [instance_variable_get("@#{state}")]
         end
       end
     end

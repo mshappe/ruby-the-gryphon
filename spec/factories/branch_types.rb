@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: branch_types
@@ -16,5 +18,4 @@ FactoryBot.define do
     full_status { true }
     has_award { false }
   end
-
 end

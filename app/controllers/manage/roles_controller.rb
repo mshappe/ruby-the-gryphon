@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Manage::RolesController < Manage::ManagementController
   load_and_authorize_resource
 

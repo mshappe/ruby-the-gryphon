@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: authorizations
@@ -18,7 +20,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Authorization, :type => :model do
+RSpec.describe Authorization, type: :model do
   it { is_expected.to belong_to :person }
   it { is_expected.to belong_to :authorization_type }
   it { is_expected.to validate_presence_of :date_of }

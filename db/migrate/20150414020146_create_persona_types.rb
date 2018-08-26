@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePersonaTypes < ActiveRecord::Migration
   def change
     create_table :persona_types do |t|

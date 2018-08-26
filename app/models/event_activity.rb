@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: drop_down_items
@@ -17,5 +19,4 @@ class EventActivity < DropDownItem
   def activity_label
     name.gsub(' ', '&nbsp;').html_safe
   end
-
 end

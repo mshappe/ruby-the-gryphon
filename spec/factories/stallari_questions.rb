@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: stallari_questions
@@ -19,10 +21,10 @@
 
 FactoryBot.define do
   factory :stallari_question do
-    question { "MyText" }
-    answer { "MyText" }
-    reply_email { "MyString" }
-    answered_date { "2017-06-02 13:59:50" }
+    question { 'MyText' }
+    answer { 'MyText' }
+    reply_email { 'MyString' }
+    answered_date { '2017-06-02 13:59:50' }
     answered_persona_id { 1 }
     warrant_type { nil }
     active { false }

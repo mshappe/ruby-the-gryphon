@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Manage::DashboardController < Manage::ManagementController
   before_filter :get_managables
 
@@ -9,6 +11,8 @@ class Manage::DashboardController < Manage::ManagementController
     @roles = Role.all
     @reign_q = Reign.ransack(params[:reign_q])
     @reigns = @reign_q.result.order(id: :desc).page(params[:reign_page]).per(10)
+    @report_q = Report.ransack(params[:report_q])
+    @reports = @report_q.result.order(id: :desc).page(params[:report_page]).per(10)
     authorize! :manage, @users
   end
 end

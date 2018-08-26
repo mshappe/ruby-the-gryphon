@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddMissingIndices < ActiveRecord::Migration
   def change
     add_index :award_badges, :award_id

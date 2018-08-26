@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Manage::RolesController, type: :controller do
-  it_behaves_like 'a management creator', :role, { name: 'wombat' }
+  it_behaves_like 'a management creator', :role, name: 'wombat'
   it_behaves_like 'a management deleter', :role
 
   describe 'role assigned to users' do
@@ -20,7 +22,7 @@ RSpec.describe Manage::RolesController, type: :controller do
 
       it 'should fail' do
         expect(response).to redirect_to :manage
-        expect(flash[:alert]).to match %r[has users assigned]
+        expect(flash[:alert]).to match /has users assigned/
       end
     end
   end

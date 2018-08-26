@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: people
@@ -43,23 +45,22 @@ FactoryBot.define do
   factory :person do
     user
     address
-    name { "MyString" }
-    phone { "MyString" }
-    phone_message { "MyString" }
-    gender { "MyString" }
-    url { "MyString" }
-    date_of_birth { "2015-04-13 17:27:22" }
+    name { 'MyString' }
+    phone { 'MyString' }
+    phone_message { 'MyString' }
+    gender { 'MyString' }
+    url { 'MyString' }
+    date_of_birth { '2015-04-13 17:27:22' }
     sca_number { 1 }
-    sca_expiration_date { "2015-04-13 17:27:22" }
+    sca_expiration_date { '2015-04-13 17:27:22' }
     private_name { false }
     private_address { false }
     private_phone { false }
     private_email { false }
     private_persona { false }
-    authorization_expiration { "2015-04-13 17:27:22" }
+    authorization_expiration { '2015-04-13 17:27:22' }
     active { false }
-    device_registered { "2015-04-13 17:27:22" }
+    device_registered { '2015-04-13 17:27:22' }
     deceased { false }
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWarrantTypeWarrantBadges < ActiveRecord::Migration
   def self.up
     create_table :warrant_badges do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: roles
@@ -17,6 +19,5 @@
 
 FactoryBot.define do
   factory :role do
-    
   end
 end

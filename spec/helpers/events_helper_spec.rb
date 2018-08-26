@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 # Specs in this file have access to a helper object that includes
@@ -10,7 +12,7 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe EventsHelper, :type => :helper do
+RSpec.describe EventsHelper, type: :helper do
   let(:event) { create :event }
 
   describe '#sca_year(date)' do
@@ -30,13 +32,13 @@ RSpec.describe EventsHelper, :type => :helper do
   describe '#sca_date(datetime)' do
     describe '30 April 2015' do
       it 'should be 30 April 49 (2015 CE)' do
-        expect(helper.sca_date('30 April 2015 8:00 pm')).to eq '30 April 49 (2015&nbsp;CE)  8:00 pm'
+        expect(helper.sca_date('30 April 2015 8:00 pm')).to eq '30 April 49 (2015CE)  8:00 pm'
       end
     end
 
     describe '1 May 2015' do
       it 'should be 1 May 50 (2015 CE)' do
-        expect(helper.sca_date('1 May 2015 8:00 pm')).to eq ' 1 May 50 (2015&nbsp;CE)  8:00 pm'
+        expect(helper.sca_date('1 May 2015 8:00 pm')).to eq ' 1 May 50 (2015CE)  8:00 pm'
       end
     end
   end
@@ -63,8 +65,8 @@ RSpec.describe EventsHelper, :type => :helper do
         event.end_at = event.start_at + 48.hours
 
         expect(helper.event_date(event, format: :date_only)).to eq sca_date(event.start_at.to_s, format: :date_only) +
-                                                                       raw('&ndash;') +
-                                                                       sca_date(event.end_at.to_s, format: :date_only)
+                                                                   raw('&ndash;') +
+                                                                   sca_date(event.end_at.to_s, format: :date_only)
       end
     end
   end
@@ -76,8 +78,8 @@ RSpec.describe EventsHelper, :type => :helper do
         event.end_at = event.start_at + 48.hours
 
         expect(helper.event_date(event)).to eq sca_date(event.start_at.to_s) +
-                                                   raw('&ndash;') +
-                                                   sca_date(event.end_at.to_s)
+                                               raw('&ndash;') +
+                                               sca_date(event.end_at.to_s)
       end
     end
   end

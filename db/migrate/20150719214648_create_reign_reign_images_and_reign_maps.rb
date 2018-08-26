@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateReignReignImagesAndReignMaps < ActiveRecord::Migration
   def self.up
     create_table :reign_images do |t|

@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class Manage::PersonasController < Manage::ManagementController
   load_and_authorize_resource
 
   def show; end
+
   def edit; end
 
   def update

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: branches
@@ -35,12 +37,11 @@ FactoryBot.define do
     sequence(:name) { Faker::Name.name }
     association :branch_type
     association :region
-    map_coordinates { "MyString" }
+    map_coordinates { 'MyString' }
     parent_branch_id { nil }
-    city { "MyString" }
-    state { "MyString" }
-    url { "MyString" }
+    city { 'MyString' }
+    state { 'MyString' }
+    url { 'MyString' }
     active { false }
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePersonHeraldicImages < ActiveRecord::Migration
   def self.up
     create_table :heraldic_images do |t|

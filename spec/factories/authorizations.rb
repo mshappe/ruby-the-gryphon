@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: authorizations
@@ -19,9 +21,8 @@
 FactoryBot.define do
   factory :authorization do
     user { nil }
-authorization_type { nil }
-date_of { "2016-02-18 11:53:41" }
-notes { "MyText" }
+    authorization_type { nil }
+    date_of { '2016-02-18 11:53:41' }
+    notes { 'MyText' }
   end
-
 end

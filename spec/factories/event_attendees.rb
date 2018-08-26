@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: event_attendees
@@ -21,9 +23,8 @@
 FactoryBot.define do
   factory :event_attendee do
     event { nil }
-persona { nil }
-warrant_type { nil }
-award_recommendation { nil }
+    persona { nil }
+    warrant_type { nil }
+    award_recommendation { nil }
   end
-
 end

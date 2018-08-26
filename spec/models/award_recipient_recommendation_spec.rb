@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: award_recipient_recommendations
@@ -16,7 +18,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AwardRecipientRecommendation, :type => :model do
+RSpec.describe AwardRecipientRecommendation, type: :model do
   it { is_expected.to belong_to :award_recipient }
   it { is_expected.to belong_to :award_recommendation }
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAttachmentBranchHeraldryToBranches < ActiveRecord::Migration
   def self.up
     remove_column :branches, :branch_heraldry if column_exists? :branches, :branch_heraldry

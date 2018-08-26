@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Persona stuff', type: :feature do
@@ -46,5 +48,4 @@ RSpec.describe 'Persona stuff', type: :feature do
       expect(page).to have_text persona.person.name
     end
   end
-
 end

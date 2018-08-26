@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reigns
@@ -47,13 +49,13 @@ class Reign < ActiveRecord::Base
   has_attached_file :reign_map, storage: :database
 
   validates :name, presence: true, uniqueness: true
-  validates_attachment_content_type :reign_image, :content_type => /\Aimage\/.*\Z/
-  validates_attachment_content_type :reign_map, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :reign_image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :reign_map, content_type: /\Aimage\/.*\Z/
 
   delegate :name, :honorific_and_name, to: :combatant_persona, prefix: true
   delegate :name, :honorific_and_name, to: :consort_persona, prefix: true
   delegate :name, :honorific_and_name, to: :runner_up_persona, prefix: true
   delegate :name, :honorific_and_name, to: :runner_up_consort_persona, prefix: true
-  delegate :name, :start_at, :branch_name, to: :crown_event, prefix: true
-  delegate :name, :start_at, :branch_name, to: :coronation_event, prefix: true
+  delegate :name, :start_at, :branch_name, to: :crown_event, prefix: true, allow_nil: true
+  delegate :name, :start_at, :branch_name, to: :coronation_event, prefix: true, allow_nil: true
 end

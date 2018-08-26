@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 class Manage::ReignsController < Manage::ManagementController
   load_and_authorize_resource
-  before_filter :get_reign_events, only: [:new, :edit]
+  before_filter :get_reign_events, only: %i[new edit]
 
   def show; end
+
   def new; end
+
   def edit; end
 
   def create
@@ -27,14 +31,14 @@ class Manage::ReignsController < Manage::ManagementController
 
   def reign_params
     params.require(:reign).permit(:name, :combatant_persona_id, :consort_persona_id,
-      :crown_event_id, :coronation_event_id, :url,
-      :runner_up_persona_id, :runner_up_consort_persona_id,
-      :reign_image, :reign_map)
+                                  :crown_event_id, :coronation_event_id, :url,
+                                  :runner_up_persona_id, :runner_up_consort_persona_id,
+                                  :reign_image, :reign_map)
   end
 
   def get_reign_events
-    @crowns = Event.where('name ILIKE ?', '%Crown Tour%').select(:id, :name, :start_at).order(start_at: :desc)
-    @coronations = Event.where('name ILIKE ?', '%Coronation%').select(:id, :name, :start_at).order(start_at: :desc)
+    @crowns = Event.where('name SIMILAR TO ?', '%(Fall|Spring|st|th) Crown%').select(:id, :name, :start_at).order(start_at: :desc)
+    @coronations = Event.where('name SIMILAR TO ?', '%(Fall|Spring|st|th) Coronation%').select(:id, :name, :start_at).order(start_at: :desc)
   end
 
   def next_id

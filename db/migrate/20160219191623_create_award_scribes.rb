@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAwardScribes < ActiveRecord::Migration
   def change
     create_table :award_scribes do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: branches
@@ -32,7 +34,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Branch, :type => :model do
+RSpec.describe Branch, type: :model do
   it { is_expected.to belong_to :branch_type }
   it { is_expected.to belong_to :region }
   it { is_expected.to belong_to :parent_branch }
@@ -59,8 +61,8 @@ RSpec.describe Branch, :type => :model do
 
       context 'but is not defined in database' do
         it 'should return nil and log an error' do
-          expect(Rails.logger).to receive(:error).with(%r[could not find branch named.*in database]i)
-          expect(Rails.logger).to receive(:error).twice.with(%r[could not find branch type.*in database]i)
+          expect(Rails.logger).to receive(:error).with(/could not find branch named.*in database/i)
+          expect(Rails.logger).to receive(:error).twice.with(/could not find branch type.*in database/i)
           expect(Branch.default_branch).to be_nil
           expect(Branch.default_branch_type).to be_nil
         end
@@ -87,8 +89,8 @@ RSpec.describe Branch, :type => :model do
       end
 
       it 'should return nil and log an error' do
-        expect(Rails.logger).to receive(:error).with(%r[no default branch name defined]i)
-        expect(Rails.logger).to receive(:error).with(%r[no default branch type defined]i)
+        expect(Rails.logger).to receive(:error).with(/no default branch name defined/i)
+        expect(Rails.logger).to receive(:error).with(/no default branch type defined/i)
 
         expect(Branch.default_branch).to be_nil
         expect(Branch.default_branch_type).to be_nil

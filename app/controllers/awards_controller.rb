@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AwardsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :award_badges]
+  before_action :authenticate_user!, except: %i[index show award_badges]
 
   load_and_authorize_resource except: [:award_badges]
   skip_authorization_check only: [:award_badges]
@@ -9,8 +11,8 @@ class AwardsController < ApplicationController
   def index
     @q = @awards.ransack(query)
     @awards = @q.result.includes(:branch)
-      .order('branches.name')
-      .order(:precedence)
+                .order('branches.name')
+                .order(:precedence)
     @awards = restrict_by_branch(params[:branch]).page(params[:page])
   end
 
@@ -20,6 +22,7 @@ class AwardsController < ApplicationController
   end
 
   def new; end
+
   def edit; end
 
   def create
@@ -37,7 +40,7 @@ class AwardsController < ApplicationController
   def restrict_by_branch(branch)
     return @awards if branch == 'all'
     branch ||= Branch.default_branch
-    return @awards.where(branch: branch[:id])
+    @awards.where(branch: branch[:id])
   end
 
   def award_params
@@ -50,7 +53,6 @@ class AwardsController < ApplicationController
   end
 
   def query
-    params.permit(q: [:court_event_name_cont, :persona_name_cont, :name_cont]).fetch(:q, nil)
+    params.permit(q: %i[court_event_name_cont persona_name_cont name_cont]).fetch(:q, nil)
   end
-
 end

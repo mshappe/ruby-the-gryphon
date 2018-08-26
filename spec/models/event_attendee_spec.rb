@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: event_attendees
@@ -20,7 +22,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EventAttendee, :type => :model do
+RSpec.describe EventAttendee, type: :model do
   it { is_expected.to belong_to :event }
   it { is_expected.to belong_to :persona }
   it { is_expected.to belong_to :warrant_type }

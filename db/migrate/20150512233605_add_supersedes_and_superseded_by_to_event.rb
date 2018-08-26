@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSupersedesAndSupersededByToEvent < ActiveRecord::Migration
   def change
     add_column :events, :supersedes_id, :integer

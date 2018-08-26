@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: events
@@ -44,7 +46,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EventsController, :type => :controller do
+RSpec.describe EventsController, type: :controller do
   before :each do
     @unapproved_event = create :event, start_at: Date.tomorrow, submission_state: 'queued'
     @good_event = create :event, start_at: Date.tomorrow, submission_state: 'approved'
@@ -136,7 +138,6 @@ RSpec.describe EventsController, :type => :controller do
         expect(response).to be_success
       end
     end
-
   end
 
   describe 'POST #create' do
@@ -263,5 +264,4 @@ RSpec.describe EventsController, :type => :controller do
       end
     end
   end
-
 end

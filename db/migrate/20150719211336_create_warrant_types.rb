@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWarrantTypes < ActiveRecord::Migration
   def change
     create_table :warrant_types do |t|

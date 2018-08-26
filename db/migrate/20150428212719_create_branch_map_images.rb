@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateBranchMapImages < ActiveRecord::Migration
   def self.up
     create_table :map_images do |t|

@@ -57,11 +57,13 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    airbrussh (1.3.0)
+      sshkit (>= 1.6.1, != 1.7.0)
     annotate (2.7.4)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     arel (6.0.4)
-    autoprefixer-rails (9.1.2)
+    autoprefixer-rails (9.1.3)
       execjs
     awesome_print (1.8.0)
     bcrypt (3.1.12)
@@ -77,6 +79,22 @@ GEM
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (1.10.1)
+    capistrano (3.11.0)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.3.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-passenger (0.2.0)
+      capistrano (~> 3.0)
+    capistrano-rails (1.4.0)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capybara (3.6.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -117,7 +135,7 @@ GEM
     crass (1.0.4)
     database_cleaner (1.7.0)
     debug_inspector (0.0.3)
-    devise (4.4.3)
+    devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -222,6 +240,9 @@ GEM
       i18n (>= 0.6.4, < 1.1)
     multi_json (1.13.1)
     nenv (0.3.0)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (5.0.2)
     netrc (0.11.0)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
@@ -272,7 +293,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.10)
       sprockets-rails
-    rails-assets-sweetalert2 (7.26.11)
+    rails-assets-sweetalert2 (7.26.12)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.9)
@@ -397,6 +418,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sshkit (1.17.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     temple (0.8.0)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
@@ -406,9 +430,9 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    turbolinks (5.1.1)
-      turbolinks-source (~> 5.1)
-    turbolinks-source (5.1.0)
+    turbolinks (5.2.0)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.1.18)
@@ -439,13 +463,16 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   cancancan (~> 1.10.1)
+  capistrano-passenger
+  capistrano-rails
+  capistrano-rvm
   capybara-webkit
   carmen-rails (~> 1.0.1)
   coffee-rails (~> 4.1.0)
   country_select
   database_cleaner
   datetimepicker-rails!
-  devise (~> 4.4.0)
+  devise
   dotenv
   factory_bot_rails
   faker
