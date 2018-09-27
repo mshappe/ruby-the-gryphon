@@ -29,4 +29,22 @@
 require 'rails_helper'
 
 RSpec.describe ReportsController, type: :controller do
+  describe 'GET :new' do
+    login_user
+
+    describe 'with a warrant-type pre-filled' do
+      let(:warrant_type) { create :warrant_type }
+      let!(:warrant) { create :warrant, warrant_type: warrant_type, user: @user }
+      
+      before do
+        get :new, report: { warrant_type_id: warrant_type.id }
+      end
+
+      it 'should route and prefill' do
+        ap warrant
+        expect(response).to have_http_status :success
+        expect(assigns(:report).warrant_type_id).to_eq warrant_type.id
+      end
+    end
+  end
 end

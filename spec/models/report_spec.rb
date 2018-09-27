@@ -32,6 +32,7 @@ RSpec.describe Report, type: :model do
   it { is_expected.to belong_to :post_type }
   it { is_expected.to belong_to :persona }
   it { is_expected.to belong_to :warrant_type }
+  it { is_expected.to have_one(:report_template).through(:warrant_type) }
 
   describe 'body fields' do
     before :each do

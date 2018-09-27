@@ -35,6 +35,7 @@ class WarrantType < ActiveRecord::Base
   belongs_to :superior_warrant, class_name: 'WarrantType', foreign_key: 'superior_warrant_id'
   has_many :posts
   has_many :warrants
+  has_one :report_template
   has_attached_file :warrant_badge, storage: :database
 
   validates :name, presence: true, uniqueness: true

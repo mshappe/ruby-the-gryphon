@@ -115,6 +115,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reports
+
   # We currently have no crud for warrant_types and the route for showing is :officers, so
   get '/warrant_types/warrant_badges/:id', controller: 'officers', action: 'warrant_badges'
 

@@ -28,6 +28,10 @@ class Ability
       user.personas.pluck(:id).include?(event.submitter_persona_id)
     end
 
+    can :create, Report do |report|
+      user.warrants.current.pluck(:warrant_type_id).include?(report.warrant_type_id)
+    end
+
     can :read, WarrantType
     can :cru, Post, persona_id: user.persona_ids
     can :read, Post do |post|

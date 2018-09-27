@@ -52,6 +52,7 @@ class Report < Post
   FIELD_KEYS = %i[title text].freeze
 
   belongs_to :report_type, foreign_key: 'post_type_id', class_name: 'ReportType'
+  has_one :report_template, through: :warrant_type
 
   validates :body_fields, body_fields: true
 

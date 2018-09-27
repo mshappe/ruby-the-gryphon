@@ -3,3 +3,5 @@ tr
   td= warrant.branch_name
   td= sca_date warrant.tenure_start, format: :date_only if warrant.tenure_start?
   td= sca_date warrant.tenure_end, format: :date_only if warrant.tenure_end?
+  - if warrant.user == current_user && warrant.current?
+    td= link_to 'Submit Report', new_report_path(warrant_type: warrant.warrant_type), class: 'btn btn-default btn-sm'
