@@ -1,0 +1,51 @@
+---
+version: "3.7"
+services:
+  app:
+    build: .
+    command: bundle exec rails server --binding 0.0.0.0
+    depends_on:
+      - db
+      - redis
+    environment:
+      BUNDLE_PATH: /usr/local/bundle
+      DB_HOST: db
+      REDIS_URL: redis://redis
+    ports:
+      - "3000:3000"
+    volumes:
+      - bundle:/usr/local/bundle
+      - .:/home/rtg
+
+  worker:
+    image: ruby-the-gryphon_app
+    command: bundle exec sidekiq
+    depends_on:
+      - db
+      - redis
+    environment:
+      BUNDLE_PATH: /usr/local/bundle
+      DB_HOST: db
+      REDIS_URL: redis://redis
+    volumes:
+      - bundle:/usr/local/bundle
+      - .:/home/rtg
+
+  db:
+    image: postgres:10.2
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  redis:
+    image: redis:4
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data
+
+volumes:
+  bundle:
+  db:
+  redis:

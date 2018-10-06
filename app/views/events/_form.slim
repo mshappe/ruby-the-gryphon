@@ -1,6 +1,6 @@
 h3  #{event.persisted? ? 'Edit' : 'Submit' } an Event
 
-= simple_form_for event, html: { class: 'form-horizontal' } wrapper: :horizontal_form do |f|
+= simple_form_for event, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f|
   - if event.persisted? && can?(:manage, event)
 
     .panel.panel-warning
