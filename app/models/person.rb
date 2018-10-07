@@ -44,7 +44,7 @@
 class Person < ActiveRecord::Base
   has_paper_trail
   acts_as_paranoid
-  has_attached_file :heraldic_image, storage: :database, cascade_deletion: true
+  has_attached_file :heraldic_image, cascade_deletion: true
   validates_attachment_content_type :heraldic_image, content_type: /\Aimage\/.*\Z/
 
   belongs_to :user
