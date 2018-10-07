@@ -40,7 +40,7 @@ Capybara.register_driver :selenium do |app|
     desired_capabilities: capabilities)  
 end
 
-Capybara.javascript_driver = :selenium
+Capybara.javascript_driver = ENV['DOCKER'] ? :selenium : :webkit
 Capybara.server_host = '0.0.0.0'
 Capybara.server_port = 3000
 Capybara.app_host = 'http://test:3000'
