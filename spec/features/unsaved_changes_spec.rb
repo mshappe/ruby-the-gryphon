@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe 'Unsaved Changes', type: :feature, js: true do
   before :each do
     visit '/users/sign_in'
-    binding.pry
     fill_in 'Email', with: 'abcdef'
   end
 
