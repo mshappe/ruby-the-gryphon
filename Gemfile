@@ -48,6 +48,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development do
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'capistrano-passenger'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
@@ -64,12 +65,16 @@ group :development, :test do
   gem 'annotate'
   gem 'awesome_print'
   gem 'byebug'
+  gem 'capybara-selenium'
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'dotenv'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'letter_opener'
+  gem 'pry'
   gem 'rspec-rails', '~> 3'
+  gem 'selenium-webdriver'
   gem 'shoulda'
   gem 'spring'
 end

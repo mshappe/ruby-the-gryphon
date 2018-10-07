@@ -28,6 +28,26 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+Capybara.register_driver :selenium do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    'desiredCapabilities' => { 'takesScreenshot' => false }, # Headless don't play screenshots yet
+    'chromeOptions' => { 'args' => ['no-sandbox', 'disable-extensions', 'disable-gpu', 'disable-plugins',
+      'test-type', 'headless', 'incognito', 'window-size=1280x1024'] }
+  )
+  Capybara::Selenium::Driver.new(app,
+    browser: :remote,
+    url: "http://chromedriver:4444", 
+    desired_capabilities: capabilities)  
+end
+
+Capybara.javascript_driver = :selenium
+Capybara.server_host = '0.0.0.0'
+Capybara.server_port = 3000
+Capybara.app_host = 'http://test:3000'
+Capybara.configure do |config|
+  config.server = :puma
+end
+
 Capybara::Webkit.configure do |webkit_config|
   webkit_config.block_unknown_urls
   webkit_config.allow_url('fonts.googleapis.com')
@@ -48,8 +68,6 @@ RSpec.configure do |config|
   config.extend ControllerMacros, type: :controller
   config.include FactoryBot::Syntax::Methods
   config.include Paperclip::Shoulda::Matchers
-
-  Capybara.javascript_driver = :webkit
 
   config.before :suite do
     DatabaseCleaner.strategy = :transaction

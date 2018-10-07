@@ -102,6 +102,9 @@ GEM
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       xpath (~> 3.1)
+    capybara-selenium (0.0.6)
+      capybara
+      selenium-webdriver
     capybara-webkit (1.15.0)
       capybara (>= 2.3, < 4.0)
       json
@@ -110,6 +113,8 @@ GEM
     carmen-rails (1.0.1)
       carmen (~> 1.0.0)
       rails
+    childprocess (0.9.0)
+      ffi (~> 1.0, >= 1.0.11)
     climate_control (0.2.0)
     code_analyzer (0.4.8)
       sexp_processor
@@ -213,6 +218,10 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.6.0)
+      launchy (~> 2.2)
     libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -364,6 +373,7 @@ GEM
     rspec-support (3.8.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
+    rubyzip (1.2.2)
     sass (3.5.7)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -382,6 +392,9 @@ GEM
       activerecord (>= 3.1)
       activesupport (>= 3.1)
     selectize-rails (0.12.5)
+    selenium-webdriver (3.14.1)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.2, >= 1.2.2)
     sexp_processor (4.11.0)
     shellany (0.0.1)
     shoulda (3.6.0)
@@ -460,12 +473,14 @@ DEPENDENCIES
   awesome_print
   bcrypt (~> 3.1.7)
   better_errors
+  binding_of_caller
   bootstrap-sass
   byebug
   cancancan (~> 1.10.1)
   capistrano-passenger
   capistrano-rails
   capistrano-rvm
+  capybara-selenium
   capybara-webkit
   carmen-rails (~> 1.0.1)
   coffee-rails (~> 4.1.0)
@@ -486,6 +501,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
+  letter_opener
   mailgun_rails
   momentjs-rails (~> 2.9)!
   paper_trail (~> 3.0.7)
@@ -494,6 +510,7 @@ DEPENDENCIES
   pg (~> 0.15)
   pg_search
   phony_rails (~> 0.12.4)
+  pry
   puma
   rails (~> 4.2.10)
   rails-assets-sweetalert2!
@@ -507,6 +524,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   seed-fu (~> 2.3.5)
   selectize-rails
+  selenium-webdriver
   shoulda
   sidekiq
   simple_form (~> 3.5.0)
@@ -518,4 +536,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.16.2
+   1.16.6

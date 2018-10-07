@@ -31,6 +31,22 @@ services:
       - bundle:/usr/local/bundle
       - .:/home/rtg
 
+  test:
+    image: ruby-the-gryphon_app
+    command: bundle exec rspec
+    depends_on:
+      - db
+      - redis
+      - chromedriver
+    environment:
+      BASE_URL: http://test:3000
+      BUNDLE_PATH: /usr/local/bundle
+      DB_HOST: db
+      REDIS_URL: redis://redis
+    volumes:
+      - bundle:/usr/local/bundle
+      - .:/home/rtg
+
   db:
     image: postgres:10.2
     ports:
@@ -45,6 +61,20 @@ services:
     volumes:
       - redis:/data
 
+  chromedriver:
+    image: 'robcherry/docker-chromedriver'
+    restart: on-failure
+    shm_size: 1G
+    environment:
+      - CHROMEDRIVER_WHITELISTED_IPS=""
+    ports:
+      - target: 4444
+        published: 4444
+    networks:
+      default:
+        aliases:
+          - chromedriver
+   
 volumes:
   bundle:
   db:

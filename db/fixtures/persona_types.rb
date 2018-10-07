@@ -6,4 +6,4 @@ PersonaType.seed(:name,
                  { id: 92, name: 'Previous Name' },
                  { id: 93, name: 'Primary Name' },
                  { id: 95, name: 'Merged Name' },
-                 id: 219, name: 'Minor')
+                 { id: 219, name: 'Minor' })
