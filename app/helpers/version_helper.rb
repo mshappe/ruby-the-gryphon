@@ -2,10 +2,10 @@
 
 module VersionHelper
   def version_number
-    '0.3.2'
+    '0.3.3'
   end
 
   def version_name
-    'Cantankerous Capering Crunchy Camelopard'
+    'Cantankerous Capering Crunchy Creaky Camelopard'
   end
 end

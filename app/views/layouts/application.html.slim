@@ -29,6 +29,7 @@ html lang='en'
               =active_link_to 'Officers', officers_path, wrap_tag: :li
               =active_link_to 'Awards and Honors', awards_path, wrap_tag: :li
               =active_link_to 'Dashboard', dashboard_path(user_id: current_user), wrap_tag: :li if current_user
+              =active_link_to 'Release Notes', release_notes_path, wrap_tag: :li
               - if user_signed_in?
                 = render 'users/sessions/logged_in'
                 - if current_user.has_any_role?
