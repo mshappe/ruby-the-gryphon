@@ -38,8 +38,8 @@ class AwardRecipient < ActiveRecord::Base
   belongs_to :persona
   belongs_to :court
 
-  has_attached_file :award_recipient_thumbnail, storage: :database
-  has_attached_file :award_recipient_image, storage: :database
+  has_attached_file :award_recipient_thumbnail
+  has_attached_file :award_recipient_image
   validates_attachment_content_type :award_recipient_thumbnail, content_type: /\Aimage\/.*\Z/
   validates_attachment_content_type :award_recipient_image, content_type: /\Aimage\/.*\Z/
 

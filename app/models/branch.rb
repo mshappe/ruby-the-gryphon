@@ -35,8 +35,8 @@
 class Branch < ActiveRecord::Base
   has_paper_trail
   resourcify
-  has_attached_file :branch_heraldry, storage: :database, cascade_deletion: true
-  has_attached_file :map_image, storage: :database, cascade_deletion: true
+  has_attached_file :branch_heraldry, cascade_deletion: true
+  has_attached_file :map_image, cascade_deletion: true
 
   belongs_to :branch_type
   belongs_to :region, class_name: 'RegionType'

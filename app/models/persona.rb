@@ -29,7 +29,7 @@
 class Persona < ActiveRecord::Base
   has_paper_trail
   acts_as_paranoid
-  has_attached_file :persona_image, storage: :database
+  has_attached_file :persona_image
   resourcify
 
   belongs_to :user

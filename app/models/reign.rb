@@ -45,8 +45,8 @@ class Reign < ActiveRecord::Base
   belongs_to :crown_event, class_name: 'Event', foreign_key: 'crown_event_id'
   belongs_to :coronation_event, class_name: 'Event', foreign_key: 'coronation_event_id'
 
-  has_attached_file :reign_image, storage: :database
-  has_attached_file :reign_map, storage: :database
+  has_attached_file :reign_image
+  has_attached_file :reign_map
 
   validates :name, presence: true, uniqueness: true
   validates_attachment_content_type :reign_image, content_type: /\Aimage\/.*\Z/
