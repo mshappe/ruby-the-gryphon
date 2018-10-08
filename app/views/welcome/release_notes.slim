@@ -1,5 +1,12 @@
 h1.header Release Notes
 
+h3.header 0.3.4 Contankerous Capering Crunchy Creaky Cloudy Camelopard
+p Only user-visible change is that all "attached" images should actually work now. 
+  The code we were using them to convert them from being stored in one DB to 
+  being stored in another DB as blobs was no longer working for some reason.
+  Rather than beat up on it when we knew we didn't want to go that way long-term, 
+  the conversion magic now pushes the images to Amazon S3, and Ruby The Gryphon now looks there.
+
 h3.header 0.3.3 Contankerous Capering Crunchy Creaky Camelopard
 ul
   li Official revival of the project
