@@ -13,6 +13,7 @@ class AwardsController < ApplicationController
     @awards = @q.result.includes(:branch)
                 .order('branches.name')
                 .order(:precedence)
+    @awards = @awards.where.not("awards.name ILIKE ?", 'Vigil for %') unless show_vigils.present?
     @awards = restrict_by_branch(params[:branch]).page(params[:page])
   end
 
@@ -50,6 +51,10 @@ class AwardsController < ApplicationController
 
   def page
     params.permit(:page).fetch(:page, nil)
+  end
+
+  def show_vigils
+    params.permit(:show_vigils).fetch(:show_vigils, nil)
   end
 
   def query
