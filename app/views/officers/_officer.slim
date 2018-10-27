@@ -1,4 +1,12 @@
 .col-md-6.col-sm-12
-  = image_tag officer.warrant_badge if officer.warrant_badge?
+  - if [0, nil].include?(officer.superior_warrant_id) && officer.warrant_badge?
+    = image_tag officer.warrant_badge
+  - else
+    | &bullet;&nbsp;
   = link_to officer.name, officer_path(officer)
+  - who = Warrant.current_holders_by_type(officer)
+  -if who.present? && who.last.person.present? && who.last.person.personas_primary.present?
+    | &mdash;
+    = link_to who.last.person.personas_primary.name, who.last.person.personas_primary
+
 
