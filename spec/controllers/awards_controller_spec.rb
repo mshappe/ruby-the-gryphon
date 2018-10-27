@@ -93,6 +93,33 @@ RSpec.describe AwardsController, type: :controller do
         expect(assigns[:awards].first).to eq @awards.first
       end
     end
+
+    context 'with show_vigils missing' do
+      before :each do
+        @prev_count = @awards.count
+        @awards << create(:award, branch: @branch, precedence: 0, name: 'Vigil for Duck')
+        get :index
+      end
+
+      it 'should not include the vigil in the awards list' do
+        expect(response).to be_success
+        expect(assigns[:awards].count).to eq @prev_count
+        expect(assigns[:awards].pluck(:name)).not_to include 'Vigil for Duck'
+      end
+    end
+
+    context 'with show_vigils non-zero' do
+      before :each do
+        @awards << create(:award, branch: @branch, precedence: 0, name: 'Vigil for Duck')
+        get :index, show_vigils: true
+      end
+
+      it 'should include the vigil' do
+        expect(response).to be_success
+        expect(assigns[:awards].count).to eq @awards.count
+        expect(assigns[:awards].pluck(:name)).to include 'Vigil for Duck'
+      end
+    end
   end
 
   context 'GET #show' do
