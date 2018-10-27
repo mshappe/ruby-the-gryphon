@@ -15,4 +15,4 @@
             = link_to 'Only future events', events_path if params[:include] == 'past'
 
   .panel-body
-    = render partial: 'events/summary', collection: @events, as: :event
+    = render partial: 'events/events'
