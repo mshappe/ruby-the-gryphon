@@ -3,4 +3,9 @@
     'Received Awards
   .panel-body
     .table-responsive
-      table.table.table-striped.table-hover=render awards
+      table.table.table-striped.table-hover
+        thead
+          tr
+            th Award Name
+            th Received at
+        tbody=render awards
