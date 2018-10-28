@@ -35,6 +35,34 @@
 require 'rails_helper'
 
 RSpec.describe BranchesController, type: :controller do
+
+  describe '#index' do
+    before :each do
+      @parent_branch = create :branch, parent_branch: nil
+      Rails.application.config.x.branch_name = @parent_branch.name
+      Rails.application.config.x.branch_type = @parent_branch.branch_type.name
+
+      @branches = create_list :branch, 3, parent_branch: @parent_branch
+      @canton = create :branch, parent_branch: @branches.first
+      @someone_elses_branch = create :branch
+
+      get :index
+    end
+
+    it 'should succeed for everybody' do
+      expect(response).to be_success
+    end
+
+    it 'should contain only this kingdoms branches' do
+      expect(assigns[:branches]).to include *@branches # Note the splat. Include is weird. 
+      expect(assigns[:branches]).to_not include @someone_elses_branch
+    end
+
+    it 'should include subsidiary branches' do
+      expect(assigns[:branches]).to include @canton
+    end
+  end
+
   describe '#show' do
     before :each do
       @branch = create :branch
