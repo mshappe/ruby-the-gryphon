@@ -51,6 +51,7 @@ class Branch < ActiveRecord::Base
   validates_attachment_content_type :map_image, content_type: /\Aimage\/.*\Z/
 
   scope :by_name, -> { order :name }
+  scope :active, -> { where active: true }
 
   delegate :name, to: :branch_type, prefix: true
   delegate :name, to: :region, prefix: true

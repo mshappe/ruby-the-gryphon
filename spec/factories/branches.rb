@@ -42,6 +42,6 @@ FactoryBot.define do
     city { 'MyString' }
     state { 'MyString' }
     url { 'MyString' }
-    active { false }
+    active { true }
   end
 end

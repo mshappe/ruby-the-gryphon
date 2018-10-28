@@ -82,7 +82,7 @@ Rails.application.routes.draw do
   resources :awards, except: [:destroy]
   get '/awards/award_badges/:id', controller: 'awards', action: 'award_badges'
 
-  resources :branches, only: [:show]
+  resources :branches, only: [:index, :show]
   get '/branches/branch_heraldries/:id', controller: 'branches', action: 'branch_heraldries'
   get '/branches/map_images/:id', controller: 'branches', action: 'map_images'
 

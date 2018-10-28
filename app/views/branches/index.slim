@@ -1,0 +1,32 @@
+.panel.panel-primary
+  .panel-heading
+    .panel-title Localities of Northshield
+  .panel-body
+    .row
+      .col-md-12
+        p Northshield is a big place, including North and South Dakota, Minnesota, Wisconsin,
+          the Upper Peninsula of Michigan, Manitoba, and Northern Ontario. A great deal of the
+          activity of the SCA actually takes place at the local level. Chances are good there's
+          a group near you!
+    .row
+      .col-md-12
+        = image_tag Branch.default_branch.map_image, class: 'img-responsive center-block', alt: 'Map of Northshield', width: "100%"
+    - @branches_by_state.sort_by { |k, _v| k || '' }.each do |state, branches|
+      h3= ns_state_name state
+      h4= ns_state_subtitle state
+      table.table.table-striped
+        thead
+          tr
+            th Branch Name
+            th Branch Status
+            th City
+        tbody
+          - branches.sort_by { |b| b.name }.each do |branch|
+            tr
+              td= link_to branch.name, branch
+              - if @subsidiaries.include?(branch)
+                td= "#{branch.branch_type.name} of #{branch.parent_branch.name}"
+              - else
+                td= branch.branch_type.name
+              td= branch.city
+        

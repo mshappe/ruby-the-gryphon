@@ -8,11 +8,20 @@ class BranchesController < ApplicationController
   downloads_files_for :branch, :branch_heraldry
   downloads_files_for :branch, :map_image
 
+  before_action :get_branches, only: [:index]
   before_action :get_events, only: [:show]
 
+  def index; end
   def show; end
 
   protected
+
+  def get_branches
+    @branches = Branch.active.where(parent_branch: Branch.default_branch)
+    @subsidiaries = Branch.active.where(parent_branch: @branches)
+    @branches = (@branches + @subsidiaries).flatten.compact.uniq
+    @branches_by_state = @branches.group_by { |b| b.state }
+  end
 
   def get_events
     @events = Event.where('branch_id = ? or sponsor_branch_id = ?', params[:id], params[:id]).next_three_months
