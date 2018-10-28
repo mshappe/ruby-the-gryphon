@@ -11,6 +11,8 @@ class Manage::DashboardController < Manage::ManagementController
     @roles = Role.all
     @reign_q = Reign.ransack(params[:reign_q])
     @reigns = @reign_q.result.order(id: :desc).page(params[:reign_page]).per(10)
+    @library_sections_q = LibrarySection.ransack(params[:library_sections_q])
+    @library_sections = @library_sections_q.result.order(order: :asc).page(params[:library_sections_page]).per(10)
     @report_q = Report.ransack(params[:report_q])
     @reports = @report_q.result.order(id: :desc).page(params[:report_page]).per(10)
     authorize! :manage, @users

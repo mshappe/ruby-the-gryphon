@@ -74,6 +74,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[show edit update destroy]
     resources :warrants, only: %i[show edit update destroy]
     resources :reports, only: %i[show edit update destroy]
+    resources :library_sections, except: [:index]
   end
 
   root to: 'welcome#index'

@@ -1,0 +1,20 @@
+.panel.panel-danger
+  .panel-heading
+    a#manage-library-sections name='manage-library-sections'
+      .row
+        .col-md-3.col-xs-3 Library Sections
+        .col-md-6.text-center
+          =< search_form_for q, url: manage_path(anchor: 'manage-library-sections'), as: :library_sections_q, class: 'form-inline' do |f|
+            = f.search_field :name_cont, placeholder: 'Name contains'
+        .col-md-3.text-right.pull-right
+          = link_to 'New', new_manage_library_section_path, class: 'btn btn-danger'
+  .panel-body
+    .row
+      .col-md-12= paginate library_sections, param_name: :library_sections_page, parmas: { anchor: 'manage-library-sections'}
+    .row.hidden-xs
+      .col-md-9 Name
+      .col-md-3 Order
+    = render library_sections
+    .row
+      .col-md-12= paginate library_sections, param_name: :library_sections_page, parmas: { anchor: 'manage-library-sections'}
+    
