@@ -35,14 +35,7 @@ class Warrant < ActiveRecord::Base
   validates :tenure_start, presence: true
 
   scope :approved, -> { where.not(approved: nil) }
-  scope :current_holders_by_type, ->(type) do
-    now = DateTime.current
-    where(warrant_type: type)
-      .approved
-      .where('tenure_start < ?', now)
-      .where('tenure_end IS NULL')
-      .order(:tenure_start)
-  end
+  scope :current_holders_by_type, -> (type) { type.warrants.current }
 
   delegate :name, to: :warrant_type, prefix: true
   delegate :name, to: :person, prefix: true

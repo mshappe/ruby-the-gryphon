@@ -25,7 +25,8 @@ class LibraryDocument < ActiveRecord::Base
   belongs_to :post # Rails 5, optional: true
 
   has_attached_file :attachment
-  validates_attachment :attachment, 
-    size: { in: 0..300.megabytes }
-    # TODO: content types
+  validates_attachment :attachment,
+    size: { in: 0..300.megabytes },
+    allow_blank: true
+  do_not_validate_attachment_file_type :attachment
 end

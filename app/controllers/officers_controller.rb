@@ -19,7 +19,7 @@ class OfficersController < ApplicationController
 
   def get_officer
     @officer = WarrantType.find(params[:id])
-    @person = Warrant.current_holders_by_type(@officer).last.person
+    @person = @officer.warrants.current.last.person
     @subordinate_officers = WarrantType.where(superior_warrant: @officer)
     now = DateTime.current
     @posts = @officer.posts.where('start_date < ?', now)

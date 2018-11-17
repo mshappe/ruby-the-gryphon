@@ -1,7 +1,12 @@
 class Manage::LibrarySectionsController < Manage::ManagementController
   load_and_authorize_resource
 
-  def show; end
+  def show
+    @library_documents_q = @library_section.library_documents.ransack(params[:library_documents_q])
+    @library_documents = @library_documents_q.result.order(order: :asc).page(params[:library_documents_page])
+  end
+
+  def edit; end
 
   def new
     @next_order_default = LibrarySection.count + 1
@@ -25,7 +30,7 @@ class Manage::LibrarySectionsController < Manage::ManagementController
     @library_section.destroy
     respond_with @library_section, location: manage_path
   end
-  
+
   protected
 
   def library_section_params

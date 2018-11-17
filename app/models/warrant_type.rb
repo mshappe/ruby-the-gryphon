@@ -34,11 +34,21 @@ class WarrantType < ActiveRecord::Base
 
   belongs_to :superior_warrant, class_name: 'WarrantType', foreign_key: 'superior_warrant_id'
   has_many :posts
-  has_many :warrants
+  has_many :warrants do
+    def current
+      now = DateTime.current
+      approved
+      .where('tenure_start < ?', now)
+      .where('tenure_end IS NULL')
+      .order(:tenure_start)
+    end
+  end
   has_attached_file :warrant_badge
 
   validates :name, presence: true, uniqueness: true
   validates_attachment_content_type :warrant_badge, content_type: /\Aimage\/.*\Z/
+
+  scope :current, -> { warrants.current }
 
   def most_recent_warrant
     warrants.order(tenure_start: :desc).first
@@ -47,7 +57,7 @@ class WarrantType < ActiveRecord::Base
   def most_recent_warranted_person
     most_recent_warrant.person
   end
-  
+
   def most_recent_warranted_persona
     most_recent_warranted_person.personas.primary
   end
