@@ -1,4 +1,11 @@
-h1.heading Library Section
+.row
+  .col-md-11
+    h1.heading Library Section
+  .col-md-1
+    = link_to edit_manage_library_section_path(@library_section), class: 'btn btn-danger text-right',
+      'data-toggle' => 'tooltip', 'data-placement' => 'top', 
+     title: 'Edit Section Information' do
+      span.glyphicon.glyphicon-pencil
 h2.heading= @library_section.name
 
 .row
@@ -15,7 +22,7 @@ h2.heading= @library_section.name
                 class: 'form-inline' do |f|
               = f.search_field :title_cont, placeholder: 'Name contains'
           .col-md-3.text-right.pull-right
-            = link_to 'New', new_manage_library_document_path, class: 'btn btn-danger'
+            = link_to 'New', new_manage_library_document_path(library_section_id: @library_section.id), class: 'btn btn-danger'
       .panel-body
         .row
           .col-md-12= paginate @library_documents, param_name: :library_documents_page

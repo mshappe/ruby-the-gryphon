@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.shared_examples 'a management controller' do |action = :index, fact|
+RSpec.shared_examples 'a management controller' do |action, fact|
   describe "get ##{action}" do
     let(:thing) { create fact }
     describe 'anonymous' do

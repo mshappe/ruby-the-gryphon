@@ -75,7 +75,11 @@ Rails.application.routes.draw do
     resources :warrants, only: %i[show edit update destroy]
     resources :reports, only: %i[show edit update destroy]
     resources :library_sections, except: [:index]
-    resources :library_documents, except: [:index]
+    resources :library_documents, except: [:index] do
+      member do
+        put :remove_attachment
+      end
+    end
   end
 
   root to: 'welcome#index'

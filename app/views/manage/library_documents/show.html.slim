@@ -1,2 +1,35 @@
-h1 Manage::LibraryDocuments#show
-p Find me in app/views/manage/library_documents/show.html.slim
+.panel.panel-danger
+  .panel-heading
+    .row
+      .col-md-11
+        h1.heading #{@library_document.title}
+      .col-md-1
+        = link_to edit_manage_library_document_path(@library_document), class: 'btn btn-danger' do
+          span.glyphicon.glyphicon-edit
+  .panel-body
+    - if @library_document.post.present?
+      .row
+        .col-md-12
+          h2.heading Linked to Post #{@library_document.post.title}
+          - if @library_document.post.body.present?
+            = @library_document.post.body.html_safe
+          - else
+            .row
+              .col-md-3
+                | URL
+              .col-md-9
+                - url = @library_document.post.url
+                - if url =~ /^http/
+                  = link_to 'Offsite link', @library_document.post.url
+                - else
+                  = link_to 'Old Nortshield Site Link', ENV['OLD_NORTHSHIELD_SITE'] + @library_document.post.url
+    - elsif @library_document.attachment.present?
+      .row
+        .col-md-12
+          h2.heading Uploaded file
+          h3.heading This will a link off-site
+      .row
+        .col-md-3
+          | URL
+        .col-md-9
+          = link_to @library_document.attachment_file_name, @library_document.attachment.url

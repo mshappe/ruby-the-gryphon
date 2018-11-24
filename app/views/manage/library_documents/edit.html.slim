@@ -1,2 +1,5 @@
-h1 Manage::LibraryDocuments#edit
-p Find me in app/views/manage/library_documents/edit.html.slim
+h1 Editing #{@library_document.title} in section #{@library_document.library_section.name}
+= render 'form', library_document: @library_document,
+  library_section: @library_document.library_section,
+  posts: @posts,
+  path: manage_library_document_path(@library_document)
