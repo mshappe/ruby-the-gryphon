@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+if ENV['PARALLEL_TEST_GROUPS']
+  Paperclip::Attachment.default_options[:path] = ":rails_root/public/system/:rails_env/#{ENV['TEST_ENV_NUMBER'].to_i}/:class/:attachment/:id_partition/:filename"
+else
+  Paperclip::Attachment.default_options[:path] = ":rails_root/public/system/:rails_env/:class/:attachment/:id_partition/:filename"
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -45,4 +51,14 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   config.cache_store = :null_store
+
+  config.paperclip_defaults = {
+    storage: :fog,
+    fog_credentials: { 
+      provider: "Local", 
+      local_root: "#{Rails.root}/public"
+    }, 
+    fog_directory: "", 
+    fog_host: "localhost" 
+  }
 end

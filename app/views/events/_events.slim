@@ -1,4 +1,4 @@
-- events_by_month = @events.group_by { |e| e.start_at.beginning_of_month }
+- events_by_month = events.group_by { |e| e.start_at.beginning_of_month }
 - events_by_month.each do |month, events|
   .row
     .col-md-12

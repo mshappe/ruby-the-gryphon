@@ -4,9 +4,8 @@
   - else
     | &bullet;&nbsp;
   = link_to officer.name, officer_path(officer)
-  - who = Warrant.current_holders_by_type(officer)
-  -if who.present? && who.last.person.present? && who.last.person.personas_primary.present?
+  -if officer.current.present? && officer.current.last.person.present? && officer.current.last.person.personas_primary.present?
     | &mdash;
-    = link_to who.last.person.personas_primary.name, who.last.person.personas_primary
+    = link_to officer.current.last.person.personas_primary.name, officer.current.last.person.personas_primary
 
 

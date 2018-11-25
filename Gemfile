@@ -83,4 +83,5 @@ group :development, :test do
 end
 
 group :test do
+  gem 'fog-local' # We use fog local provider in test
 end

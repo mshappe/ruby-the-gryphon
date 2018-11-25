@@ -70,10 +70,16 @@ Rails.application.routes.draw do
 
     resources :roles, only: %i[create destroy]
     resources :personas, only: %i[show edit update destroy]
-    resources :reigns, except: [:destroy]
+    resources :reigns, except: [:destroy, :index]
     resources :users, only: %i[show edit update destroy]
     resources :warrants, only: %i[show edit update destroy]
     resources :reports, only: %i[show edit update destroy]
+    resources :library_sections, except: [:index]
+    resources :library_documents, except: [:index] do
+      member do
+        put :remove_attachment
+      end
+    end
   end
 
   root to: 'welcome#index'
@@ -91,6 +97,13 @@ Rails.application.routes.draw do
   resources :events, except: [:destroy] do
     collection do
       get :queued
+    end
+  end
+
+  resources :library_sections, only: [:index]
+  resources :library_documents, only: [:show] do
+    collection do
+      get :search
     end
   end
 

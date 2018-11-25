@@ -1,0 +1,14 @@
+.panel.panel-primary
+  .panel-heading
+    .row
+      .col-md-6.col-xs-12
+        .panel-title Welcome to the Library
+      .col-md-6.col-xs-12
+        .text-right
+          = search_form_for @q, url: search_library_documents_path do |f|
+            = f.search_field :title_cont, placeholder: 'Document contains'
+  .panel-body
+    p Below, organized in hopefully useful sections, are documents describing the rules and policies of
+      the Society, and of Northshield, along with some other helpful information. Many of these will be
+      links that will take you to other sites, or download documents (usually in PDF format).
+    = render @library_sections

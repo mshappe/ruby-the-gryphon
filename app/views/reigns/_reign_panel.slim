@@ -36,7 +36,7 @@
             => event_date(reign.crown_event, format: :date_only)
             ' in
             =link_to reign.crown_event_branch_name, reign.crown_event.branch
-        
+
   - if reign.coronation_event_id?
     .panel-footer.text-center
       - if DateTime.now < reign.coronation_event_start_at
@@ -46,6 +46,5 @@
       =<> link_to reign.coronation_event_name, reign.coronation_event if reign.coronation_event_id?
       ' held
       => event_date(reign.coronation_event, format: :date_only)
-      ' in 
+      ' in
       =link_to reign.coronation_event_branch_name, reign.coronation_event.branch
-              
