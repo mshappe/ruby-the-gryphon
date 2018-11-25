@@ -170,6 +170,7 @@ GEM
       railties (>= 3.2, < 6.0)
     erubi (1.7.1)
     erubis (2.7.0)
+    excon (0.62.0)
     execjs (2.7.0)
     factory_bot (4.11.0)
       activesupport (>= 3.0.0)
@@ -179,6 +180,12 @@ GEM
     faker (1.9.1)
       i18n (>= 0.7)
     ffi (1.9.25)
+    fog-core (1.45.0)
+      builder
+      excon (~> 0.58)
+      formatador (~> 0.2)
+    fog-local (0.6.0)
+      fog-core (>= 1.27, < 3.0)
     formatador (0.2.5)
     geocoder (1.5.0)
     globalid (0.4.1)
@@ -512,6 +519,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  fog-local
   geocoder
   guard
   guard-annotate
