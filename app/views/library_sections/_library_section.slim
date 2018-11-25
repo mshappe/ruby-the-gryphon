@@ -1,0 +1,5 @@
+.panel.panel-default
+  .panel-heading
+    .panel-title= library_section.name
+  .panel-body
+    ul= render library_section.library_documents.order(order: :asc)

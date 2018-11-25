@@ -100,6 +100,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :library_sections, only: [:index]
+  resources :library_documents, only: [:show] do
+    collection do
+      get :search
+    end
+  end
+
   namespace :manage do
     get '/', to: 'manage/dashboard#index'
   end

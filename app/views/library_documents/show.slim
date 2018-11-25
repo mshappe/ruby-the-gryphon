@@ -1,0 +1,24 @@
+.panel.panel-primary
+  .panel-heading
+    .row
+      .col-md-11
+        h1.heading #{@library_document.title}
+  .panel-body
+    - if @library_document.post.present?
+      .row
+        .col-md-12
+          div 
+          - if @library_document.post.body.present?
+            = @library_document.post.body.html_safe
+          - else
+            | External link to 
+            - url = @library_document.post.url
+            - if url =~ /^http/
+              = link_to "#{@library_document.post.title} (External)", @library_document.post.url, class: 'btn btn-default'
+            - else
+              = link_to "#{@library_document.post.title} (External)", ENV['OLD_NORTHSHIELD_SITE'] + @library_document.post.url,
+                class: 'btn btn-default'
+    - elsif @library_document.attachment.present?
+      .row
+        .col-md-12
+          = link_to "#{@library_document.attachment_file_name} (External)", @library_document.attachment.url

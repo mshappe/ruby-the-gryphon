@@ -11,10 +11,9 @@
   .panel-body
     .row
       .col-md-12= paginate library_sections, param_name: :library_sections_page, params: { anchor: 'manage-library-sections'}
-    .row.hidden-xs
-      .col-md-9 Name
-      .col-md-3 Order
-    = render library_sections
+    .row
+      .col-md-12
+        ul= render library_sections
     .row
       .col-md-12= paginate library_sections, param_name: :library_sections_page, params: { anchor: 'manage-library-sections'}
     
