@@ -10,6 +10,7 @@ class EventsController < ApplicationController
     @q = @events.ransack(query)
     @events = @q.result.approved_eager
     @events = @events.all_future unless params[:include] == 'past'
+    @events = @events.reorder(start_at: :desc) if params[:include] == 'past'
   end
 
   def queued
