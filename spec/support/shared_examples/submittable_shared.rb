@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.shared_examples 'submittable' do |type|
+  klass = type.to_s.classify.constantize
   it { is_expected.to validate_presence_of :submission_state }
   it { is_expected.to validate_inclusion_of(:submission_state).in_array Submittable::STATES }
   it { is_expected.to belong_to :supersedes }
@@ -19,7 +20,7 @@ RSpec.shared_examples 'submittable' do |type|
     Submittable::STATES.each do |state|
       describe state.to_s do
         it "should only have @#{state}" do
-          expect(Event.send(state)).to match_array [instance_variable_get("@#{state}")]
+          expect(klass.send(state)).to match_array [instance_variable_get("@#{state}")]
         end
       end
     end

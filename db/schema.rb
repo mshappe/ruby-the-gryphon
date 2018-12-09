@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181028211506) do
+ActiveRecord::Schema.define(version: 20181208211241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -731,12 +731,15 @@ ActiveRecord::Schema.define(version: 20181028211506) do
     t.datetime "tenure_start"
     t.datetime "tenure_end"
     t.integer  "branch_id"
-    t.datetime "approved"
+    t.datetime "approved_date"
     t.text     "introduction"
     t.text     "comments"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.datetime "deleted_at"
+    t.string   "submission_state"
+    t.integer  "supersedes_id"
+    t.integer  "superseded_by_id"
   end
 
   add_index "warrants", ["branch_id"], name: "index_warrants_on_branch_id", using: :btree
@@ -790,4 +793,6 @@ ActiveRecord::Schema.define(version: 20181028211506) do
   add_foreign_key "warrants", "branches"
   add_foreign_key "warrants", "people"
   add_foreign_key "warrants", "warrant_types"
+  add_foreign_key "warrants", "warrants", column: "superseded_by_id", on_delete: :nullify
+  add_foreign_key "warrants", "warrants", column: "supersedes_id", on_delete: :nullify
 end

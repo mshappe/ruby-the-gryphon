@@ -1,0 +1,85 @@
+h3.heading Please verify that this information is current and correct; if not, please go to
+  the #{link_to 'Dashboard', dashboard_path(current_user)} and edit your details, then come back.
+
+- persona = warrant.person.personas_primary
+.row
+  .col-md-12.col-sm-12
+    h2.heading #{persona.name} #{persona_badge(persona)}
+
+.row
+  .col-md-9.col-sm-9
+    = render 'people/person', person: warrant.person if warrant.person.present?
+  .col-md-3
+    = image_tag warrant.persona_image.url, class: 'img-responsive' if persona.persona_image.present?
+
+.panel.panel-primary
+  .panel-heading
+    .panel-title Officer Change Form
+  .panel-body
+    = simple_form_for warrant, url: warrant do |f|
+      = f.input :submission_state, as: :hidden
+      = f.input :office_scope, collection: @office_scope
+      = f.input :warrant_type, collection: []
+      .form-group#text-fields
+        = f.input :introduction
+        = f.input :comments
+      .form-group#disclaimers
+        .row
+          .col-md-12
+            | Submission of this form indicates that:
+            ul
+              li I understand that I will function as an acting officer until I am warranted by the appropriate Kingdom Officer and the Crown of Northshield.
+              li I am a sustaining member in good standing of the Society for Creative Anachronism, Inc. or I am an associate or family member and live at the same address as a subscribing member.
+              li I understand that I must regularly report on the state of my office to the branch members and to the appropriate Regional and Kingdom Officers.
+              li To the best of my knowledge I am able to fulfill all requirements and to perform all duties of the office.
+        .row
+          .col-md-12
+            = f.button :submit, 'Submit Change of Officer Request'
+
+
+/ This should eventually move out to its own .coffee file?
+coffee:
+  $offices = $('.warrant_warrant_type')
+  selector = null
+
+  buildOfficeSelector = (which) ->
+    selector?.clearOptions()
+    selector?.load((callback) ->
+        $.ajax(
+          url: "/officers/search.json?q=#{which}"
+          type: 'GET'
+          highlight: true
+          placeholder: 'Search or select your office'
+          error: () -> callback()
+          success: (res) -> console.log res; callback(res)
+        )
+    )
+   
+  showOffices = (val) ->
+    console.log val
+    
+    if val 
+      $offices.show()
+      buildOfficeSelector(val)
+    else 
+     $offices.hide()
+  
+  showTextAndDisclaimers = () ->
+    $('#text-fields').show()
+    $('#disclaimers').show()
+
+  $(document).ready(() ->
+    $('#warrant_office_scope').selectize(onChange: showOffices)
+    selector = $('#warrant_warrant_type').selectize(
+      labelField: 'name'
+      maxItems: 1
+      searchField: 'name'
+      valueField: 'id'
+      onChange: showTextAndDisclaimers
+    ).data('selectize')
+    $offices.hide()
+    $('#text-fields').hide()
+    $('#disclaimers').hide()
+  )
+ #$(document).on 'change', 'form #warrant_office_scope', (event) ->
+  #  console.log $('#warrant_office_scope option').first().value

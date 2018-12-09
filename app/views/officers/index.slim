@@ -1,2 +1,9 @@
-.row
-  = render partial: 'officer', collection: @officers, as: :officer
+.panel.panel-primary
+  .panel-heading
+    .row
+      .col-md-6.col-xs-12
+        .panel-title Great Officers of Northshield
+      .col-md-6.col-xs-12
+        .panel-title.pull-right= link_to 'Officer Change Forms', change_process_officers_path, class: 'btn btn-primary'
+  .panel-body
+    = render partial: 'officer', collection: @officers, as: :officer

@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: library_sections
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  order      :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 RSpec.describe LibrarySectionsController, type: :controller do
   let(:section1) { create :library_section, order: 1 }

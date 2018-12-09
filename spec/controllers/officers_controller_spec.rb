@@ -22,7 +22,7 @@ RSpec.describe OfficersController, type: :controller do
       type = create :post_type, name: 'Officer Content'
       @officer = create :warrant_type, name: 'Kingdom Wombat'
       @holder = create :person
-      @warrant = create :warrant, person: @holder, warrant_type: @officer, tenure_start: 1.year.ago, approved: 1.year.ago
+      @warrant = create :warrant, person: @holder, warrant_type: @officer, tenure_start: 1.year.ago, submission_state: 'approved', approved_date: 1.year.ago
       @post = create :post, warrant_type: @officer, post_type: type, start_date: 3.days.ago, end_date: 3.days.from_now, approved: 1.day.ago
       create :post, warrant_type: @officer, post_type: type, start_date: 3.days.ago, end_date: 3.days.from_now, approved: nil
       create :post, warrant_type: @officer, post_type: type, start_date: 5.days.ago, end_date: 3.days.ago, approved: 4.days.ago
@@ -36,6 +36,60 @@ RSpec.describe OfficersController, type: :controller do
       expect(assigns(:subordinate_officers)).to be_empty
       expect(assigns(:person)).to eq @warrant.person
       expect(assigns(:posts)).to match_array [@post]
+    end
+  end
+
+  describe 'GET #change_process' do
+    before :each do
+      get :change_process
+    end
+
+    it 'should succeed' do
+      expect(response).to be_success
+    end
+  end
+
+  describe 'GET #search JSON' do
+    let!(:kingdom_office) { create :warrant_type }
+    let!(:branch_office) { create :warrant_type, name: "Branch #{Faker::Name.name}"}
+    let(:all) { [kingdom_office, branch_office] }
+
+    describe 'no query string' do
+      before :each do
+        xhr :get, :search, format: :json
+      end
+
+      it 'should get all' do
+        expect(response).to be_success
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json.count).to eq 2
+      end
+    end
+
+    describe 'with q=kingdom' do
+      before :each do
+        xhr :get, :search, q: 'kingdom', format: :json
+      end
+
+      it 'should get only the non-branch' do
+        expect(response).to be_success
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json.count).to eq 1
+        expect(json.first[:name]).to eq kingdom_office.name
+      end
+    end
+
+    describe 'with q=branch' do
+      before :each do
+        xhr :get, :search, q: 'branch', format: :json
+      end
+
+      it 'should get only the branch' do
+        expect(response).to be_success
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json.count).to eq 1
+        expect(json.first[:name]).to eq branch_office.name
+      end
     end
   end
 end

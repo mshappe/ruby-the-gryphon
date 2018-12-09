@@ -45,7 +45,7 @@ FactoryBot.define do
   factory :person do
     user
     address
-    name { 'MyString' }
+    sequence(:name) { Faker::Name.name }
     phone { 'MyString' }
     phone_message { 'MyString' }
     gender { 'MyString' }

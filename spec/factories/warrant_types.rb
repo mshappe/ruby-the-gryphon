@@ -31,8 +31,8 @@
 
 FactoryBot.define do
   factory :warrant_type do
-    name { 'MyString' }
-    email { 'MyString' }
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
     missive { false }
     stallari_order { 1 }
     job_description { 'MyText' }

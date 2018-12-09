@@ -2,10 +2,10 @@
 
 module VersionHelper
   def version_number
-    '0.5.1'
+    '0.6.0'
   end
 
   def version_name
-    'Eclectic Echidna'
+    'Frog'
   end
 end

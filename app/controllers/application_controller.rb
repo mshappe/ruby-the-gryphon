@@ -14,7 +14,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied! #{exception.message}"
+    if current_user
+      flash[:alert] = "Access denied! #{exception.message}"
+    else
+      flash[:alert] = 'Please sign in to make this request!'
+    end
     redirect_to root_url
   end
 end

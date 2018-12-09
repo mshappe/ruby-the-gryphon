@@ -1,14 +1,1 @@
-.row
-  .col-md-12.col-sm-12
-    h2.heading #{@persona.name} #{persona_badge(@persona)}
-
-.row
-  .col-md-9.col-sm-9
-    = render 'people/person', person: @persona.person if @persona.person.present?
-  .col-md-3
-    = image_tag @persona.persona_image.url, class: 'img-responsive' if @persona.persona_image.present?
-
-.row
-  .col-md-12
-    h3.heading Description
-    p= raw sanitize @persona.description
+=render @persona

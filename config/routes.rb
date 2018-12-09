@@ -111,7 +111,12 @@ Rails.application.routes.draw do
     get '/', to: 'manage/dashboard#index'
   end
 
-  resources :officers, only: %i[index show]
+  resources :officers, only: %i[index show] do
+    collection do
+      get :change_process
+      get :search
+    end
+  end
 
   resources :personas, except: [:index] do
     collection do
@@ -128,6 +133,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :warrants, only: %i[show new create]
+  
   # We currently have no crud for warrant_types and the route for showing is :officers, so
   get '/warrant_types/warrant_badges/:id', controller: 'officers', action: 'warrant_badges'
 

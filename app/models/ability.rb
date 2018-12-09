@@ -23,13 +23,14 @@ class Ability
     # What belongs to a specific user and can be edited by that user
     can :update, Person, user_id: user.id
     can :crud, Persona, user_id: user.id
+    can :create, Warrant if user.persisted?
 
     can :create, Event if user.persisted? # No visitors
     can [:create, :edit], Event do |event| # Event is inexplicably tied to personas. We chose not to change this right now.
       user.personas.pluck(:id).include?(event.submitter_persona_id)
     end
 
-    can :read, WarrantType
+    can [:read, :search], WarrantType
     can :cru, Post, persona_id: user.persona_ids
     can :read, Post do |post|
       !post.approved.nil?

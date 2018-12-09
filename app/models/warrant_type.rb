@@ -49,6 +49,8 @@ class WarrantType < ActiveRecord::Base
   validates_attachment_content_type :warrant_badge, content_type: /\Aimage\/.*\Z/
 
   scope :current, -> { warrants.current }
+  scope :branch_offices, -> { where "name LIKE 'Branch %'" }
+  scope :kingdom_offices, -> { where.not "name LIKE 'Branch %'"}
 
   def most_recent_warrant
     warrants.order(tenure_start: :desc).first

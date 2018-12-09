@@ -1,15 +1,27 @@
 # frozen_string_literal: true
 
 class OfficersController < ApplicationController
+  authorize_resource class: 'WarrantType', only: :search
+  skip_authorization_check only: %i[index show change_process warrant_badges]
+  
   before_filter :get_officers, only: [:index]
   before_filter :get_officer, only: [:show]
-  skip_authorization_check only: %i[index show warrant_badges]
-
+  
+  
   downloads_files_for :warrant_type, :warrant_badge
 
   def index; end
 
   def show; end
+
+  def search
+    @officers = WarrantType.all
+    @officers = @officers.kingdom_offices.order(:stallari_order) if params[:q] == 'kingdom'
+    @officers = @officers.branch_offices if params[:q] == 'branch'
+    respond_with do |f|
+      f.json { render json: @officers }
+    end
+  end
 
   protected
 
