@@ -23,6 +23,21 @@ class Ability
     # What belongs to a specific user and can be edited by that user
     can :update, Person, user_id: user.id
     can :crud, Persona, user_id: user.id
+
+    can :crud, Warrant do |warrant|
+      # Only great officers
+      current_go_warrants = (WarrantType.great_offices.pluck(:id) & user.warrants.current.pluck(:warrant_type_id))
+
+      # Only the subordinate warrants that are ours
+      current_go_warrants.include?(warrant.warrant_type&.superior_warrant_id)
+    end
+
+    can :queued, Warrant
+    
+    # Anyone can read their own warrants
+    can :read, Warrant, person_id: user&.person&.id
+
+    # Any logged in user can create warrants (an officer change request is an unapproved warrant object)
     can :create, Warrant if user.persisted?
 
     can :create, Event if user.persisted? # No visitors

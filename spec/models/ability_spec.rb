@@ -50,4 +50,33 @@ RSpec.describe Ability, type: :model do
     it { is_expected.to have_abilities :read, Event.new(submission_state: 'approved') }
     it { is_expected.to not_have_abilities :read, Event.new(submission_state: 'queued') }
   end
+
+  describe 'Warrant management' do
+    let(:officer) { create :person }
+    let(:subordinate) { create :person }
+    let(:go_type) { create :warrant_type }
+    let(:so_type) { create :warrant_type, superior_warrant: go_type }
+    let!(:go_warrant) { create :warrant, person: officer, warrant_type: go_type, submission_state: 'approved' }
+    let!(:so_warrant) { create :warrant, person: subordinate, warrant_type: so_type, submission_state: 'approved' }
+
+    describe 'Great officer' do
+      describe "Can manage subordinate warrants" do
+        subject { Ability.new(officer.user) }
+
+        it { is_expected.to have_abilities :read, go_warrant }
+        it { is_expected.to have_abilities %i[create update destroy], so_warrant }
+      end
+
+      describe 'Cannot manage any other warrants' do
+        let(:other) { create :person }
+        let(:other_go_type) { create :warrant_type }
+        let(:other_so_type) { create :warrant_type, superior_warrant: other_go_type }
+        let!(:other_so_warrant) { create :warrant, person: other, warrant_type: other_so_type }
+
+        subject { Ability.new(officer.user) }
+
+        it { is_expected.to not_have_abilities %i[update destroy], other_so_warrant }
+      end
+     end
+  end
 end

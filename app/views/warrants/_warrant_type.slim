@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading= warrant_type.name
+  .panel-body
+    - if warrant_type.warrants.current.count == 0
+      .row
+        .col-md-12
+          | Vacant
+    - else
+      = render warrant_type.warrants.current

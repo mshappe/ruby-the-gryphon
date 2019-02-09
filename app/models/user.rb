@@ -53,7 +53,15 @@ class User < ActiveRecord::Base
   has_one :person, dependent: :destroy
   has_many :personas, dependent: :destroy
   has_many :authorizations, through: :person
-  has_many :warrants, through: :person
+  has_many :warrants, through: :person do
+    def current
+      now = DateTime.current
+      approved
+      .where('tenure_start < ?', now)
+      .where('tenure_end IS NULL')
+      .order(:tenure_start)
+    end
+  end
 
   accepts_nested_attributes_for :person, :personas
 end

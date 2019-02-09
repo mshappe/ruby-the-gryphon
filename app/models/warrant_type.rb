@@ -32,7 +32,8 @@
 class WarrantType < ActiveRecord::Base
   has_paper_trail
 
-  belongs_to :superior_warrant, class_name: 'WarrantType', foreign_key: 'superior_warrant_id'
+  belongs_to :superior_warrant, class_name: 'WarrantType', foreign_key: 'superior_warrant_id', inverse_of: :subordinate_warrants
+  has_many :subordinate_warrants, class_name: 'WarrantType', foreign_key: 'superior_warrant_id', inverse_of: :superior_warrant
   has_many :posts
   has_many :warrants do
     def current
@@ -51,6 +52,7 @@ class WarrantType < ActiveRecord::Base
   scope :current, -> { warrants.current }
   scope :branch_offices, -> { where "name LIKE 'Branch %'" }
   scope :kingdom_offices, -> { where.not "name LIKE 'Branch %'"}
+  scope :great_offices, -> { where superior_warrant_id: nil }
 
   def most_recent_warrant
     warrants.order(tenure_start: :desc).first

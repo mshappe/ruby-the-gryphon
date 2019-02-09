@@ -1,0 +1,5 @@
+tr
+  td= warrant.warrant_type_name
+  td= warrant.branch_name
+  td= sca_date warrant.tenure_start, format: :date_only if warrant.tenure_start?
+  td= sca_date warrant.tenure_end, format: :date_only if warrant.tenure_end?

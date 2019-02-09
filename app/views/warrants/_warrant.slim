@@ -1,5 +1,8 @@
-tr
-  td= warrant.warrant_type_name
-  td= warrant.branch_name
-  td= sca_date warrant.tenure_start, format: :date_only if warrant.tenure_start?
-  td= sca_date warrant.tenure_end, format: :date_only if warrant.tenure_end?
+.row
+  .col-md-3= link_to "#{warrant.person.name} (#{warrant.person.personas_primary.name})", persona_path(warrant.person.personas_primary)
+  .col-md-1= link_to warrant.branch.name, warrant.branch
+  .col-md-3 Since #{sca_date warrant.approved_date, format: :date_only}
+  .col-md-5
+    .text-right= simple_form_for warrant, wrapper: :inline_form, class: 'form-inline' do |f|
+      = f.input :tenure_end, as: :hidden, value: DateTime.now
+      = f.button :submit, "Terminate Warrant", class: 'btn btn-danger'

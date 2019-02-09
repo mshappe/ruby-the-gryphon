@@ -9,7 +9,8 @@ row
       =f.association :branch
       =f.input :tenure_start, as: :datetime_picker, wrapper: :ranged_datetime
       =f.input :tenure_end, as: :datetime_picker, wrapper: :ranged_datetime
-      =f.input :approved, as: :datetime_picker, wrapper: :ranged_datetime
+      =f.input :approved_date, as: :datetime_picker, wrapper: :ranged_datetime
+      =f.input :submission_state
   .row
     .col-md-12
       =f.input :introduction, as: :text

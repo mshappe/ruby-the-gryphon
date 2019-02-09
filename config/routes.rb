@@ -133,7 +133,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :warrants, only: %i[show new create]
+  resources :warrants, only: %i[index show new create] do
+    collection do 
+      get :queued
+    end
+  end
   
   # We currently have no crud for warrant_types and the route for showing is :officers, so
   get '/warrant_types/warrant_badges/:id', controller: 'officers', action: 'warrant_badges'

@@ -32,4 +32,12 @@ module Submittable
 
     super(params)
   end
+
+  def method_missing(method, *args, &block)
+    method =~ /^(.*)\?$/
+    if STATES.include?($1)
+      submission_state == $1
+    end
+  end
+  
 end

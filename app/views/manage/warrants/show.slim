@@ -16,6 +16,6 @@
           .col-md-6= "Ended #{sca_date(@warrant.tenure_end)}" if @warrant.tenure_end?
         .row
           -if @warrant.approved?
-            .col-md-6= "Approved #{sca_date(@warrant.approved)}"
+            .col-md-6= "Approved #{sca_date(@warrant.approved_date)}"
           -else
             | Not yet approved

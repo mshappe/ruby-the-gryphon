@@ -8,6 +8,6 @@
   .col-md-8= render 'people/person', person: @user.person if @user.person
   .col-md-4= render 'personas', personas: @user.personas
 .row
-  .col-md-12.col-sm-12=render 'warrants/warrants', warrants: @user.warrants unless @user.warrants.blank?
+  .col-md-12.col-sm-12=render 'dashboard/warrants', warrants: @user.warrants unless @user.warrants.blank?
 .row
   .col-md-12= link_to 'Edit', edit_manage_user_path(@user), class: 'btn btn-danger'
